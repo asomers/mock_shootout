@@ -1,0 +1,345 @@
+/// ```
+/// #![feature(proc_macro)]
+/// extern crate galvanic_mock;
+/// use galvanic_mock::{mockable, use_mocks};
+///
+/// #[mockable]
+/// pub trait A {
+///     fn foo(&self, x: i16) -> i16;
+/// }
+/// 
+/// #[use_mocks]
+/// fn testit() {
+///     let mock = new_mock!(A);
+///     given! {
+///         <mock as A>::foo(|_| true) then_return 12 always;
+///     }
+///     assert_eq!(12, mock.foo(0));
+/// }
+/// fn main() {
+///     testit();
+/// }
+/// ```
+fn doctest() {}
+
+extern crate galvanic_assert;
+extern crate galvanic_mock;
+use galvanic_assert::matchers::*;
+use galvanic_mock::{mockable, use_mocks};
+
+#[mockable]
+pub trait A {
+    fn foo(&self, x: i16) -> i16;
+    fn bar(self);
+    fn baz(&self) -> String;
+}
+
+#[mockable]
+pub trait Derived: A {
+    fn bean(self);
+}
+
+#[mockable]
+pub trait B<'a> {
+    fn foo(&'a self) -> &'a u32;
+}
+
+#[mockable]
+pub trait C {
+    fn boo(&self) -> i32;
+}
+
+#[derive(Clone, Copy)]
+pub struct ConcreteC();
+impl C for ConcreteC {
+    fn boo(&self) -> i32 { 42 }
+}
+
+#[mockable]
+pub trait GenericTrait<T> {
+    fn foo(&self) -> T;
+}
+
+#[mockable]
+pub trait GenericMethodTrait {
+    fn foo<T: PartialEq>(&self, x: T, y: T) -> bool;
+}
+
+#[mockable]
+pub trait AssociatedTrait {
+    type Key;
+    fn foo(&self, k: Self::Key) -> bool;
+}
+
+#[mockable]
+pub trait ManyArgsTrait {
+    fn foo(&self, a: i8, b: i8, c: i8, d: i8, e: i8, f: i8, g: i8, h: i8,
+        i: i8, j: i8, k: i8, l: i8, m: i8, n: i8, o: i8, p: i8) -> u32;
+}
+
+// The docs suggest that this should work, but it doesn't and I can't figure out
+// what's wrong.
+//#[mockable(extern ::std::io)]
+//trait Write {
+    //fn write(&mut self, buf: &[u8]) -> Result<usize>;
+    //fn flush(&mut self) -> Result<()>;
+//}
+
+#[cfg(test)]
+#[use_mocks]
+mod t {
+    use std;
+    use super::*;
+
+use TestSuite;
+
+pub struct MockGalvanicMock;
+impl TestSuite for MockGalvanicMock{
+    fn associated_types() {
+        let mock = new_mock!(AssociatedTrait<Key=i32>);
+        given! {
+            <mock as AssociatedTrait<Key=i32>>::foo(|_| true) then_return true always;
+        }
+        assert!(mock.foo(5i32));
+    }
+
+    fn checkpoint() { unimplemented!() }
+    fn consume() {
+        let mock = new_mock!(A);
+        given! {
+            <mock as A>::bar() then_return () always
+        }
+        mock.bar();
+    }
+
+    fn derive() {
+        let mock = new_mock!(A);
+        given! {
+            <mock as A>::foo(|_| true) then_return 12 always;
+        }
+        assert_eq!(12, mock.foo(0));
+    }
+
+    fn external_trait() { unimplemented!() }
+    fn fallback() {
+        // Galvanic does not have this functionality explicitly builtin, but it
+        // can be implemented using binds
+        let mock = new_mock!(C);
+        given! {
+            bind concrete: ConcreteC = ConcreteC();
+            <mock as C>::boo() then_return_from |_| bound.concrete.boo() always;
+        }
+        assert_eq!(42, mock.boo());
+    }
+
+    fn foreign() { unimplemented!() }
+    fn generic_method() {
+        let mock = new_mock!(GenericMethodTrait);
+        given! {
+            <mock as GenericMethodTrait>::foo |&(ref x, ref y)| x == y
+                then_return true always;
+        }
+        assert!(mock.foo(5, 5));
+    }
+
+    fn generic_trait() {
+        let mock = new_mock!(GenericTrait<i32>);
+        given! {
+            <mock as GenericTrait<i32>>::foo() then_return 5 always;
+        }
+        assert_eq!(5, mock.foo());
+    }
+
+    fn inherited_trait() {
+        let mock = new_mock!(Derived, A);
+        given! {
+            <mock as A>::foo(|_| true) then_return 12 always;
+            <mock as Derived>::bean() then_return () always;
+        }
+        assert_eq!(12, mock.foo(0));
+        mock.bean();
+    }
+
+    fn many_args() {
+        let mock = new_mock!(ManyArgsTrait);
+        given!{
+            <mock as ManyArgsTrait>::foo(
+                any_value(), any_value(), any_value(), any_value(),
+                any_value(), any_value(), any_value(), any_value(),
+                any_value(), any_value(), any_value(), any_value(),
+                any_value(), any_value(), any_value(), any_value())
+                then_return 1 always;
+        }
+        assert_eq!(1, mock.foo(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+                               14, 15));
+    }
+
+    fn match_and() {
+        // The docs suggest that this should work, but I can't get it to
+        // compile
+        //let mock = new_mock!(A);
+        //given! {
+            //<mock as A>::foo(All::of(gt(0)).and(lt(10))) then_return 1 always;
+        //}
+        //assert_eq!(1, mock.foo(5));
+        unimplemented!()
+    }
+
+    fn match_constant() { unimplemented!() }
+
+    fn match_method() {
+        let mock = new_mock!(A);
+        given! {
+            <mock as A>::foo(|&x| x == 5) then_return 12 always;
+        }
+        assert_eq!(12, mock.foo(5));
+    }
+
+    fn match_operator() {
+        let mock = new_mock!(A);
+        given! {
+            <mock as A>::foo(eq(5)) then_return 1 always;
+            <mock as A>::foo(geq(10)) then_return 2 always;
+            <mock as A>::foo(gt(8)) then_return 3 always;
+            <mock as A>::foo(leq(2)) then_return 4 always;
+            <mock as A>::foo(lt(4)) then_return 5 always;
+            <mock as A>::foo(not(eq(5))) then_return 6 always;
+        }
+        assert_eq!(1, mock.foo(5));
+        assert_eq!(2, mock.foo(10));
+        assert_eq!(3, mock.foo(9));
+        assert_eq!(4, mock.foo(2));
+        assert_eq!(5, mock.foo(3));
+        assert_eq!(6, mock.foo(6));
+    }
+
+    fn match_or() {
+        // The docs suggest that this should work, but I can't get it to
+        // compile
+        //let mock = new_mock!(A);
+        //given! {
+            //<mock as A>::foo(Any::of(gt(10)).or(lt(0))) then_return 1 always;
+        //}
+        //assert_eq!(1, mock.foo(15));
+        unimplemented!()
+    }
+
+    fn match_pattern() {
+        // galvanic_assert has matchers for Option and Result types, but no way
+        // to match arbitrary Enum types
+        unimplemented!()
+    }
+
+    fn match_range() {
+        // galvanic_mock has no explicit functionality for this, but you can
+        // implement it yourself.
+        let mock = new_mock!(A);
+        given! {
+            <mock as A>::foo(|x| (0..10).contains(x)) then_return 12 always;
+        }
+        assert_eq!(12, mock.foo(5));
+    }
+
+    fn match_wildcard() {
+        let mock = new_mock!(A);
+        given! {
+            <mock as A>::foo(any_value()) then_return 12 always;
+        }
+        assert_eq!(12, mock.foo(5));
+    }
+
+    fn multi_trait() {
+        let mock = new_mock!(A, C);
+        given! {
+            <mock as A>::foo(|_| true) then_return 12 always;
+            <mock as C>::boo() then_return -4 always;
+        }
+        assert_eq!(12, mock.foo(5));
+        assert_eq!(-4, mock.boo());
+    }
+
+    fn return_call() {
+        let mock = new_mock!(A);
+        given! {
+            <mock as A>::foo(|_| true) then_return_from |_| 12 always;
+        }
+        assert_eq!(12, mock.foo(0));
+    }
+
+    fn return_call_with_args() {
+        let mock = new_mock!(A);
+        given! {
+            <mock as A>::foo(|_| true) then_return_from |&(x)| x + 1 always;
+        }
+        assert_eq!(6, mock.foo(5));
+    }
+
+    fn return_constant() {
+        let mock = new_mock!(A);
+        given! {
+            <mock as A>::foo(|_| true) then_return 12 always;
+        }
+        assert_eq!(12, mock.foo(0));
+    }
+
+    fn return_default() { unimplemented!() }
+    fn return_lifetime() {
+        let mock = new_mock!(B);
+        given! {
+            <mock as B>::foo() then_return &5u32 always;
+        }
+        assert_eq!(5, *mock.foo());
+    }
+
+    fn return_owned() {
+        let mock = new_mock!(A);
+        given! {
+            <mock as A>::baz() then_return "baz".to_owned() always;
+        }
+        assert_eq!("baz", mock.baz());
+    }
+
+    fn return_panic() {
+        let mock = new_mock!(A);
+        given! {
+            <mock as A>::foo(|_| true) then_panic always;
+        }
+        mock.foo(0);
+    }
+
+    fn sequence() { unimplemented!() }
+    fn times_once() {
+        let mock = new_mock!(A);
+        given! {
+            <mock as A>::foo(|_| true) then_return 12 always;
+        }
+        expect_interactions! {
+            <mock as A>::foo(|_| true) times 1;
+        }
+        assert_eq!(12, mock.foo(0));
+    }
+
+    fn times_any() {
+        let mock = new_mock!(A);
+        given! {
+            <mock as A>::foo(|_| true) then_return 12 always;
+        }
+        assert_eq!(12, mock.foo(0));
+    }
+
+    fn times_never() {
+        let mock = new_mock!(A);
+        given! {
+            <mock as A>::foo(|_| true) then_return 12 always
+        }
+        expect_interactions! {
+            <mock as A>::foo(|_| true) times 0;
+        }
+    }
+
+    fn times_range() { unimplemented!() }
+}
+
+test!{MockGalvanicMock}
+
+}
