@@ -11,6 +11,7 @@ extern crate galvanic_mock;
 extern crate mock_derive;
 extern crate mockers;
 extern crate mockers_derive;
+extern crate simulacrum;
 
 #[allow(unused)]
 macro_rules! test {
@@ -54,6 +55,7 @@ mod t_double;
 mod t_galvanic_mock;
 mod t_mock_derive;
 mod t_mockers;
+mod t_simulacrum;
 
 pub trait TestSuite {
     /// A mocked `Trait` can have associated types
@@ -109,7 +111,8 @@ pub trait TestSuite {
     fn return_default();
     /// A mock method can return a reference with a non-`'static` lifetime
     fn return_lifetime();
-    /// A mock method can return an owned object that is neither `Copy` nor `Clone`
+    /// A mock method can return an owned object that is neither `Copy` nor
+    /// `Clone`
     fn return_owned();
     /// A mock method can panic, rather than return
     fn return_panic();

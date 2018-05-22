@@ -10,3 +10,4 @@ double = { version = "=0.2.2" }
 mock_derive = { version = "=0.7.0" }
 mockers = { version = "=0.10.2" }
 mockers_derive = { version = "=0.10.2" }
+simulacrum = { version = "=0.3.0" }
