@@ -1,0 +1,18 @@
+h1. Rust Mock Shootout!
+
+Rust has several different mocking libraries.  None is clearly superior to all
+of the others.  This project compares their feature sets, using an
+apples-to-apples approach.  Each of several dozen features is implemented with
+multiple mocking libraries, if possible.
+
+h2. The Contenders
+
+TODO
+
+h2. Features
+
+TODO
+
+h2. Conclusion
+
+TODO
