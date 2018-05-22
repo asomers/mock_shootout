@@ -27,6 +27,8 @@ extern crate galvanic_mock;
 use galvanic_assert::matchers::*;
 use galvanic_mock::{mockable, use_mocks};
 
+// Galvanic_mock's macros don't work in function-scope, so we have to define all
+// the traits up here.  This is unlikely to hinder most users.
 #[mockable]
 pub trait A {
     fn foo(&self, x: i16) -> i16;

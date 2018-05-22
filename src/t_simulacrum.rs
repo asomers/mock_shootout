@@ -201,32 +201,7 @@ impl TestSuite for Simulacrum {
             }
         }
 
-        //pub struct AMock<T> {
-            //e: Expectations,
-            //phantom: PhantomData<T>
-        //}
-
-        //impl<T: 'static> AMock<T> {
-            //pub fn new() -> Self {
-                //Self {
-                    //e: Expectations::new(),
-                    //phantom: PhantomData
-                //}
-            //}
-
-            //pub fn expect_foo(&mut self) -> Method<T, u32> {
-                //self.e.expect::<T, u32>("foo")
-            //}
-        //}
-
-        //impl<T: 'static> A<T> for AMock<T> {
-            //fn foo(&self, t: T) -> u32 {
-                //self.e.was_called_returning::<T, u32>("foo", t)
-            //}
-        //}
-
         let mut mock: AMock = AMock::new();
-        //let mut mock: AMock<i16> = AMock::new();
         mock.expect_foo().called_once().with(-1).returning(|_| 5);
 
         assert_eq!(5, mock.foo(-1));
