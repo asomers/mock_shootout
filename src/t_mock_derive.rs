@@ -242,6 +242,7 @@ impl TestSuite for MockDerive{
         mock.foo();
     }
 
+    fn return_parameters() {unimplemented!()}
     fn sequence(){unimplemented!()}
     fn times_once(){
         #[mock]

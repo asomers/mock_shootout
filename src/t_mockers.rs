@@ -374,6 +374,12 @@ impl TestSuite for Mockers {
         mock.foo();
     }
 
+    fn return_parameters() {
+        // Mockers can't implement this, because matchers only provide their
+        // arguments by immutable reference.
+        unimplemented!()
+    }
+
     fn sequence(){
         #[derive_mock]
         pub trait A {
@@ -444,5 +450,3 @@ impl TestSuite for Mockers {
 test!{Mockers}
 
 }
-
-

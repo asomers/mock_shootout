@@ -497,6 +497,29 @@ impl TestSuite for Simulacrum {
         mock.foo();
     }
 
+    fn return_parameters() {
+        // Simulacrum can do this, but it needs unsafe code
+        pub trait A {
+            fn foo(&self, x: &mut u32);
+        }
+
+        create_mock! {
+            impl A for AMock (self) {
+                expect_foo("foo"):
+                fn foo(&self, x: &mut u32);
+            }
+         }
+
+        let mut mock = AMock::new();
+        mock.expect_foo().called_any().modifying(|x: &mut *mut u32|
+            unsafe {**x = 42}
+        );
+
+        let mut x = 0;
+        mock.foo(&mut x);
+        assert_eq!(42, x);
+    }
+
     fn sequence() {
         // Simulacrum lacks this explicit functionality, but it can be
         // implemented using checkpoints, aka Eras.

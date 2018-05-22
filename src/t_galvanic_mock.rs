@@ -307,6 +307,12 @@ impl TestSuite for MockGalvanicMock{
         mock.foo(0);
     }
 
+    fn return_parameters() {
+        // Galvanic mock can't implement this, because matchers only provide
+        // their arguments by immutable reference.
+        unimplemented!()
+    }
+
     fn sequence() { unimplemented!() }
     fn times_once() {
         let mock = new_mock!(A);

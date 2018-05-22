@@ -395,6 +395,12 @@ impl TestSuite for MockDouble{
         mock.foo();
     }
 
+    fn return_parameters() {
+        // Double can't implement this, because matchers only provide
+        // their arguments by immutable reference.
+        unimplemented!()
+    }
+
     fn sequence() { unimplemented!() }
     fn times_once() { 
         pub trait A {

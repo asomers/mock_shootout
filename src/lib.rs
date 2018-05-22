@@ -43,6 +43,7 @@ macro_rules! test {
         #[test] fn return_lifetime() { $self::return_lifetime() }
         #[test] fn return_owned() { $self::return_owned() }
         #[should_panic] #[test] fn return_panic() { $self::return_panic() }
+        #[test] fn return_parameters() { $self::return_parameters() }
         #[test] fn sequence() { $self::sequence() }
         #[test] fn times_once() { $self::times_once() }
         #[test] fn times_any() { $self::times_any() }
@@ -114,6 +115,9 @@ pub trait TestSuite {
     /// A mock method can return an owned object that is neither `Copy` nor
     /// `Clone`
     fn return_owned();
+    /// A mock method can mutate its parameters when supplied by mutable
+    /// reference.
+    fn return_parameters();
     /// A mock method can panic, rather than return
     fn return_panic();
     /// A scenario can expect calls to multiple methods in a specified order
