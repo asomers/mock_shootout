@@ -50,6 +50,7 @@ macro_rules! test {
         #[test] fn sequence() { $self::sequence() }
         #[test] fn times_once() { $self::times_once() }
         #[test] fn times_any() { $self::times_any() }
+        #[test] fn times_n() { $self::times_n() }
         #[test] fn times_never() { $self::times_never() }
         #[test] fn times_range() { $self::times_range() }
     }
@@ -141,6 +142,8 @@ pub trait TestSuite {
     fn times_once();
     /// An expectation can be called any number of times
     fn times_any();
+    /// An expectation can be called a specific number of times
+    fn times_n();
     /// An expectation can assert that it's never called
     fn times_never();
 }

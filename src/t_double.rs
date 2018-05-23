@@ -379,6 +379,24 @@ impl TestSuite for MockDouble{
         mock.foo();
     }
 
+    fn times_n() {
+        pub trait A {
+            fn foo(&self);
+        }
+
+        mock_trait!(
+            MockA,
+            foo() -> ()
+        );
+        impl A for MockA {
+            mock_method!(foo(&self));
+        }
+        let mock = MockA::default();
+        mock.foo();
+        mock.foo();
+        assert_eq!(2, mock.foo.num_calls());
+    }
+
     fn times_never() {
         pub trait A {
             fn foo(&self);
@@ -396,6 +414,12 @@ impl TestSuite for MockDouble{
     }
 
     fn times_range() { 
+        // Double has a different approach to validating the number of
+        // calls.  It validates call counts at the end of the test,
+        // rather than in Drop.  So even though it doesn't have explicit
+        // support for Range, I'm going to count it, because it can be
+        // implemented by the user (and the user can't implement Range
+        // with other libraries).
         pub trait A {
             fn foo(&self);
         }

@@ -554,6 +554,25 @@ impl TestSuite for Simulacrum {
         mock.foo();
     }
 
+    fn times_n() {
+        pub trait A {
+            fn foo(&self);
+        }
+
+        create_mock! {
+            impl A for AMock (self) {
+                expect_foo("foo"):
+                fn foo(&self);
+            }
+         }
+
+        let mut mock = AMock::new();
+        mock.expect_foo().called_times(2);
+
+        mock.foo();
+        mock.foo();
+    }
+
     fn times_never() {
         pub trait A {
             fn foo(&self);

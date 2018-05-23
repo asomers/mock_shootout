@@ -402,6 +402,19 @@ impl TestSuite for Mockers {
         mock.foo();
     }
 
+    fn times_n(){
+        #[derive_mock]
+        pub trait A {
+            fn foo(&self);
+        }
+
+        let scenario = Scenario::new();
+        let mock = scenario.create_mock_for::<A>();
+        scenario.expect(mock.foo_call().and_return_clone(()).times(2));
+        mock.foo();
+        mock.foo();
+    }
+
     fn times_never(){
         #[derive_mock]
         pub trait A {

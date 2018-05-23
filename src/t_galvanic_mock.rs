@@ -317,7 +317,7 @@ impl TestSuite for MockGalvanicMock{
         expect_interactions! {
             <mock as A>::foo(|_| true) times 1;
         }
-        assert_eq!(12, mock.foo(0));
+        mock.foo(0);
     }
 
     fn times_any() {
@@ -325,7 +325,21 @@ impl TestSuite for MockGalvanicMock{
         given! {
             <mock as A>::foo(|_| true) then_return 12 always;
         }
-        assert_eq!(12, mock.foo(0));
+        mock.foo(0);
+        mock.foo(0);
+        mock.foo(0);
+    }
+
+    fn times_n() {
+        let mock = new_mock!(A);
+        given! {
+            <mock as A>::foo(|_| true) then_return 12 always;
+        }
+        expect_interactions! {
+            <mock as A>::foo(|_| true) times 2;
+        }
+        mock.foo(0);
+        mock.foo(0);
     }
 
     fn times_never() {

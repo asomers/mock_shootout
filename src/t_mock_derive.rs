@@ -259,6 +259,7 @@ impl TestSuite for MockDerive{
         assert_eq!(1, mock.foo());
         assert_eq!(1, mock.foo());
     }
+    fn times_n(){unimplemented!()}
     fn times_never(){unimplemented!()}
     fn times_range(){unimplemented!()}
 }
