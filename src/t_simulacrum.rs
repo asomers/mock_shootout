@@ -1,3 +1,5 @@
+use simulacrum::*;
+
 /// ```
 /// #![feature(proc_macro)]
 /// extern crate simulacrum;
@@ -20,12 +22,39 @@
 /// ```
 fn doctest() {}
 
+struct Bean();
+impl Bean {
+    pub fn eat(&self) {}
+}
+struct BeanMock{
+    e: Expectations
+}
+impl BeanMock {
+    pub fn new() -> Self {
+        Self {
+            e: Expectations::new()
+        }
+    }
+    pub fn eat(&self) {
+        self.e.was_called::<(), ()>("eat", ())
+    }
+    pub fn expect_eat(&mut self) -> Method<(), ()> {
+        self.e.expect::<(), ()>("eat")
+    }
+    pub fn then(&mut self) -> &mut Self {
+        self.e.then();
+        self
+    }
+}
+
 #[cfg(test)]
 mod t {
 
 use simulacrum::*;
 use simulacrum_user::{deref, gt, lt, passes};
 use {TestSuite, UniquelyOwned};
+use test_double::*;
+#[test_double] use super::Bean;
 
 struct Simulacrum {}
 impl TestSuite for Simulacrum {
@@ -336,6 +365,12 @@ impl TestSuite for Simulacrum {
         mock.expect_foo().called_any();
 
         mock.foo(42);
+    }
+
+    fn mock_struct() {
+        let mut mock = Bean::new();
+        mock.expect_eat().called_once();
+        mock.eat();
     }
 
     fn multi_trait() {

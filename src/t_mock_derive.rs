@@ -160,6 +160,7 @@ impl TestSuite for MockDerive{
         mock.foo(45);
     }
 
+    fn mock_struct() { unimplemented!() }
     fn multi_trait(){unimplemented!()}
     fn return_call(){
         #[mock]

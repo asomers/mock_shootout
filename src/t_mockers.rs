@@ -281,6 +281,7 @@ impl TestSuite for Mockers {
         mock.foo(2);
     }
 
+    fn mock_struct() { unimplemented!() }
     fn multi_trait(){
         fn foo<T: EMTA + EMTB>(_t: T) {
         }

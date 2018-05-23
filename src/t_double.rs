@@ -256,6 +256,7 @@ impl TestSuite for MockDouble{
         mock.foo.called_with_pattern( matcher!( p!(any)));
     }
 
+    fn mock_struct() { unimplemented!() }
     fn multi_trait() { unimplemented!() }
     fn return_call() { 
         unimplemented!()

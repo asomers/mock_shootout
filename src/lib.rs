@@ -13,6 +13,7 @@ extern crate mockers;
 extern crate mockers_derive;
 extern crate simulacrum;
 extern crate simulacrum_user;
+extern crate test_double;
 
 #[allow(unused)]
 macro_rules! test {
@@ -36,6 +37,7 @@ macro_rules! test {
         #[test] fn match_pattern() { $self::match_pattern() }
         #[test] fn match_range() { $self::match_range() }
         #[test] fn match_wildcard() { $self::match_wildcard() }
+        #[test] fn mock_struct() { $self::mock_struct() }
         #[test] fn multi_trait() { $self::multi_trait() }
         #[test] fn return_call() { $self::return_call() }
         #[test] fn return_call_with_args() { $self::return_call_with_args() }
@@ -93,6 +95,8 @@ pub trait TestSuite {
     fn many_args();
     /// A method call can match an argument by an arbitrary method
     fn match_method();
+    /// A plain `Struct` can be mocked.
+    fn mock_struct();
     /// A Mock can be defined that implements multiple `Trait`s.
     fn multi_trait();
     /// A mock method can return the result of a function that depends on its

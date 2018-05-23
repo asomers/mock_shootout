@@ -12,3 +12,4 @@ mockers = { version = "=0.10.2" }
 mockers_derive = { version = "=0.10.2" }
 simulacrum = { version = "=0.3.0" }
 simulacrum_user = { version = "=0.1.0" }
+test_double = { version = "=0.1.1" }
