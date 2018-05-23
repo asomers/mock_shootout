@@ -139,7 +139,7 @@ impl TestSuite for MockGalvanicMock{
     }
 
     fn foreign() { unimplemented!() }
-    fn generic_method() {
+    fn generic_parameters() {
         let mock = new_mock!(GenericMethodTrait);
         given! {
             <mock as GenericMethodTrait>::foo |&(ref x, ref y)| x == y

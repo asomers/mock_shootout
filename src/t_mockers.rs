@@ -119,7 +119,7 @@ impl TestSuite for Mockers {
         unimplemented!()
     }
 
-    fn generic_method(){
+    fn generic_parameters(){
         //#[derive_mock]
         //pub trait A {
             //fn foo<T>(&self, t:T);

@@ -72,7 +72,7 @@ impl TestSuite for MockDouble{
         unimplemented!()
     }
 
-    fn generic_method() {
+    fn generic_parameters() {
         // Double's docs describe mocking generic methods by converting the
         // arguments to Strings.  But IMHO, that's too limited, cumbersome, and
         // lossy

@@ -174,7 +174,7 @@ impl TestSuite for Simulacrum {
     }
 
     fn foreign() { unimplemented!() }
-    fn generic_method() {
+    fn generic_parameters() {
         pub trait A {
             fn foo<T: 'static>(&self, t:T);
             fn bar<T: 'static>(&self) -> T;
