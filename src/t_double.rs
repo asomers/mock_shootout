@@ -24,9 +24,10 @@ fn doctest() {}
 mod t {
 
 use double::matcher::*;
-use {TestSuite, UniquelyOwned};
+use TestSuite;
 
 pub struct MockDouble;
+#[allow(unused_parens)]
 impl TestSuite for MockDouble{
     fn associated_types() { unimplemented!() }
     fn checkpoint() { unimplemented!() }

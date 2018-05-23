@@ -24,8 +24,9 @@ fn doctest() {}
 
 extern crate galvanic_assert;
 extern crate galvanic_mock;
-use galvanic_assert::matchers::*;
-use galvanic_mock::{mockable, use_mocks};
+#[cfg(test)] use galvanic_assert::matchers::*;
+use galvanic_mock::mockable;
+#[cfg(test)] use galvanic_mock::use_mocks;
 use UniquelyOwned;
 
 // Galvanic_mock's macros don't work in function-scope, so we have to define all
@@ -88,8 +89,9 @@ pub trait ManyArgsTrait {
     //fn flush(&mut self) -> Result<()>;
 //}
 
-#[cfg(test)]
+#[allow(unreachable_code)]
 #[use_mocks]
+#[cfg(test)]
 mod t {
     use std;
     use super::*;

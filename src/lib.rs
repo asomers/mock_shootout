@@ -7,7 +7,7 @@
 
 extern crate galvanic_assert;
 extern crate galvanic_mock;
-#[macro_use] extern crate double;
+#[allow(unused_imports)] #[macro_use] extern crate double;
 extern crate mock_derive;
 extern crate mockers;
 extern crate mockers_derive;
