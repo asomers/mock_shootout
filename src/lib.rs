@@ -92,8 +92,6 @@ pub trait TestSuite {
     fn generic_trait();
     /// An inherited `Trait` can be mocked.
     fn inherited_trait();
-    /// A method with many arguments can be mocked
-    fn many_args();
     /// A method call can match an argument by an arbitrary method
     fn match_method();
     /// A plain `Struct` can be mocked.
@@ -155,6 +153,8 @@ pub trait TestSuite {
 
     // Quantitative features.  These are measured in degrees, rather than as
     // booleans.  The degree of support is printed to stdout.
+    /// How many arguments can be mocked?
+    fn many_args();
     /// A scenario can expect calls to multiple methods in a specified order
     fn sequence();
 }

@@ -155,15 +155,16 @@ impl TestSuite for Mockers {
     }
 
     fn many_args(){
-        // #[derive_mock]
-        // pub trait A {
-        //     fn foo(&self, a: i8, b: i8, c: i8, d: i8, e: i8, f: i8, g: i8,
-        //         h: i8, i: i8, j: i8, k: i8, l: i8, m: i8, n: i8, o: i8, p: i8);
-        // }
-        //
-        // let scenario = Scenario::new();
-        // let _mock = scenario.create_mock_for::<A>();
-        unimplemented!()
+         #[derive_mock]
+         pub trait A {
+             fn foo(&self, a: i8, b: i8, c: i8, d: i8);
+         }
+
+         let scenario = Scenario::new();
+         let mock = scenario.create_mock_for::<A>();
+         scenario.expect(mock.foo_call(0, 1, 2, 3).and_return(()));
+         mock.foo(0, 1, 2, 3);
+         println!("4");
     }
 
     fn match_and(){

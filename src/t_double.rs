@@ -115,26 +115,22 @@ impl TestSuite for MockDouble{
 
     fn many_args() {
         // Double is limited to 12 arguments per function
-        //pub trait A {
-            //fn foo(&self, a: i8, b: i8, c: i8, d: i8, e: i8, f: i8, g: i8,
-                //h: i8, i: i8, j: i8, k: i8, l: i8, m: i8, n: i8, o: i8,
-                //p: i8) -> u32;
-        //}
-        //mock_trait!(
-            //MockA,
-            //foo(i8, i8, i8, i8, i8, i8, i8, i8,
-                //i8, i8, i8, i8, i8, i8, i8, i8) -> u32;
-        //);
-        //impl A for MockA {
-            //mock_method!(foo(&self, a: i8, b: i8, c: i8, d: i8, e: i8, f: i8,
-                //g: i8, h: i8, i: i8, j: i8, k: i8, l: i8, m: i8, n: i8, o: i8,
-                //p: i8) -> u32);
-        //}
-        //let mock = MockA::default();
-        //mock.foo.return_value(6);
-        //assert_eq!(3, mock.foo(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
-                               //14, 15));
-        unimplemented!()
+        pub trait A {
+            fn foo(&self, a: i8, b: i8, c: i8, d: i8, e: i8, f: i8, g: i8,
+                h: i8, i: i8, j: i8, k: i8, l: i8);
+        }
+        mock_trait!(
+            MockA,
+            foo(i8, i8, i8, i8, i8, i8, i8, i8,
+                i8, i8, i8, i8) -> ()
+        );
+        impl A for MockA {
+            mock_method!(foo(&self, a: i8, b: i8, c: i8, d: i8, e: i8, f: i8,
+                g: i8, h: i8, i: i8, j: i8, k: i8, l: i8));
+        }
+        let mock = MockA::default();
+        mock.foo(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
+        println!("12");
     }
 
     fn match_and() {

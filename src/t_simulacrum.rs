@@ -271,8 +271,23 @@ impl TestSuite for Simulacrum {
     }
 
     fn many_args() {
+        pub trait A {
+            fn foo(&self, a: i8, b: i8, c: i8, d: i8, e: i8, f: i8, g: i8,
+                h: i8, i: i8);
+        }
+        create_mock! {
+            impl A for AMock (self) {
+                expect_foo("foo"):
+                fn foo(&self, a: i8, b: i8, c: i8, d: i8, e: i8, f: i8, g: i8,
+                h: i8, i: i8);
+            }
+         }
+
+        let mut mock = AMock::new();
+        mock.expect_foo().called_any().with(params!(0, 1, 2, 3, 4, 5, 6, 7, 8));
+        mock.foo(0, 1, 2, 3, 4, 5, 6, 7, 8);
+        println!("9");
         // Simulacrum's params! macro works with a maximum of 9 arguments
-        unimplemented!()
     }
 
     fn match_and() { unimplemented!() }
