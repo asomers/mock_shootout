@@ -23,8 +23,8 @@ fn doctest() {}
 #[cfg(test)]
 mod t {
 
-extern crate simulacrum;
 use simulacrum::*;
+use simulacrum_user::{deref, gt, lt, passes};
 use TestSuite;
 
 struct Simulacrum {}
@@ -265,8 +265,57 @@ impl TestSuite for Simulacrum {
         mock.foo(42);
     }
 
-    fn match_method() { unimplemented!() }
-    fn match_operator() { unimplemented!() }
+    fn match_method() {
+        pub trait A {
+            fn foo(&self, x: u32);
+        }
+
+        create_mock! {
+            impl A for AMock (self) {
+                expect_foo("foo"):
+                fn foo(&self, x: u32);
+            }
+         }
+
+        let mut mock = AMock::new();
+        mock.expect_foo().called_any().with(passes(|x| *x == 42));
+
+        mock.foo(42);
+    }
+
+    fn match_operator() {
+        // Simulacrum doesn't have any ge, le, or ne operators
+        pub trait A {
+            fn foo_deref(&self, key: &i16);
+            fn foo_eq(&self, key: i16);
+            fn foo_gt(&self, key: i16);
+            fn foo_lt(&self, key: i16);
+        }
+
+        create_mock! {
+            impl A for AMock(self) {
+                expect_foo_deref("foo_deref"):
+                fn foo_deref(&self, key: &i16);
+                expect_foo_eq("foo_eq"):
+                fn foo_eq(&self, key: i16);
+                expect_foo_gt("foo_gt"):
+                fn foo_gt(&self, key: i16);
+                expect_foo_lt("foo_lt"):
+                fn foo_lt(&self, key: i16);
+            }
+        }
+
+        let mut mock = AMock::new();
+        mock.expect_foo_deref().called_any().with(deref(3));
+        mock.expect_foo_eq().called_any().with(3);
+        mock.expect_foo_gt().called_any().with(gt(2));
+        mock.expect_foo_lt().called_any().with(lt(4));
+        mock.foo_deref(&3);
+        mock.foo_eq(3);
+        mock.foo_gt(3);
+        mock.foo_lt(3);
+    }
+
     fn match_or() { unimplemented!() }
     fn match_pattern() { unimplemented!() }
     fn match_range() { unimplemented!() }

@@ -12,6 +12,7 @@ extern crate mock_derive;
 extern crate mockers;
 extern crate mockers_derive;
 extern crate simulacrum;
+extern crate simulacrum_user;
 
 #[allow(unused)]
 macro_rules! test {
