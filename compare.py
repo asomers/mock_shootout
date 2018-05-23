@@ -47,9 +47,7 @@ results['double']['rustc'] = "stable ok"
 results['galvanic_mock']['rustc'] = "nightly warn"
 results['mock_derive']['rustc'] = "nightly warn"
 results['mockers']['rustc'] = "nightly warn"
-# Simulacrum compiles on stable, but its tests fail
-# https://github.com/pcsm/simulacrum/issues/50
-results['simulacrum']['rustc'] = "nightly warn"
+results['simulacrum']['rustc'] = "stable ok"
 
 results['double']['first_release'] = "Dec-12-2017 -"
 results['galvanic_mock']['first_release'] = "Aug-13-2017 -"
