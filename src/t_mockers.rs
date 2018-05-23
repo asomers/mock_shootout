@@ -377,7 +377,7 @@ impl TestSuite for Mockers {
         unimplemented!()
     }
 
-    fn sequence(){
+    fn sequence_multi_method(){
         #[derive_mock]
         pub trait A {
             fn foo(&self);

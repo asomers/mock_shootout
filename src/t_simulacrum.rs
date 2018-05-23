@@ -543,7 +543,7 @@ impl TestSuite for Simulacrum {
         assert_eq!(42, mock.foo(0));
     }
 
-    fn sequence() {
+    fn sequence_multi_method() {
         // Simulacrum lacks this explicit functionality, but it can be
         // implemented using checkpoints, aka Eras.
         pub trait A {

@@ -313,7 +313,7 @@ impl TestSuite for MockGalvanicMock{
         unimplemented!()
     }
 
-    fn sequence() { unimplemented!() }
+    fn sequence_multi_method() { unimplemented!() }
     fn times_once() {
         let mock = new_mock!(A);
         given! {

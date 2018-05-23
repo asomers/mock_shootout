@@ -49,7 +49,7 @@ macro_rules! test {
             $self::return_panic()
         }
         #[test] fn return_parameters() { $self::return_parameters() }
-        #[test] fn sequence() { $self::sequence() }
+        #[test] fn sequence_multi_method() { $self::sequence_multi_method() }
         #[test] fn static_method() { $self::static_method() }
         #[test] fn times_once() { $self::times_once() }
         #[test] fn times_any() { $self::times_any() }
@@ -112,7 +112,7 @@ pub trait TestSuite {
     /// reference.
     fn return_parameters();
     /// A scenario can expect calls to multiple methods in a specified order
-    fn sequence();
+    fn sequence_multi_method();
     /// A `Trait` with a static method can be mocked (though the static method
     /// cannot neccessarily be expected)
     fn static_method();
