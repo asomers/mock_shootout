@@ -96,6 +96,7 @@ impl TestSuite for MockDerive{
         unimplemented!();
     }
 
+    fn generic_return() {unimplemented!()}
     fn generic_trait(){
         #[mock]
         trait A<T> where T: Clone {

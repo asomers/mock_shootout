@@ -177,15 +177,12 @@ impl TestSuite for Simulacrum {
     fn generic_parameters() {
         pub trait A {
             fn foo<T: 'static>(&self, t:T);
-            fn bar<T: 'static>(&self) -> T;
         }
 
         create_mock_struct! {
             struct AMock: {
                 expect_foo_i16("foo") i16;
                 expect_foo_u32("foo") u32;
-                expect_bar_i16("bar") () => i16;
-                expect_bar_u32("bar") () => u32;
             }
         }
 
@@ -193,20 +190,38 @@ impl TestSuite for Simulacrum {
             fn foo<T: 'static>(&self, t: T) {
                 was_called!(self, "foo", (t: T))
             }
+        }
 
+        let mut mock: AMock = AMock::new();
+        mock.expect_foo_i16().called_once().with(-1);
+        mock.then().expect_foo_u32().called_once().with(1);
+
+        mock.foo::<i16>(-1);
+        mock.foo::<u32>(1);
+    }
+
+    fn generic_return() {
+        pub trait A {
+            fn bar<T: 'static>(&self) -> T;
+        }
+
+        create_mock_struct! {
+            struct AMock: {
+                expect_bar_i16("bar") () => i16;
+                expect_bar_u32("bar") () => u32;
+            }
+        }
+
+        impl A for AMock {
             fn bar<T: 'static>(&self) -> T {
                 was_called!(self, "bar", () -> T)
             }
         }
 
         let mut mock: AMock = AMock::new();
-        mock.expect_foo_i16().called_once().with(-1);
         mock.expect_bar_i16().called_once().returning(|_| -5);
-        mock.then().expect_foo_u32().called_once().with(1);
-        mock.expect_bar_u32().called_once().returning(|_| 1_000_000);
+        mock.then().expect_bar_u32().called_once().returning(|_| 1_000_000);
 
-        mock.foo::<i16>(-1);
-        mock.foo::<u32>(1);
         assert_eq!(-5, mock.bar::<i16>());
         assert_eq!(1_000_000, mock.bar::<u32>());
     }

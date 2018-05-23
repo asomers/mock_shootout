@@ -61,9 +61,10 @@ lib_headers = "|_. ".join(libnames)
 print "|_. |_.%s|" % lib_headers
 essential_features = ["associated_types", "checkpoint", "consume",
 "doctest", "external_trait", "fallback", "foreign", "generic_parameters",
-"generic_trait", "inherited_trait", "match_method", "mock_struct",
-"multi_trait", "return_call_with_args", "return_lifetime", "return_owned",
-"return_parameters", "sequence", "static_method", "times_range",]
+"generic_return", "generic_trait", "inherited_trait", "match_method",
+"mock_struct", "multi_trait", "return_call_with_args", "return_lifetime",
+"return_owned", "return_parameters", "sequence", "static_method",
+"times_range",]
 convenience_features = [ "derive", "match_and", "match_constant",
 "match_operator", "match_or", "match_pattern", "match_range", "match_wildcard",
 "return_call", "return_constant", "return_default", "return_panic",

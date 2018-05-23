@@ -79,6 +79,7 @@ impl TestSuite for MockDouble{
         unimplemented!()
     }
 
+    fn generic_return() {unimplemented!()}
     fn generic_trait() {
         //pub trait A<T> {
             //fn foo(&self, key: i16) -> T;

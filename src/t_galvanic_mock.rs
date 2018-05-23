@@ -148,6 +148,12 @@ impl TestSuite for MockGalvanicMock{
         assert!(mock.foo(5, 5));
     }
 
+    fn generic_return() {
+        // galvanic_mock can mock a method with a generic return value, but
+        // there's no way to specify the return value except for default().
+        unimplemented!()
+    }
+
     fn generic_trait() {
         let mock = new_mock!(GenericTrait<i32>);
         given! {

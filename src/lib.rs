@@ -26,6 +26,7 @@ macro_rules! test {
         #[test] fn fallback() { $self::fallback() }
         #[test] fn foreign() { $self::foreign() }
         #[test] fn generic_parameters() { $self::generic_parameters() }
+        #[test] fn generic_return() { $self::generic_return() }
         #[test] fn generic_trait() { $self::generic_trait() }
         #[test] fn inherited_trait() { $self::inherited_trait() }
         #[test] fn many_args() { $self::many_args() }
@@ -86,8 +87,10 @@ pub trait TestSuite {
     fn fallback();
     /// Can mock foreign functions
     fn foreign();
-    /// A `Trait` with a generic method can be mocked.
+    /// A `Trait` with a method that has generic parameters can be mocked.
     fn generic_parameters();
+    /// A `Trait` with a method that has a generic return value can be mocked.
+    fn generic_return();
     /// A generic `Trait` can be mocked.
     fn generic_trait();
     /// An inherited `Trait` can be mocked.

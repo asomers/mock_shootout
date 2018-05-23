@@ -131,6 +131,7 @@ impl TestSuite for Mockers {
         unimplemented!();
     }
 
+    fn generic_return() {unimplemented!()}
     fn generic_trait(){
         unimplemented!();
     }
