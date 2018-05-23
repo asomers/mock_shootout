@@ -1,6 +1,7 @@
 /// ```
 /// #![feature(proc_macro)]
 /// extern crate galvanic_mock;
+/// extern crate galvanic_assert;
 /// use galvanic_mock::{mockable, use_mocks};
 ///
 /// #[mockable]
