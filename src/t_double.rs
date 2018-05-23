@@ -347,7 +347,25 @@ impl TestSuite for MockDouble{
         unimplemented!()
     }
 
-    fn sequence_multi_method() { unimplemented!() }
+    fn sequence() {
+        pub trait A {
+            fn foo(&self, x: i32);
+        }
+
+        mock_trait!(
+            MockA,
+            foo(i32) -> ()
+        );
+        impl A for MockA {
+            mock_method!(foo(&self, x: i32));
+        }
+        let mock = MockA::default();
+        mock.foo(1);
+        mock.foo(2);
+        assert!(mock.foo.has_calls_exactly_in_order(vec![1, 2]));
+        println!("single method");
+    }
+
     fn times_once() { 
         pub trait A {
             fn foo(&self);

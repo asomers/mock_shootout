@@ -49,7 +49,7 @@ macro_rules! test {
             $self::return_panic()
         }
         #[test] fn return_parameters() { $self::return_parameters() }
-        #[test] fn sequence_multi_method() { $self::sequence_multi_method() }
+        #[test] fn sequence() { $self::sequence() }
         #[test] fn static_method() { $self::static_method() }
         #[test] fn times_once() { $self::times_once() }
         #[test] fn times_any() { $self::times_any() }
@@ -111,8 +111,6 @@ pub trait TestSuite {
     /// A mock method can mutate its parameters when supplied by mutable
     /// reference.
     fn return_parameters();
-    /// A scenario can expect calls to multiple methods in a specified order
-    fn sequence_multi_method();
     /// A `Trait` with a static method can be mocked (though the static method
     /// cannot neccessarily be expected)
     fn static_method();
@@ -154,5 +152,10 @@ pub trait TestSuite {
     fn times_n();
     /// An expectation can assert that it's never called
     fn times_never();
+
+    // Quantitative features.  These are measured in degrees, rather than as
+    // booleans.  The degree of support is printed to stdout.
+    /// A scenario can expect calls to multiple methods in a specified order
+    fn sequence();
 }
 

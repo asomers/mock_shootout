@@ -543,7 +543,7 @@ impl TestSuite for Simulacrum {
         assert_eq!(42, mock.foo(0));
     }
 
-    fn sequence_multi_method() {
+    fn sequence() {
         // Simulacrum lacks this explicit functionality, but it can be
         // implemented using checkpoints, aka Eras.
         pub trait A {
@@ -576,6 +576,7 @@ impl TestSuite for Simulacrum {
         mock.bar();
         mock.baz();
         mock.bang();
+        println!("multi method");
     }
 
     fn times_once() {

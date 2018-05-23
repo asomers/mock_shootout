@@ -245,7 +245,7 @@ impl TestSuite for MockDerive{
         mock.foo(0);
     }
 
-    fn sequence_multi_method(){unimplemented!()}
+    fn sequence(){unimplemented!()}
     fn times_once(){
         #[mock]
         trait A {

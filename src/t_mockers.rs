@@ -377,7 +377,7 @@ impl TestSuite for Mockers {
         unimplemented!()
     }
 
-    fn sequence_multi_method(){
+    fn sequence(){
         #[derive_mock]
         pub trait A {
             fn foo(&self);
@@ -386,12 +386,14 @@ impl TestSuite for Mockers {
 
         let scenario = Scenario::new();
         let mut seq = Sequence::new();
-        let mock = scenario.create_mock_for::<A>();
-        seq.expect(mock.foo_call().and_return(()));
-        seq.expect(mock.bar_call().and_return(()));
+        let mock1 = scenario.create_mock_for::<A>();
+        let mock2 = scenario.create_mock_for::<A>();
+        seq.expect(mock1.foo_call().and_return(()));
+        seq.expect(mock2.bar_call().and_return(()));
         scenario.expect(seq);
-        mock.foo();
-        mock.bar();
+        mock1.foo();
+        mock2.bar();
+        println!("multi object");
     }
 
     fn times_any(){
