@@ -61,6 +61,10 @@ mod t_mock_derive;
 mod t_mockers;
 mod t_simulacrum;
 
+/// A handy type that is non-Clone and non-Copy
+#[derive(Debug, Eq, PartialEq)]
+pub struct UniquelyOwned(u32);
+
 pub trait TestSuite {
     // Core features.  These are the essential features that cannot be
     // implemented by the user

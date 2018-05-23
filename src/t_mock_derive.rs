@@ -16,7 +16,7 @@ mod t {
 
 extern crate mock_derive;
 use mock_derive::mock;
-use TestSuite;
+use {TestSuite, UniquelyOwned};
 
 pub struct MockDerive;
 impl TestSuite for MockDerive{
@@ -217,14 +217,14 @@ impl TestSuite for MockDerive{
     fn return_owned(){
         #[mock]
         pub trait A {
-            fn foo(&self) -> String;
+            fn foo(&self) -> UniquelyOwned;
         }
 
         let mut mock = MockA::new();
-        let result = "Foo".to_owned();
+        let result = UniquelyOwned(42);
         let method = mock.method_foo().first_call().set_result(result);
         mock.set_foo(method);
-        assert_eq!(mock.foo(), "Foo");
+        assert_eq!(mock.foo(), UniquelyOwned(42));
     }
 
     fn return_panic(){

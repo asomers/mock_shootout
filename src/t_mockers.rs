@@ -21,7 +21,7 @@ extern crate mockers;
 extern crate mockers_derive;
 use mockers::*;
 #[macro_use] use mockers_derive::*;
-use TestSuite;
+use {TestSuite, UniquelyOwned};
 
 pub trait ET {}
 
@@ -344,14 +344,14 @@ impl TestSuite for Mockers {
     fn return_owned(){
         #[derive_mock]
         pub trait A {
-            fn foo(&self) -> String;
+            fn foo(&self) -> UniquelyOwned;
         }
 
         let scenario = Scenario::new();
         let mock = scenario.create_mock_for::<A>();
-        let result = "Foo".to_owned();
+        let result = UniquelyOwned(42);
         scenario.expect(mock.foo_call().and_return(result));
-        assert_eq!(mock.foo(), "Foo");
+        assert_eq!(mock.foo(), UniquelyOwned(42));
     }
 
     fn return_panic(){

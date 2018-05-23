@@ -25,7 +25,7 @@ mod t {
 
 use simulacrum::*;
 use simulacrum_user::{deref, gt, lt, passes};
-use TestSuite;
+use {TestSuite, UniquelyOwned};
 
 struct Simulacrum {}
 impl TestSuite for Simulacrum {
@@ -439,20 +439,20 @@ impl TestSuite for Simulacrum {
 
     fn return_owned() {
         pub trait A {
-            fn foo(&self) -> String;
+            fn foo(&self) -> UniquelyOwned;
         }
 
         create_mock! {
             impl A for AMock (self) {
                 expect_foo("foo"):
-                fn foo(&self) -> String;
+                fn foo(&self) -> UniquelyOwned;
             }
          }
 
         let mut mock = AMock::new();
-        mock.expect_foo().called_once().returning(|_| "foo".to_owned());
+        mock.expect_foo().called_once().returning(|_| UniquelyOwned(42));
 
-        assert_eq!("foo", mock.foo());
+        assert_eq!(UniquelyOwned(42), mock.foo());
     }
 
     fn return_panic() {

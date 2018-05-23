@@ -26,6 +26,7 @@ extern crate galvanic_assert;
 extern crate galvanic_mock;
 use galvanic_assert::matchers::*;
 use galvanic_mock::{mockable, use_mocks};
+use UniquelyOwned;
 
 // Galvanic_mock's macros don't work in function-scope, so we have to define all
 // the traits up here.  This is unlikely to hinder most users.
@@ -33,7 +34,7 @@ use galvanic_mock::{mockable, use_mocks};
 pub trait A {
     fn foo(&self, x: i16) -> i16;
     fn bar(self);
-    fn baz(&self) -> String;
+    fn baz(&self) -> UniquelyOwned;
 }
 
 #[mockable]
@@ -93,7 +94,7 @@ mod t {
     use std;
     use super::*;
 
-use TestSuite;
+use {TestSuite, UniquelyOwned};
 
 pub struct MockGalvanicMock;
 impl TestSuite for MockGalvanicMock{
@@ -286,9 +287,9 @@ impl TestSuite for MockGalvanicMock{
     fn return_owned() {
         let mock = new_mock!(A);
         given! {
-            <mock as A>::baz() then_return "baz".to_owned() always;
+            <mock as A>::baz() then_return UniquelyOwned(42) always;
         }
-        assert_eq!("baz", mock.baz());
+        assert_eq!(UniquelyOwned(42), mock.baz());
     }
 
     fn return_panic() {

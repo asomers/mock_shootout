@@ -24,7 +24,7 @@ fn doctest() {}
 mod t {
 
 use double::matcher::*;
-use TestSuite;
+use {TestSuite, UniquelyOwned};
 
 pub struct MockDouble;
 impl TestSuite for MockDouble{
@@ -328,20 +328,8 @@ impl TestSuite for MockDouble{
     }
 
     fn return_owned() { 
-        pub trait A {
-            fn foo(&self) -> String;
-        }
-
-        mock_trait!(
-            MockA,
-            foo() -> String
-        );
-        impl A for MockA {
-            mock_method!(foo(&self) -> String);
-        }
-        let mock = MockA::default();
-        mock.foo.return_value("foo".to_owned());
-        assert_eq!("foo", mock.foo());
+        // Double requires that return types be Clone
+        unimplemented!()
     }
 
     fn return_panic() {
