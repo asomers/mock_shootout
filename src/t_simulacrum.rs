@@ -286,7 +286,7 @@ impl TestSuite for Simulacrum {
         let mut mock = AMock::new();
         mock.expect_foo().called_any().with(params!(0, 1, 2, 3, 4, 5, 6, 7, 8));
         mock.foo(0, 1, 2, 3, 4, 5, 6, 7, 8);
-        println!("9");
+        print!("9 ");
         // Simulacrum's params! macro works with a maximum of 9 arguments
     }
 
@@ -591,7 +591,7 @@ impl TestSuite for Simulacrum {
         mock.bar();
         mock.baz();
         mock.bang();
-        println!("multi method");
+        print!("multi method ");
     }
 
     fn times_once() {

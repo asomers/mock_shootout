@@ -164,7 +164,7 @@ impl TestSuite for Mockers {
          let mock = scenario.create_mock_for::<A>();
          scenario.expect(mock.foo_call(0, 1, 2, 3).and_return(()));
          mock.foo(0, 1, 2, 3);
-         println!("4");
+         print!("4 ");
     }
 
     fn match_and(){
@@ -394,7 +394,7 @@ impl TestSuite for Mockers {
         scenario.expect(seq);
         mock1.foo();
         mock2.bar();
-        println!("multi object");
+        print!("multi object ");
     }
 
     fn times_any(){

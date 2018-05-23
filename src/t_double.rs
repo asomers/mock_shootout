@@ -131,7 +131,7 @@ impl TestSuite for MockDouble{
         }
         let mock = MockA::default();
         mock.foo(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
-        println!("12");
+        print!("12 ");
     }
 
     fn match_and() {
@@ -360,7 +360,7 @@ impl TestSuite for MockDouble{
         mock.foo(1);
         mock.foo(2);
         assert!(mock.foo.has_calls_exactly_in_order(vec![1, 2]));
-        println!("single method");
+        print!("single method ");
     }
 
     fn times_once() { 

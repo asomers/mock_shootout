@@ -137,7 +137,7 @@ impl TestSuite for MockDerive{
         mock.set_foo(method);
         assert_eq!(3, mock.foo(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
                                14, 15));
-        println!(">= 16");
+        print!(">= 16 ");
     }
 
     fn match_and(){unimplemented!()}
