@@ -233,6 +233,18 @@ impl TestSuite for MockDerive{
     }
 
     fn return_parameters() {unimplemented!()}
+    fn static_method() {
+        #[mock]
+        pub trait A {
+            fn bar() -> u32;
+            fn foo(&self, x: u32) -> u32;
+        }
+        let mut mock = MockA::new();
+        let method = mock.method_foo().return_result_of(|| 1);
+        mock.set_foo(method);
+        mock.foo(0);
+    }
+
     fn sequence(){unimplemented!()}
     fn times_once(){
         #[mock]

@@ -50,6 +50,7 @@ macro_rules! test {
         }
         #[test] fn return_parameters() { $self::return_parameters() }
         #[test] fn sequence() { $self::sequence() }
+        #[test] fn static_method() { $self::static_method() }
         #[test] fn times_once() { $self::times_once() }
         #[test] fn times_any() { $self::times_any() }
         #[test] fn times_n() { $self::times_n() }
@@ -112,6 +113,9 @@ pub trait TestSuite {
     fn return_parameters();
     /// A scenario can expect calls to multiple methods in a specified order
     fn sequence();
+    /// A `Trait` with a static method can be mocked (though the static method
+    /// cannot neccessarily be expected)
+    fn static_method();
     /// An expectation can assert that it's called a variable number of times
     fn times_range();
 

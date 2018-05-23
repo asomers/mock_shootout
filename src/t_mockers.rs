@@ -373,6 +373,10 @@ impl TestSuite for Mockers {
         unimplemented!()
     }
 
+    fn static_method() {
+        unimplemented!()
+    }
+
     fn sequence(){
         #[derive_mock]
         pub trait A {

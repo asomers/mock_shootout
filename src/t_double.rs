@@ -343,6 +343,10 @@ impl TestSuite for MockDouble{
         unimplemented!()
     }
 
+    fn static_method() {
+        unimplemented!()
+    }
+
     fn sequence() { unimplemented!() }
     fn times_once() { 
         pub trait A {

@@ -517,6 +517,32 @@ impl TestSuite for Simulacrum {
         assert_eq!(42, x);
     }
 
+    fn static_method() {
+        pub trait A {
+            fn bar() -> u32;
+            fn foo(&self, x: u32) -> u32;
+        }
+
+        create_mock_struct! {
+            struct AMock: {
+                expect_foo("foo") u32 => u32;
+            }
+        }
+        impl A for AMock {
+            fn foo(&self, x: u32) -> u32 {
+                was_called!(self, "foo", (x: u32) -> u32)
+            }
+            fn bar() -> u32 {
+                unimplemented!()
+            }
+         }
+
+        let mut mock = AMock::new();
+        mock.expect_foo().called_once().returning(|_| 42);
+
+        assert_eq!(42, mock.foo(0));
+    }
+
     fn sequence() {
         // Simulacrum lacks this explicit functionality, but it can be
         // implemented using checkpoints, aka Eras.
