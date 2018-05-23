@@ -238,26 +238,7 @@ impl TestSuite for MockDouble{
     }
 
     fn match_pattern() { unimplemented!() }
-    fn match_range() {
-        // Double has no explicit functionality for this, though you can implement
-        // it yourself using `calls`.
-        pub trait A {
-            fn foo(&self, key: i16);
-        }
-
-        mock_trait!(
-            MockA,
-            foo(i16) -> ()
-        );
-        impl A for MockA {
-            mock_method!(foo(&self, key: i16));
-        }
-        let mock = MockA::default();
-        mock.foo(15);
-        let arg = mock.foo.calls()[0];
-        assert!((0..20).contains(&arg));
-    }
-
+    fn match_range() { unimplemented!() }
     fn match_wildcard() {
         pub trait A {
             fn foo(&self, key: i16);
@@ -277,20 +258,7 @@ impl TestSuite for MockDouble{
 
     fn multi_trait() { unimplemented!() }
     fn return_call() { 
-        pub trait A {
-            fn foo(&self) -> i32;
-        }
-
-        mock_trait!(
-            MockA,
-            foo() -> i32
-        );
-        impl A for MockA {
-            mock_method!(foo(&self) -> i32);
-        }
-        let mock = MockA::default();
-        mock.foo.use_closure(Box::new(|_| 6));
-        assert_eq!(6, mock.foo());
+        unimplemented!()
     }
 
     fn return_call_with_args() { 
@@ -377,22 +345,7 @@ impl TestSuite for MockDouble{
     }
 
     fn return_panic() {
-        // Double lacks this explicit functionality, but you can implement
-        // yourself.
-        pub trait A {
-            fn foo(&self) -> i32;
-        }
-
-        mock_trait!(
-            MockA,
-            foo() -> i32
-        );
-        impl A for MockA {
-            mock_method!(foo(&self) -> i32);
-        }
-        let mock = MockA::default();
-        mock.foo.use_closure(Box::new(|_| panic!("XXX")));
-        mock.foo();
+        unimplemented!()
     }
 
     fn return_parameters() {

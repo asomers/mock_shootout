@@ -228,18 +228,7 @@ impl TestSuite for MockDerive{
     }
 
     fn return_panic(){
-        //mock_derive lacks this explicit functionality, but you can do it
-        //yourself with return_result_of
-        #[mock]
-        trait A {
-            fn foo(&self) -> u32;
-        }
-
-        let mut mock = MockA::new();
-        let method = mock.method_foo()
-            .return_result_of(|| panic!("XXX"));
-        mock.set_foo(method);
-        mock.foo();
+        unimplemented!()
     }
 
     fn return_parameters() {unimplemented!()}

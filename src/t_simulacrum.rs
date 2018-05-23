@@ -373,21 +373,7 @@ impl TestSuite for Simulacrum {
     }
 
     fn return_call() {
-        pub trait A {
-            fn foo(&self) -> u32;
-        }
-
-        create_mock! {
-            impl A for AMock (self) {
-                expect_foo("foo"):
-                fn foo(&self) -> u32;
-            }
-         }
-
-        let mut mock = AMock::new();
-        mock.expect_foo().called_once().returning(|_| 5);
-
-        assert_eq!(5, mock.foo());
+        unimplemented!()
     }
 
     fn return_call_with_args() {
@@ -409,43 +395,11 @@ impl TestSuite for Simulacrum {
     }
 
     fn return_constant() {
-        // Simulacrum lacks this explicit functionality, but it can be
-        // implemented using `returning`
-        pub trait A {
-            fn foo(&self) -> u32;
-        }
-
-        create_mock! {
-            impl A for AMock (self) {
-                expect_foo("foo"):
-                fn foo(&self) -> u32;
-            }
-         }
-
-        let mut mock = AMock::new();
-        mock.expect_foo().called_once().returning(|_| 5);
-
-        assert_eq!(5, mock.foo());
+        unimplemented!()
     }
 
     fn return_default() {
-        // Simulacrum lacks this explicit functionality, but it can be
-        // implemented using `returning`
-        pub trait A {
-            fn foo(&self) -> u32;
-        }
-
-        create_mock! {
-            impl A for AMock (self) {
-                expect_foo("foo"):
-                fn foo(&self) -> u32;
-            }
-         }
-
-        let mut mock = AMock::new();
-        mock.expect_foo().called_once().returning(|_| u32::default());
-
-        assert_eq!(0, mock.foo());
+        unimplemented!()
     }
 
     fn return_lifetime() {
@@ -502,23 +456,7 @@ impl TestSuite for Simulacrum {
     }
 
     fn return_panic() {
-        // Simulacrum lacks this explicit functionality, but it can be
-        // implemented using `modifying`
-        pub trait A {
-            fn foo(&self);
-        }
-
-        create_mock! {
-            impl A for AMock (self) {
-                expect_foo("foo"):
-                fn foo(&self);
-            }
-         }
-
-        let mut mock = AMock::new();
-        mock.expect_foo().called_once().modifying(|_| panic!("xxx"));
-
-        mock.foo();
+        unimplemented!()
     }
 
     fn return_parameters() {

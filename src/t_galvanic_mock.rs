@@ -233,13 +233,7 @@ impl TestSuite for MockGalvanicMock{
     }
 
     fn match_range() {
-        // galvanic_mock has no explicit functionality for this, but you can
-        // implement it yourself.
-        let mock = new_mock!(A);
-        given! {
-            <mock as A>::foo(|x| (0..10).contains(x)) then_return 12 always;
-        }
-        assert_eq!(12, mock.foo(5));
+        unimplemented!()
     }
 
     fn match_wildcard() {
@@ -261,11 +255,7 @@ impl TestSuite for MockGalvanicMock{
     }
 
     fn return_call() {
-        let mock = new_mock!(A);
-        given! {
-            <mock as A>::foo(|_| true) then_return_from |_| 12 always;
-        }
-        assert_eq!(12, mock.foo(0));
+        unimplemented!()
     }
 
     fn return_call_with_args() {
@@ -302,6 +292,8 @@ impl TestSuite for MockGalvanicMock{
     }
 
     fn return_panic() {
+        // Galvanic-mock has this ability, though you can't set the panic
+        // message.
         let mock = new_mock!(A);
         given! {
             <mock as A>::foo(|_| true) then_panic always;

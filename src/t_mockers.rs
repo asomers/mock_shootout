@@ -291,15 +291,7 @@ impl TestSuite for Mockers {
     }
 
     fn return_call(){
-        #[derive_mock]
-        pub trait A {
-            fn foo(&self) -> i16;
-        }
-
-        let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
-        scenario.expect(mock.foo_call().and_call(|| 1));
-        assert_eq!(mock.foo(), 1);
+        unimplemented!()
     }
 
     fn return_call_with_args(){
@@ -370,7 +362,7 @@ impl TestSuite for Mockers {
 
         let scenario = Scenario::new();
         let mock = scenario.create_mock_for::<A>();
-        scenario.expect(mock.foo_call().and_panic("fail".to_owned()));
+        scenario.expect(mock.foo_call().and_panic("Panic".to_owned()));
         mock.foo();
     }
 
