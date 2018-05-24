@@ -32,6 +32,7 @@ impl TestSuite for MockDouble{
     fn associated_types() { unimplemented!() }
     fn checkpoint() { unimplemented!() }
     fn consume() { 
+        // mock_method doesn't support "self" parameters
         //pub trait A {
             //fn into_i32(self) -> i32;
         //}
@@ -81,6 +82,7 @@ impl TestSuite for MockDouble{
 
     fn generic_return() {unimplemented!()}
     fn generic_trait() {
+        // mock_trait! doesn't support generic structs
         //pub trait A<T> {
             //fn foo(&self, key: i16) -> T;
         //}
@@ -96,23 +98,30 @@ impl TestSuite for MockDouble{
     }
 
     fn inherited_trait() {
-        //pub trait A {
-            //fn foo(&self);
-        //}
+        pub trait A {
+            fn foo(&self);
+        }
 
-        //pub trait B: A {
-            //fn bar(&self);
-        //}
+        pub trait B: A {
+            fn bar(&self);
+        }
 
-        //mock_trait!(
-            //MockB,
-            //bar() -> ()
-        //);
+        mock_trait!(
+            MockB,
+            foo() -> (),
+            bar() -> ()
+        );
 
-        //impl B for MockB {
-            //mock_method!(bar(&self));
-        //}
-        unimplemented!()
+        impl A for MockB {
+            mock_method!(foo(&self));
+        }
+        impl B for MockB {
+            mock_method!(bar(&self));
+        }
+
+        let mock = MockB::default();
+        mock.foo();
+        mock.bar();
     }
 
     fn many_args() {
@@ -311,6 +320,7 @@ impl TestSuite for MockDouble{
     }
 
     fn return_lifetime() {
+        // mock_method! can't handle "&'a self" parameters
         //struct S();
         //pub trait A<'a> {
             //fn foo(&'a self, t: S) -> &'a S;
