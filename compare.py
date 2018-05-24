@@ -48,12 +48,14 @@ results['galvanic_mock']['rustc'] = "nightly warn"
 results['mock_derive']['rustc'] = "nightly warn"
 results['mockers']['rustc'] = "nightly warn"
 results['simulacrum']['rustc'] = "stable ok"
+results['mock_it']['rustc'] = "stable ok"
 
 results['double']['first_release'] = "Dec-12-2017 -"
 results['galvanic_mock']['first_release'] = "Aug-13-2017 -"
 results['mock_derive']['first_release'] = "Jul-16-2017 -"
 results['mockers']['first_release'] = "Apr-6-2016 -"
 results['simulacrum']['first_release'] = "Dec-17-2017 -"
+results['mock_it']['first_release'] = "Mar-11-2018 -"
 
 # Finally, generate the table
 libnames = sorted(results.keys())

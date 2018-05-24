@@ -11,6 +11,7 @@ extern crate galvanic_mock;
 extern crate mock_derive;
 extern crate mockers;
 extern crate mockers_derive;
+extern crate mock_it;
 extern crate simulacrum;
 extern crate simulacrum_user;
 extern crate test_double;
@@ -63,6 +64,7 @@ macro_rules! test {
 mod t_double;
 mod t_galvanic_mock;
 mod t_mock_derive;
+mod t_mock_it;
 mod t_mockers;
 mod t_simulacrum;
 
