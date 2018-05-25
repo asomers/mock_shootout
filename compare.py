@@ -4,6 +4,57 @@ import re
 import pprint
 import subprocess
 
+descs = {
+    "double": "Double",
+    "galvanic_mock": "Galvanic-mock",
+    "mock_derive": "Mock_Derive",
+    "mock_it": "Mock-it",
+    "mockers": "Mockers",
+    "simulacrum": "Simulacrum",
+
+    "associated_types": "Associated types",
+    "checkpoint": "Checkpoints",
+    "consume": "Consume",
+    "doctest": "Doctest",
+    "external_trait": "External traits",
+    "fallback": "Fallback",
+    "foreign": "Foreign",
+    "generic_parameters": "Generic parameters",
+    "generic_return": "Generic return",
+    "generic_trait": "Generic traits",
+    "inherited_trait": "Inherited traits",
+    "match_method": "Match function",
+    "mock_struct": "Structs",
+    "multi_trait": "Multiple traits",
+    "return_call_with_args": "Return call with args",
+    "return_lifetime": "Return lifetime",
+    "return_owned": "Return owned",
+    "return_parameters": "Return parameters",
+    "sequence": "Sequence",
+    "static_method": "Static methods",
+    "times_range": "Times range",
+
+    "derive": "Derive",
+    "match_and": "TODO",
+    "match_constant": "Match constant",
+    "match_operator": "Match operator",
+    "match_or": "TODO",
+    "match_pattern": "Match pattern",
+    "match_range": "Match range",
+    "match_wildcard": "Match wildcard",
+    "return_call": "Return call",
+    "return_constant": "Return a constant",
+    "return_default": "Return default",
+    "return_panic": "Return panic",
+    "times_once": "Times once",
+    "times_any": "Times any",
+    "times_n": "Times n",
+    "times_never": "Times never",
+    "many_args": "Maximum arguments",
+    "rustc": "Rustc",
+    "first_release": "First release"
+}
+
 def format_cell(s):
     words = s.split(" ")
     result = words[-1]
@@ -21,7 +72,7 @@ def format_cell(s):
 def print_row(feature, results):
     result_details = "|".join([format_cell(results[l][feature])
         for l in libnames])
-    print "|%21s|%s|" % (feature, result_details)
+    print "|%21s|%s|" % (descs[feature], result_details)
 
 # First, run the tests and collect results
 results = {}
@@ -59,7 +110,7 @@ results['mock_it']['first_release'] = "Mar-11-2018 -"
 
 # Finally, generate the table
 libnames = sorted(results.keys())
-lib_headers = "|_. ".join(libnames)
+lib_headers = "|_. ".join([descs[l] for l in libnames])
 print "|_. |_.%s|" % lib_headers
 essential_features = ["associated_types", "checkpoint", "consume",
 "doctest", "external_trait", "fallback", "foreign", "generic_parameters",
