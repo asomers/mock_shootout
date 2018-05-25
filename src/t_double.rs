@@ -31,7 +31,37 @@ pub struct MockDouble;
 #[allow(unused_parens)]
 impl TestSuite for MockDouble{
     fn associated_types() { unimplemented!() }
-    fn checkpoint() { unimplemented!() }
+    fn checkpoint() {
+        // Double actually supports this feature the same way that Pseudo does,
+        // but it prints garbage to stdout.  Until that's fixed, I need to leave
+        // the test disabled so it doesn't confuse compare.py
+        //pub trait A {
+            //fn foo(&self, x: i32);
+        //}
+
+        //mock_trait!(
+            //MockA,
+            //foo(i32) -> ()
+        //);
+        //impl A for MockA {
+            //mock_method!(foo(&self, x: i32));
+        //}
+
+        //let mock = MockA::default();
+        //mock.foo(1);
+        //mock.foo(2);
+        //assert!(mock.foo.called_with(1));
+        //assert!(mock.foo.called_with(2));
+        //mock.foo.reset_calls();
+        //mock.foo(3);
+        //mock.foo(4);
+        //assert!(mock.foo.called_with(4));
+        //assert!(mock.foo.called_with(3));
+        //assert!(!mock.foo.called_with(1));
+        //assert!(!mock.foo.called_with(2));
+        unimplemented!()
+    }
+
     fn consume() { 
         // mock_method doesn't support "self" parameters
         //pub trait A {
