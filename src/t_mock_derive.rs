@@ -4,10 +4,12 @@
 /// use mock_derive::mock;
 /// #[mock]
 /// pub trait A {
-///     fn foo(&self) -> i16;
+///     fn foo(&self, key: i16) -> i32;
 /// }
 /// 
-/// let _mock = MockA::new();
+/// let mock = MockA::new();
+/// mock.foo.first_call.set_result(42);
+/// assert_eq!(42, mock.foo());
 /// ```
 fn doctest() {}
 

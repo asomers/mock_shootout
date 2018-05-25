@@ -6,7 +6,7 @@
 ///
 /// #[mockable]
 /// pub trait A {
-///     fn foo(&self, x: i16) -> i16;
+///     fn foo(&self, x: i16) -> i32;
 /// }
 /// 
 /// #[use_mocks]

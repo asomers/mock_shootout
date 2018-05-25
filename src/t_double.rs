@@ -15,8 +15,9 @@
 /// }
 ///
 /// let mock = MockA::default();
-/// mock.foo.return_value(250);
-/// assert_eq!(250, mock.foo(0));
+/// mock.foo.return_value(42);
+/// assert_eq!(42, mock.foo(-1));
+/// assert!(mock.foo.called_with(-1i16));
 /// ```
 fn doctest() {}
 

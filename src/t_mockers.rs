@@ -6,11 +6,13 @@
 /// #[macro_use] use mockers_derive::*;
 /// #[derive_mock]
 /// pub trait A {
-///     fn foo(&self, key: i16);
+///     fn foo(&self, key: i16) -> i32;
 /// }
 /// 
 /// let scenario = Scenario::new();
-/// let _mock = scenario.create_mock_for::<A>();
+/// let mock = scenario.create_mock_for::<A>();
+/// scenario.expect(mock.foo_call(-1).and_return(42));
+/// assert_eq!(42, mock.foo(-1));
 /// ```
 fn doctest() {}
 

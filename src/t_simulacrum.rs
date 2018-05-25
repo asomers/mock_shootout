@@ -6,19 +6,19 @@ use simulacrum::*;
 /// use simulacrum::*;
 ///
 /// pub trait A {
-///     fn foo(&self);
+///     fn foo(&self, key: i16) -> i32;
 /// }
 ///
 /// create_mock! {
 ///     impl A for AMock (self) {
 ///         expect_foo("foo"):
-///         fn foo(&self);
+///         fn foo(&self, key: i16) -> i32;
 ///     }
 /// }
 ///
 /// let mut mock = AMock::new();
-/// mock.expect_foo().called_once();
-/// mock.foo();
+/// mock.expect_foo().called_once().with(-1).returning(|_| 42);
+/// assert_eq!(42, mock.foo(-1));
 /// ```
 fn doctest() {}
 
