@@ -1,6 +1,3 @@
-<html lang="en">
-<head>
-<meta charset="utf-8">
 h1. Rust Mock Shootout!
 
 Rust has several different mocking libraries.  None is clearly superior to all
@@ -32,14 +29,17 @@ approach to testing.  It tries to separate the specification from what a mock
 does, from how that mock is expected to be used.  It's a good all-around
 library: good feature set, good documentation, good ergonomics.
 
-- Double := All of the previous libraries had one thing in common: they all
+- Pseudo := All of the previous libraries had one thing in common: they all
 require the nightly compiler.  That allows them to do some pretty cool stuff,
 like tweak the language's syntax, but it's also inherently unstable.  No code
-that relies on nightly can be guaranteed to work with future compilers.  Double
+that relies on nightly can be guaranteed to work with future compilers.  Pseudo
 is different.  It eschews nightly-dependent features like @derive@ so that it
-can work on stable Rust.  Unfortunately, that also makes it the most verbose
-library of any compared here.  It also has the slimmest feature set of any
-library compared here.
+can work on stable Rust.  Unfortunately, that also makes it pretty verbose.
+
+- Double :=  Like Pseudo, Double runs on stable Rust.  However, it uses a few
+macros to reduce the verbosity.  The feature set is pretty similar.  In fact,
+the entire API is eerily similar.  I think one of these crates must've copied
+from the other (perhaps they both did).
 
 - Simulacrum := This is a bit of a different beast.  Whereas other mock
 libraries try to provide a clean API, Simulacrum actually provides 3 different
@@ -194,19 +194,21 @@ versions.
 
 - First release := Date of the first release on crates.io .
 
+%%TABLE%%
+
 h2. Conclusion
 
 The best mocking library is ... none of them.  No one library is clearly
 superior to all of the others.  Every project will need to choose a different
 mocking library with the features needed for that particular project.  Some
-projects may event need to use multiple libraries in combination 😝.  But a few
+projects may event need to use multiple libraries in combination.  But a few
 things stand out:
 
 * All of the libraries that run on stable Rust are more verbose than those that
 don't.  Mock-it is by far the most verbose, and Mock_Derive is the least.
 * All of the libraries that run on stable Rust are also much easier to debug
 than those that don't.  Procedural macros can be very confusing when they fail
-to compile.  Galvanic-mock was probably the worst in this respect.
+to compile.  Galvanic-mock is probably the worst in this respect.
 * Validating call sequences is an underappreciated aspect of mocking.  Only
 Mockers had full support for validating the sequences of multiple objects'
 methods.  However, Simulacrum's sequence syntax is more elegant.
@@ -217,5 +219,3 @@ library itself.
 * Simulacrum is the clear winner on features.  However, it also has pretty
 sparse documentation.
 * Mock_Derive and Mockers are probably the easiest libraries to use.
-
-TODO
