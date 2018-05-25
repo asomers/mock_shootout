@@ -125,12 +125,12 @@ convenience_features = [ "derive", "match_combo", "match_constant",
 "return_call", "return_constant", "return_default", "return_panic",
 "times_once", "times_any", "times_n", "times_never"]
 other_features = [ "many_args", "rustc", "first_release"]
-print "|\\6=. Essential Features|"
+print "|\\8=. Essential Features|"
 for feature in essential_features:
     print_row(feature, results)
-print "|\\6=. Convenience Features|"
+print "|\\8=. Convenience Features|"
 for feature in convenience_features:
     print_row(feature, results)
-print "|\\6=. Other|"
+print "|\\8=. Other|"
 for feature in other_features:
     print_row(feature, results)
