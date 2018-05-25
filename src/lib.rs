@@ -31,11 +31,10 @@ macro_rules! test {
         #[test] fn generic_trait() { $self::generic_trait() }
         #[test] fn inherited_trait() { $self::inherited_trait() }
         #[test] fn many_args() { $self::many_args() }
-        #[test] fn match_and() { $self::match_and() }
+        #[test] fn match_combo() { $self::match_combo() }
         #[test] fn match_constant() { $self::match_constant() }
         #[test] fn match_method() { $self::match_method() }
         #[test] fn match_operator() { $self::match_operator() }
-        #[test] fn match_or() { $self::match_or() }
         #[test] fn match_pattern() { $self::match_pattern() }
         #[test] fn match_range() { $self::match_range() }
         #[test] fn match_wildcard() { $self::match_wildcard() }
@@ -125,14 +124,12 @@ pub trait TestSuite {
     // implement these himself, or make do with their lack.
     /// A Mock can be `Derive`d from a `Trait`
     fn derive();
-    /// A method call can match both of two conditions
-    fn match_and();
+    /// A method call can match a combination of conditions
+    fn match_combo();
     /// A method call can match a constant value
     fn match_constant();
     /// A method call can match an argument by common operators
     fn match_operator();
-    /// A method call can match either of two conditions
-    fn match_or();
     /// A method call can match a pattern
     fn match_pattern();
     /// A method call can match a range of values

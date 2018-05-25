@@ -144,7 +144,7 @@ impl TestSuite for MockDouble{
         print!("12 ");
     }
 
-    fn match_and() {
+    fn match_combo() {
         pub trait A {
             fn foo(&self, key: i16);
         }
@@ -162,6 +162,11 @@ impl TestSuite for MockDouble{
             matcher!(
                 p!(all_of,
                    vec![p!(gt, 0), p!(lt, 10)])));
+        mock.foo(-1);
+        mock.foo.called_with_pattern(
+            matcher!(
+                p!(any_of,
+                   vec![p!(lt, 0), p!(gt, 10)])));
     }
 
     fn match_constant() { 
@@ -222,26 +227,6 @@ impl TestSuite for MockDouble{
         assert!(mock.foo.called_with_pattern(
             matcher!(p!(eq, 15), p!(ge, 10), p!(gt, 9), p!(le, 5), p!(lt, 6), p!(ne, 0))
         ));
-    }
-
-    fn match_or() {
-        pub trait A {
-            fn foo(&self, key: i16);
-        }
-
-        mock_trait!(
-            MockA,
-            foo(i16) -> ()
-        );
-        impl A for MockA {
-            mock_method!(foo(&self, key: i16));
-        }
-        let mock = MockA::default();
-        mock.foo(15);
-        mock.foo.called_with_pattern(
-            matcher!(
-                p!(any_of,
-                   vec![p!(lt, 0), p!(gt, 10)])));
     }
 
     fn match_pattern() { unimplemented!() }

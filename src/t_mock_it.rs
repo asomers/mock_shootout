@@ -250,7 +250,7 @@ impl TestSuite for MockIt {
 
     }
 
-    fn match_and() { unimplemented!() }
+    fn match_combo() { unimplemented!() }
     fn match_constant() {
         pub trait A {
             fn foo(&self, key: i16);
@@ -279,7 +279,6 @@ impl TestSuite for MockIt {
 
     fn match_method() { unimplemented!() }
     fn match_operator() { unimplemented!() }
-    fn match_or() { unimplemented!() }
     fn match_pattern() { unimplemented!() }
     fn match_range() { unimplemented!() }
     fn match_wildcard() {

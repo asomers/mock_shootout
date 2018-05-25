@@ -35,10 +35,9 @@ descs = {
     "times_range": "Times range",
 
     "derive": "Derive",
-    "match_and": "TODO",
+    "match_combo": "Match combinations",
     "match_constant": "Match constant",
     "match_operator": "Match operator",
-    "match_or": "TODO",
     "match_pattern": "Match pattern",
     "match_range": "Match range",
     "match_wildcard": "Match wildcard",
@@ -118,8 +117,8 @@ essential_features = ["associated_types", "checkpoint", "consume",
 "mock_struct", "multi_trait", "return_call_with_args", "return_lifetime",
 "return_owned", "return_parameters", "sequence", "static_method",
 "times_range",]
-convenience_features = [ "derive", "match_and", "match_constant",
-"match_operator", "match_or", "match_pattern", "match_range", "match_wildcard",
+convenience_features = [ "derive", "match_combo", "match_constant",
+"match_operator", "match_pattern", "match_range", "match_wildcard",
 "return_call", "return_constant", "return_default", "return_panic",
 "times_once", "times_any", "times_n", "times_never"]
 other_features = [ "many_args", "rustc", "first_release"]

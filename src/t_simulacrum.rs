@@ -305,7 +305,7 @@ impl TestSuite for Simulacrum {
         // Simulacrum's params! macro works with a maximum of 9 arguments
     }
 
-    fn match_and() { unimplemented!() }
+    fn match_combo() { unimplemented!() }
     fn match_constant() {
         pub trait A {
             fn foo(&self, x: u32);
@@ -375,7 +375,6 @@ impl TestSuite for Simulacrum {
         mock.foo_lt(3);
     }
 
-    fn match_or() { unimplemented!() }
     fn match_pattern() { unimplemented!() }
     fn match_range() { unimplemented!() }
     fn match_wildcard() {

@@ -141,11 +141,10 @@ impl TestSuite for MockDerive{
         print!(">= 16 ");
     }
 
-    fn match_and(){unimplemented!()}
+    fn match_combo(){unimplemented!()}
     fn match_constant(){unimplemented!()}
     fn match_method(){unimplemented!()}
     fn match_operator(){unimplemented!()}
-    fn match_or(){unimplemented!()}
     fn match_pattern(){unimplemented!()}
     fn match_range(){unimplemented!()}
     fn match_wildcard(){

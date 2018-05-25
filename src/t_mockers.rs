@@ -168,7 +168,7 @@ impl TestSuite for Mockers {
          print!("4 ");
     }
 
-    fn match_and(){
+    fn match_combo(){
         #[derive_mock]
         pub trait A {
             fn foo(&self, key: i16);
@@ -178,7 +178,10 @@ impl TestSuite for Mockers {
         let mock = scenario.create_mock_for::<A>();
         scenario.expect(mock.foo_call(
             matchers::and(matchers::gt(1), matchers::lt(10))).and_return(()));
+        scenario.expect(mock.foo_call(
+            matchers::or(matchers::gt(10), matchers::lt(0))).and_return(()));
         mock.foo(5);
+        mock.foo(-1);
     }
 
     fn match_constant(){
@@ -231,19 +234,6 @@ impl TestSuite for Mockers {
         mock.foo_le(3);
         mock.foo_lt(2);
         mock.foo_ne(5);
-    }
-
-    fn match_or(){
-        #[derive_mock]
-        pub trait A {
-            fn foo(&self, key: i16);
-        }
-
-        let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
-        scenario.expect(mock.foo_call(
-            matchers::or(matchers::gt(10), matchers::lt(0))).and_return(()));
-        mock.foo(-1);
     }
 
     fn match_pattern(){

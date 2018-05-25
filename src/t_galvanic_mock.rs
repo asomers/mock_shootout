@@ -187,14 +187,16 @@ impl TestSuite for MockGalvanicMock{
         print!(">= 16 ");
     }
 
-    fn match_and() {
+    fn match_combo() {
         // The docs suggest that this should work, but I can't get it to
         // compile
         //let mock = new_mock!(A);
         //given! {
             //<mock as A>::foo(All::of(gt(0)).and(lt(10))) then_return 1 always;
+            //<mock as A>::foo(Any::of(gt(10)).or(lt(0))) then_return 1 always;
         //}
         //assert_eq!(1, mock.foo(5));
+        //assert_eq!(1, mock.foo(-1));
         unimplemented!()
     }
 
@@ -224,17 +226,6 @@ impl TestSuite for MockGalvanicMock{
         assert_eq!(4, mock.foo(2));
         assert_eq!(5, mock.foo(3));
         assert_eq!(6, mock.foo(6));
-    }
-
-    fn match_or() {
-        // The docs suggest that this should work, but I can't get it to
-        // compile
-        //let mock = new_mock!(A);
-        //given! {
-            //<mock as A>::foo(Any::of(gt(10)).or(lt(0))) then_return 1 always;
-        //}
-        //assert_eq!(1, mock.foo(15));
-        unimplemented!()
     }
 
     fn match_pattern() {
