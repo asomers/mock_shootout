@@ -1,0 +1,717 @@
+<h1>Rust Mock Shootout!</h1>
+<p>Rust has several different mocking libraries.  None is clearly superior to all<br />
+of the others.  This project compares their feature sets, using an<br />
+apples-to-apples approach.  Each of several dozen features is implemented with<br />
+multiple mocking libraries, if possible.  The test results then show which<br />
+features work with which library.</p>
+<h2>The Contenders</h2>
+<dl>
+	<dt>Mockers</dt>
+	<dd>This is the oldest library in our shootout.  Inspired by<br />
+GoogleMock, it has an elegant syntax, powerful sequence matching, and a rich<br />
+variety of helper methods.  It requires nightly Rust, and is very sensitive to<br />
+exact compiler versions.  Each release of Mockers typically only works with a<br />
+single version of rustc.</dd>
+</dl>
+<dl>
+	<dt>Mock_Derive</dt>
+	<dd>This was the first Rust mocking library that supported<br />
+automatically @derive@ing the Mock object from the target trait.  That saves a<br />
+lot of typing!  Mock_Derive is still very easy to use, though it lacks any<br />
+ability to validate method arguments.  It also can&#8217;t work with generic traits,<br />
+traits with generic methods, traits defined in external crates, or multiple<br />
+traits (like <code>T: A + B</code>).  However, it does have a few rare features, like the<br />
+ability to mock foreign free functions, or traits with static methods.</dd>
+</dl>
+<dl>
+	<dt>Galvanic-mock</dt>
+	<dd>This is part of a suite of testing libraries.  Along with<br />
+galvanic-test and galvanic-assert, it provides a comprehensive set of testing<br />
+functionality for Rust programs.  Galvanic-mock itself takes a behavior-driven<br />
+approach to testing.  It tries to separate the specification from what a mock<br />
+does, from how that mock is expected to be used.  It&#8217;s a good all-around<br />
+library: good feature set, good documentation, good ergonomics.</dd>
+</dl>
+<dl>
+	<dt>Pseudo</dt>
+	<dd>All of the previous libraries had one thing in common: they all<br />
+require the nightly compiler.  That allows them to do some pretty cool stuff,<br />
+like tweak the language&#8217;s syntax, but it&#8217;s also inherently unstable.  No code<br />
+that relies on nightly can be guaranteed to work with future compilers.  Pseudo<br />
+is different.  It eschews nightly-dependent features like <code>derive</code> so that it<br />
+can work on stable Rust.  Unfortunately, that also makes it pretty verbose.</dd>
+</dl>
+<dl>
+	<dt>Double</dt>
+	<dd>Like Pseudo, Double runs on stable Rust.  However, it uses a few<br />
+macros to reduce the verbosity.  The feature set is pretty similar.  In fact,<br />
+the entire <span class="caps">API</span> is eerily similar.  I think one of these crates must&#8217;ve copied<br />
+from the other (perhaps they both did).</dd>
+</dl>
+<dl>
+	<dt>Simulacrum</dt>
+	<dd>This is a bit of a different beast.  Whereas other mock<br />
+libraries try to provide a clean <span class="caps">API</span>, Simulacrum actually provides 3 different<br />
+APIs.  That can be confusing at first, but the result is great power.  Unusual<br />
+requirements, impossible to meet with the highest-level and most conveient <span class="caps">API</span>,<br />
+can be satisfied (at greater effort) with the lower-level APIs.  Simulacrum also<br />
+runs on stable Rust, and manages to do it with less verbosity than Double.<br />
+Optional, nightly-dependent, support for <code>derive</code> is a work-in-progress.</dd>
+</dl>
+<dl>
+	<dt>Mock-it</dt>
+	<dd>Mock-it is Rust&#8217;s newest mocking library, and probably its<br />
+simplest.  Its chief advantage is that its simplicity allows it to run on stable<br />
+Rust, though that&#8217;s fast becoming a less unique feature.  However, the lack of a<br />
+high-level <span class="caps">API</span> also gives Mock-it some of the power of Simulacrum; it can mock a<br />
+<code>struct</code>, for example.  Overall, Mock-it has few practical advantages, but it&#8217;s<br />
+a good starting point for someone looking to build something bigger.</dd>
+</dl>
+<h2>Features</h2>
+<p>I evaluated about three dozen features evaluated for each library.  The first<br />
+group are the essential features.  These determine the library&#8217;s overall<br />
+capabilities.  While they may not be important to all users, they&#8217;re considered<br />
+&#8220;essential&#8221; because a user can&#8217;t implement any of these if the library doesn&#8217;t<br />
+intrinsically support them.</p>
+<p>The second group are the convenience features.  These are features that a user<br />
+can implement in terms of other essential features, for example, &#8220;Match<br />
+constant&#8221; can be implemented by matching with a method).  The lack of any of<br />
+these features shouldn&#8217;t preclude the use of a certain library, but may cause<br />
+some annoyance.</p>
+<p>The third group of &#8220;features&#8221; are really more informational in nature:</p>
+<h3>Feature Matrix</h3>
+<table>
+	<tr>
+		<th></th>
+		<th>Double</th>
+		<th>Galvanic-mock</th>
+		<th>Mock_Derive</th>
+		<th>Mock-it</th>
+		<th>Mockers</th>
+		<th>Pseudo</th>
+		<th>Simulacrum</th>
+	</tr>
+	<tr>
+		<td style="text-align:center;" colspan="8">Essential Features</td>
+	</tr>
+	<tr>
+		<td>     Associated types</td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>          Checkpoints</td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>              Consume</td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>              Doctest</td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>      External traits</td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>             Fallback</td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+	</tr>
+	<tr>
+		<td>              Foreign</td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+	</tr>
+	<tr>
+		<td>   Generic parameters</td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>       Generic return</td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>       Generic traits</td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>     Inherited traits</td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>       Match function</td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>              Structs</td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>      Multiple traits</td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>Return call with args</td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>      Return lifetime</td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+	</tr>
+	<tr>
+		<td>         Return owned</td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>    Return parameters</td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>             Sequence</td>
+		<td style="background:#ADEBAD;">single method</td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;">multi object</td>
+		<td style="background:#ADEBAD;">single method</td>
+		<td style="background:#ADEBAD;">multi method</td>
+	</tr>
+	<tr>
+		<td>       Static methods</td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>          Times range</td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+	</tr>
+	<tr>
+		<td style="text-align:center;" colspan="8">Convenience Features</td>
+	</tr>
+	<tr>
+		<td>               Derive</td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+	</tr>
+	<tr>
+		<td>   Match combinations</td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+	</tr>
+	<tr>
+		<td>       Match constant</td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>       Match operator</td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>        Match pattern</td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+	</tr>
+	<tr>
+		<td>          Match range</td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+	</tr>
+	<tr>
+		<td>       Match wildcard</td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>          Return call</td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+	</tr>
+	<tr>
+		<td>    Return a constant</td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+	</tr>
+	<tr>
+		<td>       Return default</td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+	</tr>
+	<tr>
+		<td>         Return panic</td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+	</tr>
+	<tr>
+		<td>           Times once</td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>            Times any</td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>              Times n</td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td>          Times never</td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#EB9999;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+		<td style="background:#ADEBAD;"></td>
+	</tr>
+	<tr>
+		<td style="text-align:center;" colspan="8">Other</td>
+	</tr>
+	<tr>
+		<td>    Maximum arguments</td>
+		<td style="background:#ADEBAD;">12</td>
+		<td style="background:#ADEBAD;">&gt;= 16</td>
+		<td style="background:#ADEBAD;">&gt;= 16</td>
+		<td style="background:#ADEBAD;">12</td>
+		<td style="background:#ADEBAD;">4</td>
+		<td style="background:#ADEBAD;">12</td>
+		<td style="background:#ADEBAD;">9</td>
+	</tr>
+	<tr>
+		<td>                Rustc</td>
+		<td style="background:#ADEBAD;">stable</td>
+		<td style="background:#FFEF99;">nightly</td>
+		<td style="background:#FFEF99;">nightly</td>
+		<td style="background:#ADEBAD;">stable</td>
+		<td style="background:#FFEF99;">nightly</td>
+		<td style="background:#ADEBAD;">stable</td>
+		<td style="background:#ADEBAD;">stable</td>
+	</tr>
+	<tr>
+		<td>        First release</td>
+		<td style="background:white;">Dec-12-2017</td>
+		<td style="background:white;">Aug-13-2017</td>
+		<td style="background:white;">Jul-16-2017</td>
+		<td style="background:white;">Mar-11-2018</td>
+		<td style="background:white;">Apr-6-2016</td>
+		<td style="background:white;">Mar-23-2017</td>
+		<td style="background:white;">Dec-17-2017</td>
+	</tr>
+</table>
+<h3>Feature Definitions</h3>
+<dl>
+	<dt>Associated types</dt>
+	<dd>Can the library mock a trait with associated types, like<br />
+<code>Iterator</code>?</dd>
+</dl>
+<dl>
+	<dt>Checkpoints</dt>
+	<dd>When validating sequences of method calls, can the library<br />
+create checkpoints (aka Eras)?  A checkpoint divides expectations<br />
+chronologically.  All expectations created before the checkpoint must be<br />
+satisfied before it, and all expectations created afterwards must be satisfied<br />
+after it.</dd>
+</dl>
+<dl>
+	<dt>Consume</dt>
+	<dd>Can the library mock a consuming method?  A consuming method is one<br />
+that takes the <code>self</code> parameter by value, rather than by reference.</dd>
+</dl>
+<dl>
+	<dt>Doctest</dt>
+	<dd>Can the library be used in doc tests?  The key difference here is<br />
+that doc tests are compiled with <code>cfg=false</code>.</dd>
+</dl>
+<dl>
+	<dt>External traits</dt>
+	<dd>Can the library mock a trait defined in another module or<br />
+crate?</dd>
+</dl>
+<dl>
+	<dt>Fallback</dt>
+	<dd>Can a mock object proxy certain method calls to a real object?</dd>
+</dl>
+<dl>
+	<dt>Foreign</dt>
+	<dd>Can the library mock static external functions?</dd>
+</dl>
+<dl>
+	<dt>Generic parameters</dt>
+	<dd>Can the library mock traits with generic methods that<br />
+have parameterized arguments, and set expectations for those methods?  For<br />
+example, a method like <code>fn foo&lt;T&gt;(&amp;self, t: T) -&gt; u32</code>.</dd>
+</dl>
+<dl>
+	<dt>Generic return</dt>
+	<dd>Can the library mock traits with generic methods that have<br />
+parameterized return values, and set expectations for those methods?  For<br />
+example, a method like <code>fn foo&lt;T&gt;(&amp;self, x: u32) -&gt; T</code>.</dd>
+</dl>
+<dl>
+	<dt>Generic traits</dt>
+	<dd>Can the library mock generic traits, like<br />
+<code>std::sync::Mutex&lt;T&gt;</code>?</dd>
+</dl>
+<dl>
+	<dt>Inherited traits</dt>
+	<dd>Can the library mock inherited traits like <code>pub trait B:
+A</code>?</dd>
+</dl>
+<dl>
+	<dt>Match function</dt>
+	<dd>Can an expectation validate arguments with an arbitrary<br />
+function?</dd>
+</dl>
+<dl>
+	<dt>Structs</dt>
+	<dd>Can the library mock a concrete <code>struct</code> instead of just<br />
+<code>trait</code> s?  This requires altering the module&#8217;s namespace during unit tests.<br />
+The <code>test_double</code> crate can do that.</dd>
+</dl>
+<dl>
+	<dt>Multiple traits</dt>
+	<dd>Can the library create a mock that satisfies multiple traits,<br />
+so it can be passed to a function like <code>fn foo&lt;T: A + B&gt;(t: T)</code>?</dd>
+</dl>
+<dl>
+	<dt>Return call with args</dt>
+	<dd>Can a mocked method return a value computed from the<br />
+arguments by an arbitrary function?</dd>
+</dl>
+<dl>
+	<dt>Return lifetime</dt>
+	<dd>Can a mocked method return a reference with a non-@&#8217;static&#8217;<br />
+lifetime?</dd>
+</dl>
+<dl>
+	<dt>Return owned</dt>
+	<dd>Can a mocked method return ownership of a value that does not<br />
+implement <code>Clone</code>?</dd>
+</dl>
+<dl>
+	<dt>Return parameters</dt>
+	<dd>Can a mocked method modify method arguments provided as<br />
+mutable references?</dd>
+</dl>
+<dl>
+	<dt>Sequence</dt>
+	<dd>Can the library assert that methods are called in a particular<br />
+order?  This feature is implemented to different degrees by different libraries.<br />
+One library only supports validating call order on a method-by-method basis.<br />
+Another can validate the call order of different methods of the same mock<br />
+object.  Only one library can validate the call order of methods of different<br />
+objects.</dd>
+</dl>
+<dl>
+	<dt>Static methods</dt>
+	<dd>Can the library mock a trait that has a static method?  A<br />
+static method, also called an &#8220;associated function&#8221; is one that does not receive<br />
+any form of <code>self</code> as a parameter.  In Rust, they must be called using<br />
+<code>Trait::function()</code> syntax, rather than <code>object.function()</code>.  That makes it<br />
+impossible for a mock library to set an expectation on such a method.  However,<br />
+mocking such a trait is still useful for setting expectations on other methods.</dd>
+</dl>
+<dl>
+	<dt>Times range</dt>
+	<dd>Can the library expect a method to be called a variable number<br />
+of times, bounded by a range?</dd>
+</dl>
+<dl>
+	<dt>Derive</dt>
+	<dd>Can the library automatically generate the Mock struct by<br />
+<code>derive</code> ing on the trait?  This feature can save a lot of typing, but it<br />
+invariably requires nightly Rust.  It also can&#8217;t be used when mocking external<br />
+traits.</dd>
+</dl>
+<dl>
+	<dt>Match combinattions</dt>
+	<dd>Expectations can match boolean combinations of other<br />
+validators.</dd>
+</dl>
+<dl>
+	<dt>Match constant</dt>
+	<dd>Can an expectation match arguments with constants?</dd>
+</dl>
+<dl>
+	<dt>Match operator</dt>
+	<dd>Can an expectation match arguments with common operators,<br />
+like <code>eq</code> , <code>gt</code> , etc?</dd>
+</dl>
+<dl>
+	<dt>Match pattern</dt>
+	<dd>Can an expectation match enum arguments using patterns?</dd>
+</dl>
+<dl>
+	<dt>Match range</dt>
+	<dd>Can an expectation match arguments with ranges?</dd>
+</dl>
+<dl>
+	<dt>Match wildcard</dt>
+	<dd>Can an expectation match any argument?</dd>
+</dl>
+<dl>
+	<dt>Return call</dt>
+	<dd>Can an expectation return a value computed from an arbitrary<br />
+function?</dd>
+</dl>
+<dl>
+	<dt>Return constant</dt>
+	<dd>Can an expectation return a constant?</dd>
+</dl>
+<dl>
+	<dt>Return default</dt>
+	<dd>Can mocked methods automatically return the<br />
+<code>Default::default()</code> value?</dd>
+</dl>
+<dl>
+	<dt>Return panic</dt>
+	<dd>Can expectations <code>panic</code> instead of returning?</dd>
+</dl>
+<dl>
+	<dt>Times once</dt>
+	<dd>Can an expectation assert that it&#8217;s called exactly once?</dd>
+</dl>
+<dl>
+	<dt>Times any</dt>
+	<dd>Can a mocked method be called any number of times?</dd>
+</dl>
+<dl>
+	<dt>Times n</dt>
+	<dd>Can an expectation assert that it&#8217;s called an arbitrary number of<br />
+times?</dd>
+</dl>
+<dl>
+	<dt>Times never</dt>
+	<dd>Can a mocked method expect to never be called?</dd>
+</dl>
+<dl>
+	<dt>Maximum arguments</dt>
+	<dd>The maximum number of arguments for a mocked method.</dd>
+</dl>
+<dl>
+	<dt>Rustc</dt>
+	<dd>Minimum required compiler version.  None of these six crates<br />
+guarantee a specific version, just &#8220;stable&#8221;, or &#8220;nightly&#8221;.  Typically, the<br />
+crates that require &#8220;nightly&#8221; will only work with a narrow range of nightly<br />
+versions.</dd>
+</dl>
+<dl>
+	<dt>First release</dt>
+	<dd>Date of the first release on crates.io .</dd>
+</dl>
+<h2>Conclusion</h2>
+<p>The best mocking library is &#8230; none of them.  No one library is clearly<br />
+superior to all of the others.  Every project will need to choose a different<br />
+mocking library with the features needed for that particular project.  Some<br />
+projects may event need to use multiple libraries in combination.  But a few<br />
+things stand out:</p>
+<ul>
+	<li>All of the libraries that run on stable Rust are more verbose than those that<br />
+don&#8217;t.  Mock-it is by far the most verbose, and Mock_Derive is the least.</li>
+	<li>All of the libraries that run on stable Rust are also much easier to debug<br />
+than those that don&#8217;t.  Procedural macros can be very confusing when they fail<br />
+to compile.  Galvanic-mock is probably the worst in this respect.</li>
+	<li>Validating call sequences is an underappreciated aspect of mocking.  Only<br />
+Mockers had full support for validating the sequences of multiple objects&#8217;<br />
+methods.  However, Simulacrum&#8217;s sequence syntax is more elegant.</li>
+	<li>Mocking is complicated, and none of these libraries&#8217; authors anticipated every<br />
+possible situation.  However, Mock-it and Simulacrum proved surprisingly<br />
+versatile, since they allow the user relatively low-level access into the<br />
+library itself.</li>
+	<li>Simulacrum is the clear winner on features.  However, it also has pretty<br />
+sparse documentation.</li>
+	<li>Mock_Derive and Mockers are probably the easiest libraries to use.</li>
+</ul>
