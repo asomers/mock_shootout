@@ -1,18 +1,221 @@
+<html lang="en">
+<head>
+<meta charset="utf-8">
 h1. Rust Mock Shootout!
 
 Rust has several different mocking libraries.  None is clearly superior to all
 of the others.  This project compares their feature sets, using an
 apples-to-apples approach.  Each of several dozen features is implemented with
-multiple mocking libraries, if possible.
+multiple mocking libraries, if possible.  The test results then show which
+features work with which library.
 
 h2. The Contenders
 
-TODO
+- Mockers := This is the oldest library in our shootout.  Inspired by
+GoogleMock, it has an elegant syntax, powerful sequence matching, and a rich
+variety of helper methods.  It requires nightly Rust, and is very sensitive to
+exact compiler versions.  Each release of Mockers typically only works with a
+single version of rustc.
+
+- Mock_Derive := This was the first Rust mocking library that supported
+automatically @derive@ing the Mock object from the target trait.  That saves a
+lot of typing!  Mock_Derive is still very easy to use, though it lacks any
+ability to validate method arguments.  It also can't work with generic traits,
+traits with generic methods, traits defined in external crates, or multiple
+traits (like @T: A + B@).  However, it does have a few rare features, like the
+ability to mock foreign free functions, or traits with static methods.
+
+- Galvanic-mock := This is part of a suite of testing libraries.  Along with
+galvanic-test and galvanic-assert, it provides a comprehensive set of testing
+functionality for Rust programs.  Galvanic-mock itself takes a behavior-driven
+approach to testing.  It tries to separate the specification from what a mock
+does, from how that mock is expected to be used.  It's a good all-around
+library: good feature set, good documentation, good ergonomics.
+
+- Double := All of the previous libraries had one thing in common: they all
+require the nightly compiler.  That allows them to do some pretty cool stuff,
+like tweak the language's syntax, but it's also inherently unstable.  No code
+that relies on nightly can be guaranteed to work with future compilers.  Double
+is different.  It eschews nightly-dependent features like @derive@ so that it
+can work on stable Rust.  Unfortunately, that also makes it the most verbose
+library of any compared here.  It also has the slimmest feature set of any
+library compared here.
+
+- Simulacrum := This is a bit of a different beast.  Whereas other mock
+libraries try to provide a clean API, Simulacrum actually provides 3 different
+APIs.  That can be confusing at first, but the result is great power.  Unusual
+requirements, impossible to meet with the highest-level and most conveient API,
+can be satisfied (at greater effort) with the lower-level APIs.  Simulacrum also
+runs on stable Rust, and manages to do it with less verbosity than Double.
+Optional, nightly-dependent, support for @derive@ is a work-in-progress.
+
+- Mock-it := Mock-it is Rust's newest mocking library, and probably its
+simplest.  Its chief advantage is that its simplicity allows it to run on stable
+Rust, though that's fast becoming a less unique feature.  However, the lack of a
+high-level API also gives Mock-it some of the power of Simulacrum; it can mock a
+@struct@, for example.  Overall, Mock-it has few practical advantages, but it's
+a good starting point for someone looking to build something bigger.
 
 h2. Features
 
-TODO
+I evaluated about three dozen features evaluated for each library.  The first
+group are the essential features.  These determine the library's overall
+capabilities.  While they may not be important to all users, they're considered
+"essential" because a user can't implement any of these if the library doesn't
+intrinsically support them.
+
+- Associated types := Can the library mock a trait with associated types, like
+@Iterator@?
+
+- Checkpoints := When validating sequences of method calls, can the library
+create checkpoints (aka Eras)?  A checkpoint divides expectations
+chronologically.  All expectations created before the checkpoint must be
+satisfied before it, and all expectations created afterwards must be satisfied
+after it.
+
+- Consume := Can the library mock a consuming method?  A consuming method is one
+that takes the @self@ parameter by value, rather than by reference.
+
+- Doctest := Can the library be used in doc tests?  The key difference here is
+that doc tests are compiled with @cfg=false@.
+
+- External traits := Can the library mock a trait defined in another module or
+crate?
+
+- Fallback := Can a mock object proxy certain method calls to a real object?
+
+- Foreign := Can the library mock static external functions?
+
+- Generic parameters := Can the library mock traits with generic methods that
+have parameterized arguments, and set expectations for those methods?  For
+example, a method like @fn foo<T>(&self, t: T) -> u32@.
+
+- Generic return := Can the library mock traits with generic methods that have
+parameterized return values, and set expectations for those methods?  For
+example, a method like @fn foo<T>(&self, x: u32) -> T@.
+
+- Generic traits := Can the library mock generic traits, like
+@std::sync::Mutex<T>@?
+
+- Inherited traits := Can the library mock inherited traits like @pub trait B:
+A@?
+
+- Match function := Can an expectation validate arguments with an arbitrary
+function?
+
+- Structs := Can the library mock a concrete @struct@ instead of just
+@trait@ s?  This requires altering the module's namespace during unit tests.
+The @test_double@ crate can do that.
+
+- Multiple traits := Can the library create a mock that satisfies multiple traits,
+so it can be passed to a function like @fn foo<T: A + B>(t: T)@?
+
+- Return call with args := Can a mocked method return a value computed from the
+arguments by an arbitrary function?
+
+- Return lifetime := Can a mocked method return a reference with a non-@'static'
+lifetime?
+
+- Return owned := Can a mocked method return ownership of a value that does not
+implement @Clone@?
+
+- Return parameters := Can a mocked method modify method arguments provided as
+mutable references?
+
+- Sequence := Can the library assert that methods are called in a particular
+order?  This feature is implemented to different degrees by different libraries.
+One library only supports validating call order on a method-by-method basis.
+Another can validate the call order of different methods of the same mock
+object.  Only one library can validate the call order of methods of different
+objects.
+
+- Static methods := Can the library mock a trait that has a static method?  A
+static method, also called an "associated function" is one that does not receive
+any form of @self@ as a parameter.  In Rust, they must be called using
+@Trait::function()@ syntax, rather than @object.function()@.  That makes it
+impossible for a mock library to set an expectation on such a method.  However,
+mocking such a trait is still useful for setting expectations on other methods.
+
+- Times range := Can the library expect a method to be called a variable number
+of times, bounded by a range?
+
+The second group are the convenience features.  These are features that a user
+can implement in terms of other essential features, for example, "Match
+constant" can be implemented by matching with a method).  The lack of any of
+these features shouldn't preclude the use of a certain library, but may cause
+some annoyance.
+
+- Derive := Can the library automatically generate the Mock struct by
+@derive@ ing on the trait?  This feature can save a lot of typing, but it
+invariably requires nightly Rust.  It also can't be used when mocking external
+traits.
+
+- Match combinattions := Expectations can match boolean combinations of other
+validators.
+
+- Match constant := Can an expectation match arguments with constants?
+
+- Match operator := Can an expectation match arguments with common operators,
+like @eq@ , @gt@ , etc?
+
+- Match pattern := Can an expectation match enum arguments using patterns?
+
+- Match range := Can an expectation match arguments with ranges?
+
+- Match wildcard := Can an expectation match any argument?
+
+- Return call := Can an expectation return a value computed from an arbitrary
+function?
+
+- Return constant := Can an expectation return a constant?
+
+- Return default := Can mocked methods automatically return the
+@Default::default()@ value?
+
+- Return panic := Can expectations @panic@ instead of returning?
+
+- Times once := Can an expectation assert that it's called exactly once?
+
+- Times any := Can a mocked method be called any number of times?
+
+- Times n := Can an expectation assert that it's called an arbitrary number of
+times?
+
+- Times never := Can a mocked method expect to never be called?
+
+The third group of "features" are really more informational in nature:
+
+- Maximum arguments := The maximum number of arguments for a mocked method.
+
+- Rustc := Minimum required compiler version.  None of these six crates
+guarantee a specific version, just "stable", or "nightly".  Typically, the
+crates that require "nightly" will only work with a narrow range of nightly
+versions.
+
+- First release := Date of the first release on crates.io .
 
 h2. Conclusion
+
+The best mocking library is ... none of them.  No one library is clearly
+superior to all of the others.  Every project will need to choose a different
+mocking library with the features needed for that particular project.  Some
+projects may event need to use multiple libraries in combination 😝.  But a few
+things stand out:
+
+* All of the libraries that run on stable Rust are more verbose than those that
+don't.  Mock-it is by far the most verbose, and Mock_Derive is the least.
+* All of the libraries that run on stable Rust are also much easier to debug
+than those that don't.  Procedural macros can be very confusing when they fail
+to compile.  Galvanic-mock was probably the worst in this respect.
+* Validating call sequences is an underappreciated aspect of mocking.  Only
+Mockers had full support for validating the sequences of multiple objects'
+methods.  However, Simulacrum's sequence syntax is more elegant.
+* Mocking is complicated, and none of these libraries' authors anticipated every
+possible situation.  However, Mock-it and Simulacrum proved surprisingly
+versatile, since they allow the user relatively low-level access into the
+library itself.
+* Simulacrum is the clear winner on features.  However, it also has pretty
+sparse documentation.
+* Mock_Derive and Mockers are probably the easiest libraries to use.
 
 TODO
