@@ -64,6 +64,20 @@ capabilities.  While they may not be important to all users, they're considered
 "essential" because a user can't implement any of these if the library doesn't
 intrinsically support them.
 
+The second group are the convenience features.  These are features that a user
+can implement in terms of other essential features, for example, "Match
+constant" can be implemented by matching with a method).  The lack of any of
+these features shouldn't preclude the use of a certain library, but may cause
+some annoyance.
+
+The third group of "features" are really more informational in nature:
+
+h3. Feature Matrix
+
+%%TABLE%%
+
+h3. Feature Definitions
+
 - Associated types := Can the library mock a trait with associated types, like
 @Iterator@?
 
@@ -139,12 +153,6 @@ mocking such a trait is still useful for setting expectations on other methods.
 - Times range := Can the library expect a method to be called a variable number
 of times, bounded by a range?
 
-The second group are the convenience features.  These are features that a user
-can implement in terms of other essential features, for example, "Match
-constant" can be implemented by matching with a method).  The lack of any of
-these features shouldn't preclude the use of a certain library, but may cause
-some annoyance.
-
 - Derive := Can the library automatically generate the Mock struct by
 @derive@ ing on the trait?  This feature can save a lot of typing, but it
 invariably requires nightly Rust.  It also can't be used when mocking external
@@ -183,8 +191,6 @@ times?
 
 - Times never := Can a mocked method expect to never be called?
 
-The third group of "features" are really more informational in nature:
-
 - Maximum arguments := The maximum number of arguments for a mocked method.
 
 - Rustc := Minimum required compiler version.  None of these six crates
@@ -193,8 +199,6 @@ crates that require "nightly" will only work with a narrow range of nightly
 versions.
 
 - First release := Date of the first release on crates.io .
-
-%%TABLE%%
 
 h2. Conclusion
 
