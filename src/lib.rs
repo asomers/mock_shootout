@@ -12,6 +12,7 @@ extern crate mock_derive;
 extern crate mockers;
 extern crate mockers_derive;
 extern crate mock_it;
+extern crate pseudo;
 extern crate simulacrum;
 extern crate simulacrum_user;
 extern crate test_double;
@@ -65,6 +66,7 @@ mod t_galvanic_mock;
 mod t_mock_derive;
 mod t_mock_it;
 mod t_mockers;
+mod t_pseudo;
 mod t_simulacrum;
 
 /// A handy type that is non-Clone and non-Copy
