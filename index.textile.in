@@ -1,3 +1,9 @@
+<notextile>
+---
+layout: default
+title: Rust Mock Shootout!
+---
+</notextile>
 h1. Rust Mock Shootout!
 
 Rust has several different mocking libraries.  None is clearly superior to all
@@ -128,7 +134,7 @@ so it can be passed to a function like @fn foo<T: A + B>(t: T)@?
 arguments by an arbitrary function?
 
 - Return lifetime := Can a mocked method return a reference with a
- non-@'static'@ lifetime?
+ non-@'static@ lifetime?
 
 - Return owned := Can a mocked method return ownership of a value that does not
 implement @Clone@?
