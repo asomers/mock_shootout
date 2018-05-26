@@ -229,3 +229,7 @@ library itself.
 * Simulacrum is the clear winner on features.  However, it also has pretty
 sparse documentation.
 * Mock_Derive and Mockers are probably the easiest libraries to use.
+
+h2. Discussion
+
+Tear me a new one at the "Rust Forums":https://users.rust-lang.org/t/rust-mock-shootout/17700
