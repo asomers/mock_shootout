@@ -15,7 +15,7 @@ exact compiler versions.  Each release of Mockers typically only works with a
 single version of rustc.
 
 - Mock_Derive := This was the first Rust mocking library that supported
-automatically @derive@ing the Mock object from the target trait.  That saves a
+automatically @derive@ ing the Mock object from the target trait.  That saves a
 lot of typing!  Mock_Derive is still very easy to use, though it lacks any
 ability to validate method arguments.  It also can't work with generic traits,
 traits with generic methods, traits defined in external crates, or multiple
@@ -127,8 +127,8 @@ so it can be passed to a function like @fn foo<T: A + B>(t: T)@?
 - Return call with args := Can a mocked method return a value computed from the
 arguments by an arbitrary function?
 
-- Return lifetime := Can a mocked method return a reference with a non-@'static'
-lifetime?
+- Return lifetime := Can a mocked method return a reference with a
+ non-@'static'@ lifetime?
 
 - Return owned := Can a mocked method return ownership of a value that does not
 implement @Clone@?
