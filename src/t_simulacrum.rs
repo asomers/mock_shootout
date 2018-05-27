@@ -502,21 +502,10 @@ impl TestSuite for Simulacrum {
     }
 
     fn return_owned() {
-        pub trait A {
-            fn foo(&self) -> UniquelyOwned;
-        }
-
-        create_mock! {
-            impl A for AMock (self) {
-                expect_foo("foo"):
-                fn foo(&self) -> UniquelyOwned;
-            }
-         }
-
-        let mut mock = AMock::new();
-        mock.expect_foo().called_once().returning(|_| UniquelyOwned(42));
-
-        assert_eq!(UniquelyOwned(42), mock.foo());
+        // Simulacrum returns the output of a `FnMut`, not an `FnOnce`, so it
+        // can't return by move.
+        // https://github.com/pcsm/simulacrum/issues/52
+        unimplemented!()
     }
 
     fn return_panic() {

@@ -287,11 +287,11 @@ impl TestSuite for MockGalvanicMock{
     }
 
     fn return_owned() {
-        let mock = new_mock!(A);
-        given! {
-            <mock as A>::baz() then_return UniquelyOwned(42) always;
-        }
-        assert_eq!(UniquelyOwned(42), mock.baz());
+        // Galvanic mock supports two kinds of returns:
+        // then_return returns constants (which can't be moved)
+        // then_return_from returns from a function (not a closure, so it can't
+        // move anything out).
+        unimplemented!()
     }
 
     fn return_panic() {
