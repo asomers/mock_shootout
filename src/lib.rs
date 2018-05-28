@@ -2,6 +2,7 @@
 #![feature(extern_prelude)] // Needed by double
 #![feature(proc_macro_mod)] // Needed by galvanic_mock
 #![feature(range_contains)] // Used by our code
+#![feature(proc_macro_gen)] // Needed by mock_derive
 
 #![allow(dead_code)]
 
