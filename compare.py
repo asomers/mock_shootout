@@ -71,6 +71,8 @@ def format_cell(s):
         bg = "white"
     else:
         bg = "#EB9999"
+    if not text:
+        text = {"error": "no", "ok": "yes", "FAILED": "no"}[result]
     return "{background:%s}.%s" % (bg, text)
 
 def print_row(feature, results):
