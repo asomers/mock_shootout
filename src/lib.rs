@@ -6,6 +6,7 @@
 
 #![allow(dead_code)]
 
+extern crate built;
 extern crate galvanic_assert;
 extern crate galvanic_mock;
 #[allow(unused_imports)] #[macro_use] extern crate double;
@@ -59,6 +60,7 @@ macro_rules! test {
         #[test] fn times_n() { $self::times_n() }
         #[test] fn times_never() { $self::times_never() }
         #[test] fn times_range() { $self::times_range() }
+        #[test] fn version() { $self::version() }
     }
 }
 
@@ -162,5 +164,10 @@ pub trait TestSuite {
     fn many_args();
     /// A scenario can expect calls to multiple methods in a specified order
     fn sequence();
+    /// Current crate version
+    fn version();
 }
 
+pub mod built_info {
+    include!(concat!(env!("OUT_DIR"), "/built.rs"));
+}

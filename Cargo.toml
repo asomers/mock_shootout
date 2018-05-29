@@ -2,8 +2,10 @@
 name = "mock_shootout"
 version = "0.1.0"
 authors = ["Alan Somers <asomers@gmail.com>"]
+build = "build.rs"
 
 [dependencies]
+built = "0.3"
 galvanic-assert = { version = "=0.8.7" }
 galvanic-mock = { version = "=0.1.3", features = ["galvanic_assert_integration"] }
 double = { version = "=0.2.2" }
@@ -15,3 +17,6 @@ pseudo = { version = "=0.1.0" }
 simulacrum = { version = "=0.3.0" }
 simulacrum_user = { version = "=0.1.0" }
 test_double = { version = "=0.1.1" }
+
+[build-dependencies]
+built = "0.3"

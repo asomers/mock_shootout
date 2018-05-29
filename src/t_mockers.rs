@@ -461,6 +461,15 @@ impl TestSuite for Mockers {
         mock.foo();
         mock.foo();
     }
+
+    #[test]
+    fn version() {
+        let ver = ::built_info::DEPENDENCIES.iter()
+            .find(|(name, _)| *name == "mockers")
+            .unwrap()
+            .1;
+        print!("{} ", ver);
+    }
 }
 
 test!{Mockers}

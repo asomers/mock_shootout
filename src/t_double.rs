@@ -484,6 +484,15 @@ impl TestSuite for MockDouble{
         let num_calls = mock.foo.num_calls();
         assert!(num_calls >= 2 && num_calls < 3);
     }
+
+    #[test]
+    fn version() {
+        let ver = ::built_info::DEPENDENCIES.iter()
+            .find(|(name, _)| *name == "double")
+            .unwrap()
+            .1;
+        print!("{} ", ver);
+    }
 }
 
 test!{MockDouble}

@@ -454,6 +454,15 @@ impl TestSuite for MockIt {
     fn times_n() { unimplemented!() }
     fn times_never() { unimplemented!() }
     fn times_range() { unimplemented!() }
+
+    #[test]
+    fn version() {
+        let ver = ::built_info::DEPENDENCIES.iter()
+            .find(|(name, _)| *name == "mock-it")
+            .unwrap()
+            .1;
+        print!("{} ", ver);
+    }
 }
 
 test!{MockIt}
