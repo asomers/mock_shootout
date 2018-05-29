@@ -52,7 +52,7 @@ mod t {
 
 use simulacrum::*;
 use simulacrum_user::{deref, gt, lt, passes};
-use {TestSuite, UniquelyOwned};
+use TestSuite;
 use test_double::*;
 #[test_double] use super::Bean;
 
