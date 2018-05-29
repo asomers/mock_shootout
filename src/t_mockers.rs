@@ -122,18 +122,29 @@ impl TestSuite for Mockers {
     }
 
     fn generic_parameters(){
-        //#[derive_mock]
-        //pub trait A {
-            //fn foo<T>(&self, t:T);
-            //fn bar<T>(&self) -> T;
-        //}
+        #[derive_mock]
+        pub trait A {
+            fn foo<T: 'static>(&self, t:T);
+        }
 
-        //let scenario = Scenario::new();
-        //let mock = scenario.create_mock_for::<A>();
-        unimplemented!();
+        let scenario = Scenario::new();
+        let mock = scenario.create_mock::<AMock>();
+        scenario.expect(mock.foo_call(-1i16).and_return(()));
+        mock.foo(-1i16);
     }
 
-    fn generic_return() {unimplemented!()}
+    fn generic_return() {
+        #[derive_mock]
+        pub trait A {
+            fn foo<T: 'static>(&self) -> T;
+        }
+
+        let scenario = Scenario::new();
+        let mock = scenario.create_mock::<AMock>();
+        scenario.expect(mock.foo_call().and_return(42u32));
+        assert_eq!(42u32, mock.foo());
+    }
+
     fn generic_trait(){
         unimplemented!();
     }
