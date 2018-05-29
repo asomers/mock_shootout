@@ -362,9 +362,19 @@ impl TestSuite for Mockers {
     }
 
     fn return_parameters() {
-        // Mockers can't implement this, because matchers only provide their
-        // arguments by immutable reference.
-        unimplemented!()
+        #[derive_mock]
+        pub trait A {
+            fn foo(&self, x: &mut u32);
+        }
+
+        let scenario = Scenario::new();
+        let mock = scenario.create_mock_for::<A>();
+        scenario.expect(mock.foo_call(matchers::ANY)
+                        .and_call(|arg| { *arg = 2 }));
+
+        let mut value = 1;
+        mock.foo(&mut value);
+        assert_eq!(value, 2);
     }
 
     fn static_method() {
