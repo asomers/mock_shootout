@@ -119,7 +119,17 @@ some annoyance.</p>
 		<td style="background:#ADEBAD;">yes</td>
 	</tr>
 	<tr>
-		<td>              Consume</td>
+		<td>   Consume parameters</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+	</tr>
+	<tr>
+		<td>         Consume self</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
@@ -520,9 +530,16 @@ satisfied before it, and all expectations created afterwards must be satisfied<b
 after it.</dd>
 </dl>
 <dl>
-	<dt>Consume</dt>
-	<dd>Can the library mock a consuming method?  A consuming method is one<br />
-that takes the <code>self</code> parameter by value, rather than by reference.</dd>
+	<dt>Consume parameters</dt>
+	<dd>Can a mock method consume its parameters, passing them<br />
+by value to an arbitrary function?  This is important, for example, to keep the<br />
+parameters from <code>drop</code> ping after the mocked method call.</dd>
+</dl>
+<dl>
+	<dt>Consume self</dt>
+	<dd>Can the library mock a consuming method?  A consuming method<br />
+is one that takes the <code>self</code> parameter by value, rather than by reference.<br />
+<code>into_*</code> methods are a common example.</dd>
 </dl>
 <dl>
 	<dt>Doctest</dt>
