@@ -23,6 +23,7 @@ extern crate mockers;
 extern crate mockers_derive;
 use mockers::*;
 #[macro_use] use mockers_derive::*;
+use std::{sync::Arc, cell::RefCell};
 use {TestSuite, UniquelyOwned};
 
 pub trait ET {}
@@ -86,7 +87,26 @@ impl TestSuite for Mockers {
         mock.foo(2);
     }
 
-    fn consume(){
+    fn consume_parameters() {
+        #[derive_mock]
+        pub trait A {
+            fn foo(&self, x: UniquelyOwned);
+        }
+
+        let dest: Arc<RefCell<Option<UniquelyOwned>>> =
+            Arc::new(RefCell::new(None));
+        let dest2 = dest.clone();
+        let scenario = Scenario::new();
+        let mock = scenario.create_mock_for::<A>();
+        scenario.expect(mock.foo_call(matchers::ANY).and_call(move |x| {
+            dest2.replace(Some(x));
+        }));
+
+        mock.foo(UniquelyOwned(42));
+        assert!(dest.borrow().is_some());
+    }
+
+    fn consume_self(){
         #[derive_mock]
         pub trait A {
             fn into_nothing(self);

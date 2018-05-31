@@ -121,7 +121,13 @@ impl TestSuite for Simulacrum {
         mock.baz();
     }
 
-    fn consume() {
+    fn consume_parameters() {
+        // Simulacrum's returning and modifying methods take their parameters by
+        // reference
+        unimplemented!()
+    }
+
+    fn consume_self() {
         pub trait A {
             fn foo(self);
         }

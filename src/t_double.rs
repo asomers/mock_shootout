@@ -62,7 +62,12 @@ impl TestSuite for MockDouble{
         unimplemented!()
     }
 
-    fn consume() { 
+    fn consume_parameters() {
+        // Double's parameters must be Clone
+        unimplemented!()
+    }
+
+    fn consume_self() {
         // mock_method doesn't support "self" parameters
         //pub trait A {
             //fn into_i32(self) -> i32;

@@ -93,8 +93,13 @@ chronologically.  All expectations created before the checkpoint must be
 satisfied before it, and all expectations created afterwards must be satisfied
 after it.
 
-- Consume := Can the library mock a consuming method?  A consuming method is one
-that takes the @self@ parameter by value, rather than by reference.
+- Consume parameters := Can a mock method consume its parameters, passing them
+by value to an arbitrary function?  This is important, for example, to keep the
+parameters from @drop@ ping after the mocked method call.
+
+- Consume self := Can the library mock a consuming method?  A consuming method
+is one that takes the @self@ parameter by value, rather than by reference.
+@into_*@ methods are a common example.
 
 - Doctest := Can the library be used in doc tests?  The key difference here is
 that doc tests are compiled with @cfg=false@.

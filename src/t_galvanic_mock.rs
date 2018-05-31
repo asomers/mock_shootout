@@ -110,7 +110,12 @@ impl TestSuite for MockGalvanicMock{
     }
 
     fn checkpoint() { unimplemented!() }
-    fn consume() {
+    fn consume_parameters() {
+        // Galvanic_mock match and return functions take parameters by reference
+        unimplemented!()
+    }
+
+    fn consume_self() {
         let mock = new_mock!(A);
         given! {
             <mock as A>::bar() then_return () always

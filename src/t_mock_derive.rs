@@ -24,7 +24,8 @@ pub struct MockDerive;
 impl TestSuite for MockDerive{
     fn associated_types(){unimplemented!()}
     fn checkpoint(){unimplemented!()}
-    fn consume(){
+    fn consume_parameters() { unimplemented!() }
+    fn consume_self(){
         #[mock]
         trait A {
             fn into_u32(self) -> u32;

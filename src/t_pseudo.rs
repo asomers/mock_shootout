@@ -100,7 +100,12 @@ impl TestSuite for Pseudo{
         assert!(!mock.foo.called_with(2));
     }
 
-    fn consume() {
+    fn consume_parameters() {
+        // Pseudo requires parameters to be Clone
+        unimplemented!()
+    }
+
+    fn consume_self() {
         trait A {
             fn into_u32(self) -> u32;
         }

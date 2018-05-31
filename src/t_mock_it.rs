@@ -91,7 +91,12 @@ impl TestSuite for MockIt {
     }
 
     fn checkpoint() { unimplemented!() }
-    fn consume() {
+    fn consume_parameters() {
+        // Mock-it can't even match parameters, much less consume them.
+        unimplemented!()
+    }
+
+    fn consume_self() {
         trait A {
             fn into_u32(self) -> u32;
         }

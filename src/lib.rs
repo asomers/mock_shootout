@@ -24,7 +24,8 @@ macro_rules! test {
     ( $self:ident) => {
         #[test] fn associated_types() { $self::associated_types() }
         #[test] fn checkpoint() { $self::checkpoint() }
-        #[test] fn consume() { $self::consume() }
+        #[test] fn consume_parameters() { $self::consume_parameters() }
+        #[test] fn consume_self() { $self::consume_self() }
         #[test] fn derive() { $self::derive() }
         #[test] fn external_trait() { $self::external_trait() }
         #[test] fn fallback() { $self::fallback() }
@@ -85,8 +86,11 @@ pub trait TestSuite {
     /// be satisified before, and all expectations defined after the barrier
     /// must be satisfied after.
     fn checkpoint();
+    /// A mock method can comsume its parameters, passing them by value to an
+    /// arbitrary function.
+    fn consume_parameters();
     /// A mock method can consume `self`
-    fn consume();
+    fn consume_self();
     /// A Mock can be defined for a `Trait` in an external crate;
     fn external_trait();
     /// A mock object can fallback to the real object's behavior
