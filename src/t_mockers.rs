@@ -134,6 +134,8 @@ impl TestSuite for Mockers {
     }
 
     fn fallback() {
+        // Mockers does not have this functionality explicitly builtin, but it
+        // can be implemented using a catch-all expectation that matches all parameters
         unimplemented!()
     }
 

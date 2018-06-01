@@ -133,14 +133,11 @@ impl TestSuite for MockGalvanicMock{
 
     fn external_trait() { unimplemented!() }
     fn fallback() {
-        // Galvanic does not have this functionality explicitly builtin, but it
-        // can be implemented using binds
-        let mock = new_mock!(C);
-        given! {
-            bind concrete: ConcreteC = ConcreteC();
-            <mock as C>::boo() then_return_from |_| bound.concrete.boo() always;
-        }
-        assert_eq!(42, mock.boo());
+        // Galvanic-mock lacks this capability.  In some cases, it can be
+        // implemented with then_return and a closure.  But that doesn't always
+        // work, because then_return supplies its closure with function arguments
+        // by reference instead of by value.
+        unimplemented!()
     }
 
     fn foreign() { unimplemented!() }

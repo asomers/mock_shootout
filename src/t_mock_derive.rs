@@ -61,7 +61,10 @@ impl TestSuite for MockDerive{
 
         let mut mock = MockA::new();
         let concrete = Concrete{};
+        let method = mock.method_foo().first_call().set_result(1);
+        mock.set_foo(method);
         mock.set_fallback(concrete);
+        assert_eq!(1, mock.foo());
         assert_eq!(5, mock.foo());
     }
 

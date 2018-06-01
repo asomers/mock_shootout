@@ -86,15 +86,13 @@ pub trait TestSuite {
     /// be satisified before, and all expectations defined after the barrier
     /// must be satisfied after.
     fn checkpoint();
-    /// A mock method can comsume its parameters, passing them by value to an
+    /// A mock method can consume its parameters, passing them by value to an
     /// arbitrary function.
     fn consume_parameters();
     /// A mock method can consume `self`
     fn consume_self();
     /// A Mock can be defined for a `Trait` in an external crate;
     fn external_trait();
-    /// A mock object can fallback to the real object's behavior
-    fn fallback();
     /// Can mock foreign functions
     fn foreign();
     /// A `Trait` with a method that has generic parameters can be mocked.
@@ -133,6 +131,8 @@ pub trait TestSuite {
     // implement these himself, or make do with their lack.
     /// A Mock can be `Derive`d from a `Trait`
     fn derive();
+    /// A mock object can fallback to the real object's behavior
+    fn fallback();
     /// A method call can match a combination of conditions
     fn match_combo();
     /// A method call can match a constant value

@@ -19,7 +19,6 @@ descs = {
     "consume_self": "Consume self",
     "doctest": "Doctest",
     "external_trait": "External traits",
-    "fallback": "Fallback",
     "foreign": "Foreign",
     "generic_parameters": "Generic parameters",
     "generic_return": "Generic return",
@@ -37,6 +36,7 @@ descs = {
     "times_range": "Times range",
 
     "derive": "Derive",
+    "fallback": "Fallback",
     "match_combo": "Match combinations",
     "match_constant": "Match constant",
     "match_operator": "Match operator",
@@ -122,12 +122,12 @@ libnames = sorted(results.keys())
 lib_headers = "|_. ".join([descs[l] for l in libnames])
 print "|_. |_.%s|" % lib_headers
 essential_features = ["associated_types", "checkpoint", "consume_parameters",
-"consume_self", "doctest", "external_trait", "fallback", "foreign",
+"consume_self", "doctest", "external_trait", "foreign",
 "generic_parameters", "generic_return", "generic_trait", "inherited_trait",
 "match_method", "mock_struct", "multi_trait", "return_call_with_args",
 "return_lifetime", "return_owned", "return_parameters", "sequence",
 "static_method", "times_range",]
-convenience_features = [ "derive", "match_combo", "match_constant",
+convenience_features = [ "derive", "fallback", "match_combo", "match_constant",
 "match_operator", "match_pattern", "match_range", "match_wildcard",
 "return_call", "return_constant", "return_default", "return_panic",
 "times_once", "times_any", "times_n", "times_never"]
