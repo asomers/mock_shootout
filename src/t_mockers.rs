@@ -4,7 +4,7 @@
 /// extern crate mockers_derive;
 /// use mockers::*;
 /// #[macro_use] use mockers_derive::*;
-/// #[derive_mock]
+/// #[mocked]
 /// pub trait A {
 ///     fn foo(&self, key: i16) -> i32;
 /// }
@@ -59,7 +59,7 @@ mock!{
 struct Mockers {}
 impl TestSuite for Mockers {
     fn associated_types(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             type Key;
             type Value;
@@ -73,7 +73,7 @@ impl TestSuite for Mockers {
     }
 
     fn checkpoint(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self, x: i16);
         }
@@ -88,7 +88,7 @@ impl TestSuite for Mockers {
     }
 
     fn consume_parameters() {
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self, x: UniquelyOwned);
         }
@@ -107,7 +107,7 @@ impl TestSuite for Mockers {
     }
 
     fn consume_self(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn into_nothing(self);
         }
@@ -119,7 +119,7 @@ impl TestSuite for Mockers {
     }
 
     fn derive(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self, key: i16);
         }
@@ -144,7 +144,7 @@ impl TestSuite for Mockers {
     }
 
     fn generic_parameters(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo<T: 'static>(&self, t:T);
         }
@@ -156,7 +156,7 @@ impl TestSuite for Mockers {
     }
 
     fn generic_return() {
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo<T: 'static>(&self) -> T;
         }
@@ -172,12 +172,12 @@ impl TestSuite for Mockers {
     }
 
     fn inherited_trait(){
-        #[derive_mock(module="::t_mockers::t")]
+        #[mocked(module="::t_mockers::t")]
         pub trait A {
             fn foo(&self);
         }
        
-        #[derive_mock(refs="A => ::t_mockers::t::A")]
+        #[mocked(refs="A => ::t_mockers::t::A")]
         pub trait B: A {
             fn bar(&self);
         }
@@ -191,7 +191,7 @@ impl TestSuite for Mockers {
     }
 
     fn many_args(){
-         #[derive_mock]
+         #[mocked]
          pub trait A {
              fn foo(&self, a: i8, b: i8, c: i8, d: i8);
          }
@@ -204,7 +204,7 @@ impl TestSuite for Mockers {
     }
 
     fn match_combo(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self, key: i16);
         }
@@ -220,7 +220,7 @@ impl TestSuite for Mockers {
     }
 
     fn match_constant(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self, key: i16);
         }
@@ -232,7 +232,7 @@ impl TestSuite for Mockers {
     }
 
     fn match_method(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self, key: i16);
         }
@@ -245,7 +245,7 @@ impl TestSuite for Mockers {
     }
 
     fn match_operator(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo_eq(&self, key: i16);
             fn foo_ge(&self, key: i16);
@@ -272,7 +272,7 @@ impl TestSuite for Mockers {
     }
 
     fn match_pattern(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self, key: Option<i16>);
         }
@@ -284,7 +284,7 @@ impl TestSuite for Mockers {
     }
 
     fn match_range(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self, key: i16);
         }
@@ -297,7 +297,7 @@ impl TestSuite for Mockers {
     }
 
     fn match_wildcard(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self, key: i16);
         }
@@ -323,7 +323,7 @@ impl TestSuite for Mockers {
     }
 
     fn return_call_with_args(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self, x: i16) -> i16;
         }
@@ -335,7 +335,7 @@ impl TestSuite for Mockers {
     }
 
     fn return_constant(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self) -> i16;
         }
@@ -347,7 +347,7 @@ impl TestSuite for Mockers {
     }
 
     fn return_default(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self) -> i16;
         }
@@ -359,7 +359,7 @@ impl TestSuite for Mockers {
     }
 
     fn return_lifetime(){
-        //#[derive_mock]
+        //#[mocked]
         //pub trait A {
             //fn foo(&'a self) -> &'a A;
         //}
@@ -370,7 +370,7 @@ impl TestSuite for Mockers {
     }
 
     fn return_owned(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self) -> UniquelyOwned;
         }
@@ -383,7 +383,7 @@ impl TestSuite for Mockers {
     }
 
     fn return_panic(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self);
         }
@@ -395,7 +395,7 @@ impl TestSuite for Mockers {
     }
 
     fn return_parameters() {
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self, x: &mut u32);
         }
@@ -415,7 +415,7 @@ impl TestSuite for Mockers {
     }
 
     fn sequence(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self);
             fn bar(&self);
@@ -434,7 +434,7 @@ impl TestSuite for Mockers {
     }
 
     fn times_any(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self);
         }
@@ -447,7 +447,7 @@ impl TestSuite for Mockers {
     }
 
     fn times_n(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self);
         }
@@ -460,7 +460,7 @@ impl TestSuite for Mockers {
     }
 
     fn times_never(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self);
         }
@@ -472,7 +472,7 @@ impl TestSuite for Mockers {
 
     fn times_once(){
         // By default, Mockers expects a mock to be called once
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self);
         }
@@ -484,7 +484,7 @@ impl TestSuite for Mockers {
     }
 
     fn times_range(){
-        #[derive_mock]
+        #[mocked]
         pub trait A {
             fn foo(&self);
         }
