@@ -140,7 +140,24 @@ impl TestSuite for Mockers {
     }
 
     fn foreign() {
-        unimplemented!()
+        #[mocked(LibFoo)]
+        extern "C" {
+            fn foo();
+        }
+        #[mocked(LibBar)]
+        extern "Rust" {
+            fn bar();
+        }
+
+        let scenario = Scenario::new();
+        let foo_mock = scenario.create_mock::<LibFoo>();
+        let bar_mock = scenario.create_mock::<LibBar>();
+
+        scenario.expect(foo_mock.foo_call().and_return(()));
+        scenario.expect(bar_mock.bar_call().and_return(()));
+
+        unsafe { foo(); }
+        unsafe { bar(); }
     }
 
     fn generic_parameters(){
