@@ -279,6 +279,16 @@ some annoyance.</p>
 		<td style="background:#ADEBAD;">yes</td>
 	</tr>
 	<tr>
+		<td>                 Send</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+	</tr>
+	<tr>
 		<td>             Sequence</td>
 		<td style="background:#ADEBAD;">single method</td>
 		<td style="background:#EB9999;">no</td>
@@ -625,6 +635,11 @@ One library only supports validating call order on a method-by-method basis.<br 
 Another can validate the call order of different methods of the same mock<br />
 object.  Only one library can validate the call order of methods of different<br />
 objects.</dd>
+</dl>
+<dl>
+	<dt>Send</dt>
+	<dd>Are mock objects <code>Send</code>?  If not, then the library cannot mock a<br />
+  trait that is.</dd>
 </dl>
 <dl>
 	<dt>Static methods</dt>
