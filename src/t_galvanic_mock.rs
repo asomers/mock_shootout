@@ -312,6 +312,11 @@ impl TestSuite for MockGalvanicMock{
         unimplemented!()
     }
 
+    // https://github.com/mindsbackyard/galvanic-mock/issues/6
+    fn send() {
+        unimplemented!()
+    }
+
     fn static_method() {
         unimplemented!()
     }

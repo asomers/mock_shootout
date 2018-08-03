@@ -424,6 +424,12 @@ impl TestSuite for MockIt {
     fn return_panic() { unimplemented!() }
     fn return_parameters() { unimplemented!() }
     fn sequence() { unimplemented!() }
+
+    // https://github.com/nathanielsimard/mock-it/issues/5
+    fn send() {
+        unimplemented!()
+    }
+
     fn static_method() {
         pub trait A {
             fn bar() -> u32;

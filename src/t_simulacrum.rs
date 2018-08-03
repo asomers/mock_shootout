@@ -541,6 +541,11 @@ impl TestSuite for Simulacrum {
         assert_eq!(42, x);
     }
 
+    // https://github.com/pcsm/simulacrum/issues/56
+    fn send() {
+        unimplemented!()
+    }
+
     fn static_method() {
         pub trait A {
             fn bar() -> u32;

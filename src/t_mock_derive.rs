@@ -240,6 +240,12 @@ impl TestSuite for MockDerive{
     }
 
     fn return_parameters() {unimplemented!()}
+
+    // https://github.com/DavidDeSimone/mock_derive/issues/15
+    fn send() {
+        unimplemented!()
+    }
+
     fn static_method() {
         #[mock]
         pub trait A {

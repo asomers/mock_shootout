@@ -154,6 +154,9 @@ Another can validate the call order of different methods of the same mock
 object.  Only one library can validate the call order of methods of different
 objects.
 
+- Send := Are mock objects @Send@?  If not, then the library cannot mock a
+  trait that is.
+
 - Static methods := Can the library mock a trait that has a static method?  A
 static method, also called an "associated function" is one that does not receive
 any form of @self@ as a parameter.  In Rust, they must be called using

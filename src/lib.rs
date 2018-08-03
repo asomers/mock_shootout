@@ -54,6 +54,7 @@ macro_rules! test {
             $self::return_panic()
         }
         #[test] fn return_parameters() { $self::return_parameters() }
+        #[test] fn send() { $self::send() }
         #[test] fn sequence() { $self::sequence() }
         #[test] fn static_method() { $self::static_method() }
         #[test] fn times_once() { $self::times_once() }
@@ -120,6 +121,8 @@ pub trait TestSuite {
     /// A mock method can mutate its parameters when supplied by mutable
     /// reference.
     fn return_parameters();
+    /// A `Send` `Trait` can be mocked
+    fn send();
     /// A `Trait` with a static method can be mocked (though the static method
     /// cannot neccessarily be expected)
     fn static_method();

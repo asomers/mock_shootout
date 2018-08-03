@@ -427,6 +427,19 @@ impl TestSuite for Mockers {
         assert_eq!(value, 2);
     }
 
+    // https://github.com/kriomant/mockers/issues/22
+    fn send() {
+        //#[mocked]
+        //pub trait A {
+            //fn foo(&self);
+        //}
+
+        //let scenario = Scenario::new();
+        //let mock = scenario.create_mock_for::<A>();
+        //let _ = Box::new(mock) as Box<A + Send>;
+        unimplemented!()
+    }
+
     fn static_method() {
         unimplemented!()
     }

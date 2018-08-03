@@ -372,6 +372,11 @@ impl TestSuite for MockDouble{
         unimplemented!()
     }
 
+    // https://github.com/DonaldWhyte/double/issues/18
+    fn send() {
+        unimplemented!()
+    }
+
     fn static_method() {
         unimplemented!()
     }

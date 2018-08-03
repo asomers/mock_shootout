@@ -413,6 +413,11 @@ impl TestSuite for Pseudo{
         print!("single method ");
     }
 
+    // https://github.com/iredelmeier/pseudo/issues/1
+    fn send() {
+        unimplemented!()
+    }
+
     fn static_method() {
         pub trait A {
             fn bar() -> u32;
