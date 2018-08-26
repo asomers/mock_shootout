@@ -415,7 +415,21 @@ impl TestSuite for Pseudo{
 
     // https://github.com/iredelmeier/pseudo/issues/1
     fn send() {
-        unimplemented!()
+        pub trait A {
+            fn foo(&self);
+        }
+
+        struct MockA {
+            foo: Mock<(), ()>
+        }
+        impl A for MockA {
+            fn foo(&self) {
+                self.foo.call(())
+            }
+        }
+
+        let mock = MockA{foo: Mock::default()};
+        let _ = Box::new(mock) as Box<A + Send>;
     }
 
     fn static_method() {
