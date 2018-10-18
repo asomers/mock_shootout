@@ -1,7 +1,6 @@
 use simulacrum::*;
 
 /// ```
-/// #![feature(proc_macro)]
 /// extern crate simulacrum;
 /// use simulacrum::*;
 ///
@@ -682,7 +681,6 @@ impl TestSuite for Simulacrum {
 
     fn times_range() { unimplemented!() }
 
-    #[test]
     fn version() {
         let ver = ::built_info::DEPENDENCIES.iter()
             .find(|(name, _)| *name == "simulacrum")

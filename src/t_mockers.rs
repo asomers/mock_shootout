@@ -1,5 +1,4 @@
 /// ```
-/// #![feature(proc_macro)]
 /// extern crate mockers;
 /// extern crate mockers_derive;
 /// use mockers::*;
@@ -525,7 +524,6 @@ impl TestSuite for Mockers {
         mock.foo();
     }
 
-    #[test]
     fn version() {
         let ver = ::built_info::DEPENDENCIES.iter()
             .find(|(name, _)| *name == "mockers")

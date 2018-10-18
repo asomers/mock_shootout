@@ -1,8 +1,5 @@
-#![feature(proc_macro)]     // Needed by mockers and mock_derive
-#![feature(extern_prelude)] // Needed by double
-#![feature(proc_macro_mod)] // Needed by galvanic_mock
+#![feature(proc_macro_hygiene)] // Needed by galvanic_mock
 #![feature(range_contains)] // Used by our code
-#![feature(proc_macro_gen)] // Needed by mock_derive
 
 #![allow(dead_code)]
 
@@ -10,7 +7,9 @@ extern crate built;
 extern crate galvanic_assert;
 extern crate galvanic_mock;
 #[allow(unused_imports)] #[macro_use] extern crate double;
-extern crate mock_derive;
+// Disable mock_derive until it gets fixed for newer nightly toolchains
+// https://github.com/DavidDeSimone/mock_derive/issues/18
+//extern crate mock_derive;
 extern crate mockers;
 extern crate mockers_derive;
 extern crate mock_it;
@@ -68,7 +67,9 @@ macro_rules! test {
 
 mod t_double;
 mod t_galvanic_mock;
-mod t_mock_derive;
+// Disable mock_derive until it gets fixed for newer nightly toolchains
+// https://github.com/DavidDeSimone/mock_derive/issues/18
+//mod t_mock_derive;
 mod t_mock_it;
 mod t_mockers;
 mod t_pseudo;

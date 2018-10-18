@@ -1,5 +1,4 @@
 /// ```
-/// #![feature(proc_macro)]
 /// extern crate galvanic_mock;
 /// extern crate galvanic_assert;
 /// use galvanic_mock::{mockable, use_mocks};
@@ -367,7 +366,6 @@ impl TestSuite for MockGalvanicMock{
 
     fn times_range() { unimplemented!() }
 
-    #[test]
     fn version() {
         let ver = ::built_info::DEPENDENCIES.iter()
             .find(|(name, _)| *name == "galvanic-mock")

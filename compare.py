@@ -104,7 +104,7 @@ for line in output.splitlines():
 # Manually add a few more data
 results['double']['rustc'] = "stable ok"
 results['galvanic_mock']['rustc'] = "nightly warn"
-results['mock_derive']['rustc'] = "nightly warn"
+# results['mock_derive']['rustc'] = "nightly < 1.28.0 error"
 results['mockers']['rustc'] = "nightly warn"
 results['pseudo']['rustc'] = "stable ok"
 results['simulacrum']['rustc'] = "stable ok"
@@ -112,7 +112,7 @@ results['mock_it']['rustc'] = "stable ok"
 
 results['double']['first_release'] = "Dec-12-2017 -"
 results['galvanic_mock']['first_release'] = "Aug-13-2017 -"
-results['mock_derive']['first_release'] = "Jul-16-2017 -"
+# results['mock_derive']['first_release'] = "Jul-16-2017 -"
 results['mockers']['first_release'] = "Apr-6-2016 -"
 results['pseudo']['first_release'] = "Mar-23-2017 -"
 results['simulacrum']['first_release'] = "Dec-17-2017 -"

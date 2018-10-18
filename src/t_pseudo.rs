@@ -497,7 +497,6 @@ impl TestSuite for Pseudo{
 
     fn times_range() { unimplemented!() }
 
-    #[test]
     fn version() {
         let ver = ::built_info::DEPENDENCIES.iter()
             .find(|(name, _)| *name == "pseudo")

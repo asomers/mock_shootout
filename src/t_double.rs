@@ -1,5 +1,4 @@
 /// ```
-/// #![feature(proc_macro)]
 /// #[macro_use] extern crate double;
 /// 
 /// pub trait A {
@@ -495,7 +494,6 @@ impl TestSuite for MockDouble{
         assert!(num_calls >= 2 && num_calls < 3);
     }
 
-    #[test]
     fn version() {
         let ver = ::built_info::DEPENDENCIES.iter()
             .find(|(name, _)| *name == "double")

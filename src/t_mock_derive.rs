@@ -1,5 +1,4 @@
 /// ```
-/// #![feature(proc_macro)]
 /// extern crate mock_derive;
 /// use mock_derive::mock;
 /// #[mock]
@@ -289,7 +288,6 @@ impl TestSuite for MockDerive{
     fn times_never(){unimplemented!()}
     fn times_range(){unimplemented!()}
 
-    #[test]
     fn version() {
         let ver = ::built_info::DEPENDENCIES.iter()
             .find(|(name, _)| *name == "mock_derive")

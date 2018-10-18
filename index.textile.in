@@ -27,6 +27,8 @@ ability to validate method arguments.  It also can't work with generic traits,
 traits with generic methods, traits defined in external crates, or multiple
 traits (like @T: A + B@).  However, it does have a few rare features, like the
 ability to mock foreign free functions, or traits with static methods.
+Unfortunately, it's maintenance has fallen behind and it *no longer compiles on
+recent toolchains*.
 
 - Galvanic-mock := This is part of a suite of testing libraries.  Along with
 galvanic-test and galvanic-assert, it provides a comprehensive set of testing
