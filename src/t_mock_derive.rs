@@ -21,6 +21,7 @@ use {TestSuite, UniquelyOwned};
 
 pub struct MockDerive;
 impl TestSuite for MockDerive{
+    const NAME: &'static str = "mock_derive";
     fn associated_types(){unimplemented!()}
     fn checkpoint(){unimplemented!()}
     fn consume_parameters() { unimplemented!() }

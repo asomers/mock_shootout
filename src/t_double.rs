@@ -29,6 +29,7 @@ use TestSuite;
 pub struct MockDouble;
 #[allow(unused_parens)]
 impl TestSuite for MockDouble{
+    const NAME: &'static str = "double";
     fn associated_types() { unimplemented!() }
     fn checkpoint() {
         // Double actually supports this feature the same way that Pseudo does,

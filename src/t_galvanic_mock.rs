@@ -100,6 +100,7 @@ use {TestSuite, UniquelyOwned};
 
 pub struct MockGalvanicMock;
 impl TestSuite for MockGalvanicMock{
+    const NAME: &'static str = "galvanic-mock";
     fn associated_types() {
         let mock = new_mock!(AssociatedTrait<Key=i32>);
         given! {

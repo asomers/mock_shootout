@@ -62,6 +62,9 @@ macro_rules! test {
         #[test] fn times_never() { $self::times_never() }
         #[test] fn times_range() { $self::times_range() }
         #[test] fn version() { $self::version() }
+        #[test] fn link() {
+            print!("<a href=\"https://crates.io/crates/{}\"> <img src=\"https://img.shields.io/crates/v/{}.svg\"> </a>", $self::NAME, $self::NAME);
+        }
     }
 }
 
@@ -80,6 +83,8 @@ mod t_simulacrum;
 pub struct UniquelyOwned(u32);
 
 pub trait TestSuite {
+    const NAME: &'static str;
+
     // Core features.  These are the essential features that cannot be
     // implemented by the user
     /// A mocked `Trait` can have associated types

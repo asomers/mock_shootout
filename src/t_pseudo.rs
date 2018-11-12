@@ -48,6 +48,7 @@ use test_double::*;
 
 pub struct Pseudo;
 impl TestSuite for Pseudo{
+    const NAME: &'static str = "pseudo";
     fn associated_types() {
         pub trait A {
             type Key;

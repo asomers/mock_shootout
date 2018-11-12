@@ -57,6 +57,7 @@ mock!{
 
 struct Mockers {}
 impl TestSuite for Mockers {
+    const NAME: &'static str = "mockers";
     fn associated_types(){
         #[mocked]
         pub trait A {

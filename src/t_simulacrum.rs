@@ -57,6 +57,8 @@ use test_double::*;
 
 struct Simulacrum {}
 impl TestSuite for Simulacrum {
+    const NAME: &'static str = "simulacrum";
+
     fn associated_types() {
         // Traits with associated types can be mocked more easily than Generic
         // Traits.

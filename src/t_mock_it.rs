@@ -60,6 +60,7 @@ use test_double::*;
 
 struct MockIt {}
 impl TestSuite for MockIt {
+    const NAME: &'static str = "mock-it";
     fn associated_types() {
         pub trait A {
             type Key;

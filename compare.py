@@ -52,17 +52,21 @@ descs = {
     "times_any": "Times any",
     "times_n": "Times n",
     "times_never": "Times never",
+
     "many_args": "Maximum arguments",
     "rustc": "Rustc",
     "first_release": "First release",
-    "version": "Crate version",
+    "version": "Tested version",
+    "link": "Current version",
 }
 
 def format_cell(s):
     words = s.split(" ")
     result = words[-1]
     text = " ".join(words[0:-1])
-    if result == "ok":
+    if '<img ' in text:
+        bg = "white"
+    elif result == "ok":
         if re.match("^0\.[0-9]+\.[0-9]+", text):
             bg = "#fe7d37"
         else:
@@ -132,7 +136,7 @@ convenience_features = [ "derive", "fallback", "match_combo", "match_constant",
 "match_operator", "match_pattern", "match_range", "match_wildcard",
 "return_call", "return_constant", "return_default", "return_panic",
 "times_once", "times_any", "times_n", "times_never"]
-other_features = [ "many_args", "rustc", "first_release", "version"]
+other_features = [ "many_args", "rustc", "first_release", "version", "link"]
 print "|\\8=. Essential Features|"
 for feature in essential_features:
     print_row(feature, results)
