@@ -428,7 +428,29 @@ impl TestSuite for MockIt {
 
     // https://github.com/nathanielsimard/mock-it/issues/5
     fn send() {
-        unimplemented!()
+        pub trait A {
+            fn foo(&self);
+        }
+
+        struct AMock {
+            foo: Mock<(), ()>
+        }
+        impl A for AMock {
+            fn foo(&self) {
+                self.foo.called(())
+            }
+        }
+        impl AMock {
+            fn new() -> AMock {
+                AMock {
+                    foo: Mock::new(())
+                }
+            }
+        }
+
+
+        let mock = AMock::new();
+        let _ = Box::new(mock) as Box<A + Send>;
     }
 
     fn static_method() {
