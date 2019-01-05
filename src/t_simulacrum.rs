@@ -118,6 +118,9 @@ impl TestSuite for Simulacrum {
 
         mock.foo();
         mock.bar();
+        fn mock_trait() {
+        }
+
         mock.bang();
         mock.baz();
     }
@@ -409,6 +412,25 @@ impl TestSuite for Simulacrum {
         mock.eat();
     }
 
+    fn mock_trait() {
+        pub trait A {
+            fn foo(&self, x: u32);
+        }
+
+        create_mock! {
+            impl A for AMock (self) {
+                expect_foo("foo"):
+                fn foo(&self, x: u32);
+            }
+         }
+
+        let mut mock = AMock::new();
+        mock.expect_foo().called_any().with(42);
+
+        mock.foo(42);
+    }
+
+    fn modules() { unimplemented!() }
     fn multi_trait() {
         // Simulacrum can mock multiple traits using mid-level macros
         pub trait A {

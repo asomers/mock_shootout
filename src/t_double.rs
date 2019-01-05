@@ -284,7 +284,25 @@ impl TestSuite for MockDouble{
         mock.foo.called_with_pattern( matcher!( p!(any)));
     }
 
+    fn mock_trait() {
+        pub trait A {
+            fn foo(&self, key: i16) -> i32;
+        }
+
+        mock_trait!(
+            MockA,
+            foo(i16) -> i32
+        );
+        impl A for MockA {
+            mock_method!(foo(&self, key: i16) -> i32);
+        }
+        let mock = MockA::default();
+        mock.foo.return_value(6);
+        mock.foo(0);
+        assert!(mock.foo.called_with(0i16));
+    }
     fn mock_struct() { unimplemented!() }
+    fn modules() { unimplemented!() }
     fn multi_trait() { unimplemented!() }
     fn return_call() { 
         unimplemented!()

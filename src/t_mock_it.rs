@@ -313,12 +313,39 @@ impl TestSuite for MockIt {
         mock.foo(-1);
     }
 
+    fn mock_trait() {
+        pub trait A {
+            fn foo(&self, key: i16);
+        }
+
+        struct AMock {
+            foo: Mock<(i16), ()>
+        }
+        impl A for AMock {
+            fn foo(&self, key: i16) {
+                self.foo.called(key)
+            }
+        }
+        impl AMock {
+            fn new() -> AMock {
+                AMock {
+                    foo: Mock::new(())
+                }
+            }
+        }
+
+        let mock = AMock::new();
+        mock.foo.given(-1).will_return(());
+        mock.foo(-1);
+    }
+
     fn mock_struct() {
         let mock = Bean::new();
         mock.eat.given(()).will_return(());
         mock.eat();
     }
 
+    fn modules() { unimplemented!() }
     fn multi_trait() {
         pub trait A {
             fn foo(&self) -> u32;

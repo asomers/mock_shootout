@@ -10,6 +10,7 @@ descs = {
     "mock_derive": "Mock_Derive",
     "mock_it": "Mock-it",
     "mockers": "Mockers",
+    "mocktopus": "Mocktopus",
     "pseudo": "Pseudo",
     "simulacrum": "Simulacrum",
 
@@ -26,6 +27,7 @@ descs = {
     "inherited_trait": "Inherited traits",
     "match_method": "Match function",
     "mock_struct": "Structs",
+    "mock_trait": "Traits",
     "multi_trait": "Multiple traits",
     "return_call_with_args": "Return call with args",
     "return_lifetime": "Return lifetime",
@@ -44,6 +46,7 @@ descs = {
     "match_pattern": "Match pattern",
     "match_range": "Match range",
     "match_wildcard": "Match wildcard",
+    "modules": "Mock modules",
     "return_call": "Return call",
     "return_constant": "Return a constant",
     "return_default": "Return default",
@@ -110,6 +113,7 @@ results['double']['rustc'] = "stable ok"
 results['galvanic_mock']['rustc'] = "nightly warn"
 # results['mock_derive']['rustc'] = "nightly < 1.28.0 error"
 results['mockers']['rustc'] = "nightly warn"
+results['mocktopus']['rustc'] = "nightly warn"
 results['pseudo']['rustc'] = "stable ok"
 results['simulacrum']['rustc'] = "stable ok"
 results['mock_it']['rustc'] = "stable ok"
@@ -118,6 +122,7 @@ results['double']['first_release'] = "Dec-12-2017 -"
 results['galvanic_mock']['first_release'] = "Aug-13-2017 -"
 # results['mock_derive']['first_release'] = "Jul-16-2017 -"
 results['mockers']['first_release'] = "Apr-6-2016 -"
+results['mocktopus']['first_release'] = "Sep-5-2017 -"
 results['pseudo']['first_release'] = "Mar-23-2017 -"
 results['simulacrum']['first_release'] = "Dec-17-2017 -"
 results['mock_it']['first_release'] = "Mar-11-2018 -"
@@ -129,11 +134,11 @@ print "|_. |_.%s|" % lib_headers
 essential_features = ["associated_types", "checkpoint", "consume_parameters",
 "consume_self", "doctest", "external_trait", "foreign",
 "generic_parameters", "generic_return", "generic_trait", "inherited_trait",
-"match_method", "mock_struct", "multi_trait", "return_call_with_args",
-"return_lifetime", "return_owned", "return_parameters", "send", "sequence",
-"static_method", "times_range",]
+"match_method", "mock_struct", "mock_trait", "multi_trait",
+"return_call_with_args", "return_lifetime", "return_owned", "return_parameters",
+"send", "sequence", "static_method", "times_range",]
 convenience_features = [ "derive", "fallback", "match_combo", "match_constant",
-"match_operator", "match_pattern", "match_range", "match_wildcard",
+"match_operator", "match_pattern", "match_range", "match_wildcard", "modules",
 "return_call", "return_constant", "return_default", "return_panic",
 "times_once", "times_any", "times_n", "times_never"]
 other_features = [ "many_args", "rustc", "first_release", "version", "link"]

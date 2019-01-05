@@ -64,6 +64,14 @@ high-level API also gives Mock-it some of the power of Simulacrum; it can mock a
 @struct@, for example.  Overall, Mock-it has few practical advantages, but it's
 a good starting point for someone looking to build something bigger.
 
+- Moctopus := Mocktopus is a bit of a different beast.  Whereas every other
+  library focuses on mocking @trait@ s, Mocktopus focuses on free functions.  In
+  fact, the only way that it can mock a @trait@ is by manually creating an
+  implementation of that @trait@, and then mocking every single function.
+  Mocktopus also has only the most rudimentary support for expectations.  Its
+  advantages are that it requires very little boiler plate, it can mock @struct@
+  s and free functions, and it handles generic functions well.
+
 h2. Features
 
 I evaluated about three dozen features evaluated for each library.  The first
@@ -134,8 +142,12 @@ function?
 @trait@ s?  This requires altering the module's namespace during unit tests.
 The @test_double@ crate can do that.
 
+- Modules := Can the library mock every function in a module?
+
 - Multiple traits := Can the library create a mock that satisfies multiple traits,
 so it can be passed to a function like @fn foo<T: A + B>(t: T)@?
+
+- Traits := Can the library create a mock object that implements a @trait@?
 
 - Return call with args := Can a mocked method return a value computed from the
 arguments by an arbitrary function?

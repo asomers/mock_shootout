@@ -1,4 +1,4 @@
-#![feature(proc_macro_hygiene)] // Needed by galvanic_mock
+#![feature(proc_macro_hygiene)] // Needed by galvanic_mock and mocktopus
 #![feature(range_contains)] // Used by our code
 
 #![allow(dead_code)]
@@ -12,6 +12,7 @@ extern crate galvanic_mock;
 //extern crate mock_derive;
 extern crate mockers;
 extern crate mockers_derive;
+extern crate mocktopus;
 extern crate mock_it;
 extern crate pseudo;
 extern crate simulacrum;
@@ -41,7 +42,9 @@ macro_rules! test {
         #[test] fn match_pattern() { $self::match_pattern() }
         #[test] fn match_range() { $self::match_range() }
         #[test] fn match_wildcard() { $self::match_wildcard() }
+        #[test] fn modules() { $self::modules() }
         #[test] fn mock_struct() { $self::mock_struct() }
+        #[test] fn mock_trait() { $self::mock_trait() }
         #[test] fn multi_trait() { $self::multi_trait() }
         #[test] fn return_call() { $self::return_call() }
         #[test] fn return_call_with_args() { $self::return_call_with_args() }
@@ -75,6 +78,7 @@ mod t_galvanic_mock;
 //mod t_mock_derive;
 mod t_mock_it;
 mod t_mockers;
+mod t_mocktopus;
 mod t_pseudo;
 mod t_simulacrum;
 
@@ -114,6 +118,8 @@ pub trait TestSuite {
     fn match_method();
     /// A plain `Struct` can be mocked.
     fn mock_struct();
+    /// An abstract Trait can be mocked
+    fn mock_trait();
     /// A Mock can be defined that implements multiple `Trait`s.
     fn multi_trait();
     /// A mock method can return the result of a function that depends on its
@@ -154,6 +160,8 @@ pub trait TestSuite {
     fn match_range();
     /// A method call can match any argument at all
     fn match_wildcard();
+    /// An entire module can be mocked
+    fn modules();
     /// A mock method can return the result of a function
     fn return_call();
     /// A mock method can return a constant value

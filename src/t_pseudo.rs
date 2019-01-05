@@ -291,6 +291,27 @@ impl TestSuite for Pseudo{
         mock.eat();
     }
 
+    fn modules() { unimplemented!() }
+    fn mock_trait() {
+        pub trait A {
+            fn foo(&self) -> u32;
+        }
+
+        struct MockA {
+            foo: Mock<(), u32>,
+        }
+        impl A for MockA {
+            fn foo(&self) -> u32 {
+                self.foo.call(())
+            }
+        }
+
+        let mock = MockA{foo: Mock::default()};
+        mock.foo.return_value(1u32);
+
+        assert_eq!(1, mock.foo());
+    }
+
     fn multi_trait() {
         pub trait A {
             fn foo(&self) -> u32;

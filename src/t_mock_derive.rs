@@ -167,7 +167,16 @@ impl TestSuite for MockDerive{
         mock.foo(45);
     }
 
+    fn mock_trait() {
+        #[mock]
+        trait A {
+            fn foo(&self) -> u32;
+        }
+
+        let _mock = MockA::new();
+    }
     fn mock_struct() { unimplemented!() }
+    fn modules() { unimplemented!() }
     fn multi_trait(){unimplemented!()}
     fn return_call(){
         #[mock]

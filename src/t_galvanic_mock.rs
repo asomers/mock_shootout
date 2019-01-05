@@ -249,6 +249,15 @@ impl TestSuite for MockGalvanicMock{
     }
 
     fn mock_struct() { unimplemented!() }
+    fn modules() { unimplemented!() }
+    fn mock_trait() {
+        let mock = new_mock!(A);
+        given! {
+            <mock as A>::foo(|_| true) then_return_from |_| 1 always;
+        }
+        assert_eq!(1, mock.foo(5));
+    }
+
     fn multi_trait() {
         let mock = new_mock!(A, C);
         given! {

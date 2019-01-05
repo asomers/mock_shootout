@@ -326,6 +326,18 @@ impl TestSuite for Mockers {
     }
 
     fn mock_struct() { unimplemented!() }
+    fn modules() { unimplemented!() }
+
+    fn mock_trait() {
+        #[mocked]
+        pub trait A {
+            fn foo(&self, key: i16);
+        }
+
+        let scenario = Scenario::new();
+        let _mock = scenario.create_mock_for::<A>();
+    }
+
     fn multi_trait(){
         fn foo<T: EMTA + EMTB>(_t: T) {
         }
