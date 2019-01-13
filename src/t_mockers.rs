@@ -456,7 +456,15 @@ impl TestSuite for Mockers {
     }
 
     fn static_method() {
-        unimplemented!()
+        #[mocked]
+        pub trait A {
+            fn foo();
+        }
+
+        let scenario = Scenario::new();
+        let mock = scenario.create_mock::<AMockStatic>();
+        scenario.expect(mock.foo_call().and_return(()));
+        AMock::foo();
     }
 
     fn sequence(){
