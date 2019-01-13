@@ -275,6 +275,7 @@ impl TestSuite for Mocktopus{
         assert_eq!(5, *a.foo());
     }
 
+    // https://github.com/CodeSandwich/Mocktopus/issues/34
     fn return_owned() { 
         // mock_safe and mock_raw both take FnMut arguments
         unimplemented!()
