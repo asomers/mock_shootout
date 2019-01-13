@@ -184,6 +184,10 @@ impl TestSuite for Simulacrum {
     }
 
     fn foreign() { unimplemented!() }
+    // Simulacrum can't mock a generic method with different parameter types
+    // more than once in the same mock object, at least not using the normal
+    // syntax.  But there's a workaround for manually-constructed mock objects.
+    // https://github.com/pcsm/simulacrum/issues/55
     fn generic_parameters() {
         pub trait A {
             fn foo<T: 'static>(&self, t:T);

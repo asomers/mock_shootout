@@ -66,7 +66,7 @@ pub trait GenericTrait<T> {
 
 #[mockable]
 pub trait GenericMethodTrait {
-    fn foo<T: PartialEq>(&self, x: T, y: T) -> bool;
+    fn foo<T>(&self, t: T) -> u32;
 }
 
 #[mockable]
@@ -141,13 +141,18 @@ impl TestSuite for MockGalvanicMock{
     }
 
     fn foreign() { unimplemented!() }
+    // https://github.com/mindsbackyard/galvanic-mock/issues/7
     fn generic_parameters() {
-        let mock = new_mock!(GenericMethodTrait);
-        given! {
-            <mock as GenericMethodTrait>::foo |&(ref x, ref y)| x == y
-                then_return true always;
-        }
-        assert!(mock.foo(5, 5));
+        //let mock = new_mock!(GenericMethodTrait);
+        //given! {
+            //<mock as GenericMethodTrait>::foo(|x: &u32| *x == 42u32)
+                //then_return 100u32 always;
+            //<mock as GenericMethodTrait>::foo(|x: &i16| *x == 42i16)
+                //then_return 1u32 always;
+        //}
+        //assert_eq!(100, mock.foo(42u32));
+        //assert_eq!(1, mock.foo(42u32));
+        unimplemented!()
     }
 
     fn generic_return() {

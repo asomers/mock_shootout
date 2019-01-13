@@ -160,16 +160,19 @@ impl TestSuite for Mockers {
         unsafe { bar(); }
     }
 
+    // https://github.com/kriomant/mockers/issues/39
     fn generic_parameters(){
         #[mocked]
         pub trait A {
-            fn foo<T: 'static>(&self, t:T);
+            fn foo<T>(&self, t:T) -> u32;
         }
 
         let scenario = Scenario::new();
         let mock = scenario.create_mock::<AMock>();
-        scenario.expect(mock.foo_call(-1i16).and_return(()));
-        mock.foo(-1i16);
+        scenario.expect(mock.foo_call(42u32).and_return_clone(100u32).times(..));
+        scenario.expect(mock.foo_call(42i16).and_return_clone(1u32).times(..));
+        assert_eq!(1u32, mock.foo(42i16));
+        assert_eq!(100u32, mock.foo(42u32));
     }
 
     fn generic_return() {

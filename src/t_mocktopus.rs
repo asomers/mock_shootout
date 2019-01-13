@@ -116,13 +116,13 @@ impl TestSuite for Mocktopus{
     }
 
     fn generic_parameters() {
-        #[derive(Default)]
-        struct A{}
         #[mockable]
         fn foo<T: Clone + Default>(_t:T) -> T {T::default()}
 
         foo.mock_safe(|t: u32| MockResult::Return(t.clone()));
+        foo.mock_safe(|t: i16| MockResult::Return(t.clone()));
         assert_eq!(42u32, foo(42u32));
+        assert_eq!(-1i16, foo(-1i16));
     }
 
     fn generic_return() {
