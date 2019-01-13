@@ -121,7 +121,7 @@ crate?
 
 - Foreign := Can the library mock static external functions?
 
-- Generic parameters := Can the library mock traits with generic methods that
+- Generic methods := Can the library mock traits with generic methods that
 have parameterized arguments, and set expectations for those methods?  For
 example, a method like @fn foo<T>(&self, t: T) -> u32@.
 

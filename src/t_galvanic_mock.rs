@@ -142,7 +142,7 @@ impl TestSuite for MockGalvanicMock{
 
     fn foreign() { unimplemented!() }
     // https://github.com/mindsbackyard/galvanic-mock/issues/7
-    fn generic_parameters() {
+    fn generic_method() {
         //let mock = new_mock!(GenericMethodTrait);
         //given! {
             //<mock as GenericMethodTrait>::foo(|x: &u32| *x == 42u32)

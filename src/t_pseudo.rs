@@ -145,7 +145,7 @@ impl TestSuite for Pseudo{
 
     fn fallback() { unimplemented!() }
     fn foreign() { unimplemented!() }
-    fn generic_parameters() { unimplemented!() }
+    fn generic_method() { unimplemented!() }
     fn generic_return() { unimplemented!() }
     fn generic_trait() {
         // Pseudo can do generic traits, but any type parameters must be Clone

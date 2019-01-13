@@ -156,7 +156,7 @@ impl TestSuite for MockIt {
     }
 
     fn foreign() { unimplemented!() }
-    fn generic_parameters() { unimplemented!() }
+    fn generic_method() { unimplemented!() }
     fn generic_return() { unimplemented!() }
     fn generic_trait() {
         // Mock-it can do generic Traits, but any type parameters used as return

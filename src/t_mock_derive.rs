@@ -89,7 +89,7 @@ impl TestSuite for MockDerive{
         unsafe{ assert_eq!(bar(0.0), 3.14) };
     }
 
-    fn generic_parameters(){
+    fn generic_method(){
         //#[mock]
         //trait A {
             //fn foo<T: Clone>(&self) -> T;

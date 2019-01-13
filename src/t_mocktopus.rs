@@ -115,7 +115,7 @@ impl TestSuite for Mocktopus{
         unimplemented!();
     }
 
-    fn generic_parameters() {
+    fn generic_method() {
         #[mockable]
         fn foo<T: Clone + Default>(_t:T) -> T {T::default()}
 

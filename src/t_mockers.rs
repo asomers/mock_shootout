@@ -161,7 +161,7 @@ impl TestSuite for Mockers {
     }
 
     // https://github.com/kriomant/mockers/issues/39
-    fn generic_parameters(){
+    fn generic_method(){
         #[mocked]
         pub trait A {
             fn foo<T>(&self, t:T) -> u32;
