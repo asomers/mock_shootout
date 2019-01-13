@@ -315,7 +315,7 @@ impl TestSuite for Mocktopus{
     fn static_method() {
         pub trait A {
             fn foo(&self, key: i16) -> i16;
-            fn bar() -> Self;
+            fn bar() -> u32;
         }
         #[derive(Default)]
         struct AS {}
@@ -324,12 +324,14 @@ impl TestSuite for Mocktopus{
             fn foo(&self, key: i16)  -> i16{
                 key
             }
-            fn bar() -> Self {unimplemented!()}
+            fn bar() -> u32 {unimplemented!()}
         }
 
         AS::foo.mock_safe(|_self, _key| MockResult::Return(42));
+        AS::bar.mock_safe(|| MockResult::Return(42));
         let mock = AS::default();
         assert_eq!(42, mock.foo(0));
+        assert_eq!(42u32, AS::bar());
     }
 
     fn sequence() {

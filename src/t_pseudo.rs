@@ -41,10 +41,16 @@ impl BeanMock {
 #[cfg(test)]
 mod t {
 
+use lazy_static::lazy_static;
 use pseudo::Mock;
+use std::sync::Mutex;
 use TestSuite;
 use test_double::*;
 #[test_double] use super::Bean;
+
+lazy_static! {
+    static ref MOCK_A_BAR: Mutex<Mock<(), u32>> = Mutex::new(Mock::default());
+}
 
 pub struct Pseudo;
 impl TestSuite for Pseudo{
@@ -454,27 +460,32 @@ impl TestSuite for Pseudo{
         let _ = Box::new(mock) as Box<A + Send>;
     }
 
+    // Pseudo can do this, but you must manually create a global Mock object for
+    // each static method.
     fn static_method() {
         pub trait A {
             fn bar() -> u32;
             fn foo(&self, x: u32) -> u32;
         }
 
+        #[derive(Default)]
         struct MockA {
             foo: Mock<(u32), (u32)>
         }
         impl A for MockA {
             fn bar() -> u32 {
-                Default::default()
+                MOCK_A_BAR.lock().unwrap().call(())
             }
             fn foo(&self, x: u32) -> u32 {
                 self.foo.call(x)
             }
         }
 
-        let mock = MockA{foo: Mock::default()};
+        let mock = MockA::default();
         mock.foo.return_value(2u32);
+        MOCK_A_BAR.lock().unwrap().return_value(3u32);
         assert_eq!(2, mock.foo(1));
+        assert_eq!(3, MockA::bar());
     }
 
     fn times_once() { unimplemented!() }

@@ -573,30 +573,47 @@ impl TestSuite for Simulacrum {
         unimplemented!()
     }
 
+    // This doesn't work because Method contains a reference to the Expectations
+    // object, and in our usage the reference must outlive the MutexGuard.  It
+    // could be done with unsafe code, but why should the user need unsafe code
+    // just to set an expectation?
+    //lazy_static! {
+        //static ref MOCK_STATIC: Mutex<Expectations>
+            //= Mutex::new(Expectations::default());
+    //}
+
     fn static_method() {
-        pub trait A {
-            fn bar() -> u32;
-            fn foo(&self, x: u32) -> u32;
-        }
+        //pub trait A {
+            //fn bar() -> u32;
+            //fn foo(&self, x: u32) -> u32;
+        //}
 
-        create_mock_struct! {
-            struct AMock: {
-                expect_foo("foo") u32 => u32;
-            }
-        }
-        impl A for AMock {
-            fn foo(&self, x: u32) -> u32 {
-                was_called!(self, "foo", (x: u32) -> u32)
-            }
-            fn bar() -> u32 {
-                unimplemented!()
-            }
-         }
+        //create_mock_struct! {
+            //struct AMock: {
+                //expect_foo("foo") u32 => u32;
+            //}
+        //}
+        //impl AMock {
+            //fn expect_bar() -> Method<(), u32> {
+                //MOCK_STATIC.lock().unwrap()
+                    //.expect::<(), u32>("A_bar")
+            //}
+        //}
+        //impl A for AMock {
+            //fn foo(&self, x: u32) -> u32 {
+                //was_called!(self, "foo", (x: u32) -> u32)
+            //}
+            //fn bar() -> u32 {
+                //MOCK_STATIC.lock().unwrap()
+                    //.was_called_returning::<(), u32>("A_bar", ())
+            //}
+         //}
 
-        let mut mock = AMock::new();
-        mock.expect_foo().called_once().returning(|_| 42);
+        //let mut mock = AMock::new();
+        //mock.expect_foo().called_once().returning(|_| 42);
 
-        assert_eq!(42, mock.foo(0));
+        //assert_eq!(42, mock.foo(0));
+        unimplemented!()
     }
 
     fn sequence() {

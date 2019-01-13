@@ -10,6 +10,7 @@ extern crate galvanic_mock;
 // Disable mock_derive until it gets fixed for newer nightly toolchains
 // https://github.com/DavidDeSimone/mock_derive/issues/18
 //extern crate mock_derive;
+extern crate lazy_static;
 extern crate mockers;
 extern crate mockers_derive;
 extern crate mocktopus;

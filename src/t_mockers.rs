@@ -458,13 +458,17 @@ impl TestSuite for Mockers {
     fn static_method() {
         #[mocked]
         pub trait A {
-            fn foo();
+            fn foo(&self, x: u32) -> u32;
+            fn bar() -> u32;
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock::<AMockStatic>();
-        scenario.expect(mock.foo_call().and_return(()));
-        AMock::foo();
+        let mock_class = scenario.create_mock::<AMockStatic>();
+        let mock_object = scenario.create_mock::<AMock>();
+        scenario.expect(mock_object.foo_call(5).and_return(42));
+        scenario.expect(mock_class.bar_call().and_return(99));
+        assert_eq!(42, mock_object.foo(5));
+        assert_eq!(99, AMock::bar());
     }
 
     fn sequence(){

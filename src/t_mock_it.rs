@@ -52,11 +52,17 @@ impl BeanMock {
 mod t {
 
 use TestSuite;
+use lazy_static::lazy_static;
 use mock_it::Mock;
 use mock_it::Matcher;
 use mock_it::Matcher::*;
+use std::sync::Mutex;
 use test_double::*;
 #[test_double] use super::Bean;
+
+lazy_static! {
+    static ref MOCK_A_BAR: Mutex<Mock<(), u32>> = Mutex::new(Mock::new(0));
+}
 
 struct MockIt {}
 impl TestSuite for MockIt {
@@ -491,7 +497,8 @@ impl TestSuite for MockIt {
         }
         impl A for AMock {
             fn bar() -> u32 {
-                Default::default()
+                MOCK_A_BAR.lock().unwrap()
+                    .called(())
             }
             fn foo(&self, x: u32) -> u32 {
                 self.foo.called(x)
@@ -507,7 +514,10 @@ impl TestSuite for MockIt {
 
         let mock = AMock::new();
         mock.foo.given(1).will_return(2);
+        MOCK_A_BAR.lock().unwrap()
+            .given(()).will_return(42);
         assert_eq!(2, mock.foo(1));
+        assert_eq!(42, AMock::bar());
     }
 
     fn times_once() { unimplemented!() }
