@@ -1,7 +1,6 @@
 /// ```
 /// #![feature(proc_macro_hygiene)]
-/// extern crate mocktopus;
-/// #[macro_use] use mocktopus::macros::*;
+/// use mocktopus::macros::*;
 /// use mocktopus::mocking::*;
 /// 
 /// #[mockable]
@@ -17,7 +16,6 @@ fn doctest() {}
 #[cfg(test)]
 mod t {
 
-#[macro_use]
 use mocktopus::macros::*;
 use mocktopus::mocking::*;
 use std::{
@@ -25,7 +23,7 @@ use std::{
     sync::Arc
 };
 
-use {TestSuite, UniquelyOwned};
+use crate::{TestSuite, UniquelyOwned};
 
 struct Mocktopus {}
 #[allow(unused_parens)]
@@ -372,7 +370,7 @@ impl TestSuite for Mocktopus{
     }
 
     fn version() {
-        let ver = ::built_info::DEPENDENCIES.iter()
+        let ver = crate::built_info::DEPENDENCIES.iter()
             .find(|(name, _)| *name == "mocktopus")
             .unwrap()
             .1;

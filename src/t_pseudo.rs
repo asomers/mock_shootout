@@ -1,7 +1,6 @@
 use pseudo::Mock;
 
 /// ```
-/// #[macro_use] extern crate pseudo;
 /// use pseudo::Mock;
 /// 
 /// pub trait A {
@@ -44,7 +43,7 @@ mod t {
 use lazy_static::lazy_static;
 use pseudo::Mock;
 use std::sync::Mutex;
-use TestSuite;
+use crate::TestSuite;
 use test_double::*;
 #[test_double] use super::Bean;
 
@@ -553,7 +552,7 @@ impl TestSuite for Pseudo{
     fn times_range() { unimplemented!() }
 
     fn version() {
-        let ver = ::built_info::DEPENDENCIES.iter()
+        let ver = crate::built_info::DEPENDENCIES.iter()
             .find(|(name, _)| *name == "pseudo")
             .unwrap()
             .1;

@@ -1,6 +1,5 @@
 /// ```
-/// #[macro_use] extern crate double;
-/// 
+/// use double::*;
 /// pub trait A {
 ///     fn foo(&self, key: i16) -> i32;
 /// }
@@ -23,8 +22,16 @@ fn doctest() {}
 #[cfg(test)]
 mod t {
 
-use double::matcher::*;
-use TestSuite;
+use double::{
+    matcher::*,
+    matcher,
+    mock_method,
+    mock_trait,
+    p,
+    __private_mock_trait_new_impl,
+    __private_mock_trait_default_impl
+};
+use crate::TestSuite;
 
 pub struct MockDouble;
 #[allow(unused_parens)]
@@ -520,7 +527,7 @@ impl TestSuite for MockDouble{
     }
 
     fn version() {
-        let ver = ::built_info::DEPENDENCIES.iter()
+        let ver = crate::built_info::DEPENDENCIES.iter()
             .find(|(name, _)| *name == "double")
             .unwrap()
             .1;

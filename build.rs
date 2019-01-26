@@ -1,4 +1,3 @@
-extern crate built;
 use std::{env, path};
 
 fn main() {

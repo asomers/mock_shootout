@@ -1,7 +1,6 @@
 use mock_it::Mock;
 
 /// ```
-/// extern crate mock_it;
 /// use mock_it::Mock;
 /// 
 /// pub trait A {
@@ -51,7 +50,7 @@ impl BeanMock {
 #[cfg(test)]
 mod t {
 
-use TestSuite;
+use crate::TestSuite;
 use lazy_static::lazy_static;
 use mock_it::Mock;
 use mock_it::Matcher;
@@ -554,7 +553,7 @@ impl TestSuite for MockIt {
     fn times_range() { unimplemented!() }
 
     fn version() {
-        let ver = ::built_info::DEPENDENCIES.iter()
+        let ver = crate::built_info::DEPENDENCIES.iter()
             .find(|(name, _)| *name == "mock-it")
             .unwrap()
             .1;

@@ -3,23 +3,6 @@
 
 #![allow(dead_code)]
 
-extern crate built;
-extern crate galvanic_assert;
-extern crate galvanic_mock;
-#[allow(unused_imports)] #[macro_use] extern crate double;
-// Disable mock_derive until it gets fixed for newer nightly toolchains
-// https://github.com/DavidDeSimone/mock_derive/issues/18
-//extern crate mock_derive;
-extern crate lazy_static;
-extern crate mockers;
-extern crate mockers_derive;
-extern crate mocktopus;
-extern crate mock_it;
-extern crate pseudo;
-extern crate simulacrum;
-extern crate simulacrum_user;
-extern crate test_double;
-
 #[allow(unused)]
 macro_rules! test {
     ( $self:ident) => {

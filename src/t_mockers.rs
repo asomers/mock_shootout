@@ -1,8 +1,6 @@
 /// ```
-/// extern crate mockers;
-/// extern crate mockers_derive;
 /// use mockers::*;
-/// #[macro_use] use mockers_derive::*;
+/// use mockers_derive::mocked;
 /// #[mocked]
 /// pub trait A {
 ///     fn foo(&self, key: i16) -> i32;
@@ -18,12 +16,10 @@ fn doctest() {}
 #[cfg(test)]
 mod t {
 
-extern crate mockers;
-extern crate mockers_derive;
 use mockers::*;
-#[macro_use] use mockers_derive::*;
+use mockers_derive::*;
 use std::{sync::Arc, cell::RefCell};
-use {TestSuite, UniquelyOwned};
+use crate::{TestSuite, UniquelyOwned};
 
 pub trait ET {}
 
@@ -556,7 +552,7 @@ impl TestSuite for Mockers {
     }
 
     fn version() {
-        let ver = ::built_info::DEPENDENCIES.iter()
+        let ver = crate::built_info::DEPENDENCIES.iter()
             .find(|(name, _)| *name == "mockers")
             .unwrap()
             .1;

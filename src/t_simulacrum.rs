@@ -1,7 +1,6 @@
 use simulacrum::*;
 
 /// ```
-/// extern crate simulacrum;
 /// use simulacrum::*;
 ///
 /// pub trait A {
@@ -51,7 +50,7 @@ mod t {
 
 use simulacrum::*;
 use simulacrum_user::{deref, gt, lt, passes};
-use TestSuite;
+use crate::TestSuite;
 use test_double::*;
 #[test_double] use super::Bean;
 
@@ -758,7 +757,7 @@ impl TestSuite for Simulacrum {
     fn times_range() { unimplemented!() }
 
     fn version() {
-        let ver = ::built_info::DEPENDENCIES.iter()
+        let ver = crate::built_info::DEPENDENCIES.iter()
             .find(|(name, _)| *name == "simulacrum")
             .unwrap()
             .1;

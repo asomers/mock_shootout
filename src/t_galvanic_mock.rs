@@ -1,6 +1,4 @@
 /// ```
-/// extern crate galvanic_mock;
-/// extern crate galvanic_assert;
 /// use galvanic_mock::{mockable, use_mocks};
 ///
 /// #[mockable]
@@ -22,12 +20,14 @@
 /// ```
 fn doctest() {}
 
-extern crate galvanic_assert;
-extern crate galvanic_mock;
 #[cfg(test)] use galvanic_assert::matchers::*;
 use galvanic_mock::mockable;
 #[cfg(test)] use galvanic_mock::use_mocks;
-use UniquelyOwned;
+
+// We must import these symbols here instead of in mod to due to bug
+// https://github.com/mindsbackyard/galvanic-mock/issues/10
+#[allow(unused)]
+use crate::{TestSuite, UniquelyOwned, built_info};
 
 // Galvanic_mock's macros don't work in function-scope, so we have to define all
 // the traits up here.  This is unlikely to hinder most users.
@@ -95,8 +95,6 @@ pub trait ManyArgsTrait {
 mod t {
     use std;
     use super::*;
-
-use {TestSuite, UniquelyOwned};
 
 pub struct MockGalvanicMock;
 impl TestSuite for MockGalvanicMock{
@@ -391,7 +389,7 @@ impl TestSuite for MockGalvanicMock{
     fn times_range() { unimplemented!() }
 
     fn version() {
-        let ver = ::built_info::DEPENDENCIES.iter()
+        let ver = built_info::DEPENDENCIES.iter()
             .find(|(name, _)| *name == "galvanic-mock")
             .unwrap()
             .1;
