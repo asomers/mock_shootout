@@ -370,7 +370,6 @@ impl TestSuite for Pseudo{
         assert_eq!(2, mock.bar());
     }
 
-    fn return_call() { unimplemented!() }
     fn return_call_with_args() {
         pub trait A {
             fn foo(&self, x: u32) -> u32;

@@ -417,7 +417,6 @@ impl TestSuite for MockIt {
         assert_eq!(2, mock.bar());
     }
 
-    fn return_call() { unimplemented!() }
     fn return_call_with_args() { unimplemented!() }
     fn return_constant() {
         pub trait A {

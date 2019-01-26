@@ -31,7 +31,6 @@ macro_rules! test {
         #[test] fn mock_struct() { $self::mock_struct() }
         #[test] fn mock_trait() { $self::mock_trait() }
         #[test] fn multi_trait() { $self::multi_trait() }
-        #[test] fn return_call() { $self::return_call() }
         #[test] fn return_call_with_args() { $self::return_call_with_args() }
         #[test] fn return_constant() { $self::return_constant() }
         #[test] fn return_default() { $self::return_default() }
@@ -149,8 +148,6 @@ pub trait TestSuite {
     fn match_wildcard();
     /// An entire module can be mocked
     fn modules();
-    /// A mock method can return the result of a function
-    fn return_call();
     /// A mock method can return a constant value
     fn return_constant();
     /// A mock method can return the type's default value

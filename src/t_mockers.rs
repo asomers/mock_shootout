@@ -349,10 +349,6 @@ impl TestSuite for Mockers {
         foo(mock);
     }
 
-    fn return_call(){
-        unimplemented!()
-    }
-
     fn return_call_with_args(){
         #[mocked]
         pub trait A {

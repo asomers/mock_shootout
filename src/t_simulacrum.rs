@@ -499,10 +499,6 @@ impl TestSuite for Simulacrum {
         assert_eq!(99, mock.bar());
     }
 
-    fn return_call() {
-        unimplemented!()
-    }
-
     fn return_call_with_args() {
         pub trait A {
             fn foo(&self, x: u32) -> u32;

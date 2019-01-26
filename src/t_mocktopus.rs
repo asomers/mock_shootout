@@ -243,10 +243,6 @@ impl TestSuite for Mocktopus{
         unimplemented!()
     }
 
-    fn return_call() { 
-        unimplemented!()
-    }
-
     fn return_call_with_args() { 
         #[mockable]
         fn foo(x: i16) -> i16 {0}

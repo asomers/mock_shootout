@@ -203,9 +203,6 @@ like @eq@ , @gt@ , etc?
 
 - Match wildcard := Can an expectation match any argument?
 
-- Return call := Can an expectation return a value computed from an arbitrary
-function?
-
 - Return constant := Can an expectation return a constant?
 
 - Return default := Can mocked methods automatically return the

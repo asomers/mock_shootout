@@ -48,7 +48,6 @@ descs = {
     "match_range": "Match range",
     "match_wildcard": "Match wildcard",
     "modules": "Mock modules",
-    "return_call": "Return call",
     "return_constant": "Return a constant",
     "return_default": "Return default",
     "return_panic": "Return panic",
@@ -140,7 +139,7 @@ essential_features = ["associated_types", "checkpoint", "consume_parameters",
 "send", "sequence", "static_method", "times_range",]
 convenience_features = [ "derive", "fallback", "match_combo", "match_constant",
 "match_operator", "match_pattern", "match_range", "match_wildcard", "modules",
-"return_call", "return_constant", "return_default", "return_panic",
+"return_constant", "return_default", "return_panic",
 "times_once", "times_any", "times_n", "times_never"]
 other_features = [ "many_args", "rustc", "first_release", "version", "link"]
 print "|\\8=. Essential Features|"

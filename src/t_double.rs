@@ -317,10 +317,6 @@ impl TestSuite for MockDouble{
     fn mock_struct() { unimplemented!() }
     fn modules() { unimplemented!() }
     fn multi_trait() { unimplemented!() }
-    fn return_call() { 
-        unimplemented!()
-    }
-
     fn return_call_with_args() { 
         pub trait A {
             fn foo(&self, key: i16) -> i16;

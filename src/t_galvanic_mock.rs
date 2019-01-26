@@ -276,10 +276,6 @@ impl TestSuite for MockGalvanicMock{
         assert_eq!(-4, mock.boo());
     }
 
-    fn return_call() {
-        unimplemented!()
-    }
-
     fn return_call_with_args() {
         let mock = new_mock!(A);
         given! {
