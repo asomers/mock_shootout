@@ -129,8 +129,11 @@ example, a method like @fn foo<T>(&self, t: T) -> u32@.
 parameterized return values, and set expectations for those methods?  For
 example, a method like @fn foo<T>(&self, x: u32) -> T@.
 
+- Generic structs := Can the library mock generic structs, like
+@std::convert::Mutex<T>@?
+
 - Generic traits := Can the library mock generic traits, like
-@std::sync::Mutex<T>@?
+@std::sync::Into<T>@?
 
 - Inherited traits := Can the library mock inherited traits like @pub trait B:
 A@?

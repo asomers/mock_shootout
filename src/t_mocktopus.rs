@@ -133,7 +133,7 @@ impl TestSuite for Mocktopus{
         assert_eq!(42u32, foo());
     }
 
-    fn generic_trait() {
+    fn generic_struct() {
         #[derive(Default)]
         struct A<T: Clone + Default> {
             _t: T
@@ -145,6 +145,10 @@ impl TestSuite for Mocktopus{
 
         A::<u32>::foo.mock_safe(|t: u32| MockResult::Return(t));
         assert_eq!(42, A::<u32>::foo(42u32))
+    }
+
+    fn generic_trait() {
+        // Mocktopus can't mock traits
     }
 
     fn inherited_trait() {

@@ -117,6 +117,12 @@ impl TestSuite for MockDouble{
     }
 
     fn generic_return() {unimplemented!()}
+
+    fn generic_struct() {
+        // double can't mock structs
+        unimplemented!()
+    }
+
     fn generic_trait() {
         // mock_trait! doesn't support generic structs
         //pub trait A<T> {

@@ -240,6 +240,12 @@ impl TestSuite for Simulacrum {
         assert_eq!(1_000_000, mock.bar::<u32>());
     }
 
+    fn generic_struct() {
+        let mut mock = Bean::new();
+        mock.expect_eat().called_once();
+        mock.eat();
+    }
+
     fn generic_trait() {
         // Generic Traits can be mocked using Simulacrum's mid-level macros.
         // But the Mock struct will be concrete, not generic.
@@ -411,6 +417,31 @@ impl TestSuite for Simulacrum {
     }
 
     fn mock_struct() {
+        struct GenericBean<T>(T);
+        impl<T: Default> GenericBean<T> {
+            pub fn eat(&self) -> T {
+                T::default()
+            }
+        }
+        struct GenericBeanMock<T> {
+            e: Expectations,
+            phantom: std::marker::PhantomData<*const T>
+        }
+        impl<T: 'static> GenericBeanMock<T> {
+            pub fn new() -> Self {
+                Self {
+                    e: Expectations::new(),
+                    phantom: std::marker::PhantomData
+                }
+            }
+            pub fn eat(&self) -> T {
+                self.e.was_called_returning::<(), T>("eat", ())
+            }
+            pub fn expect_eat(&mut self) -> Method<(), T> {
+                self.e.expect::<(), T>("eat")
+            }
+        }
+
         let mut mock = Bean::new();
         mock.expect_eat().called_once();
         mock.eat();

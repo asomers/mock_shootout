@@ -23,6 +23,7 @@ descs = {
     "foreign": "Foreign",
     "generic_method": "Generic methods",
     "generic_return": "Generic return",
+    "generic_struct": "Generic structs",
     "generic_trait": "Generic traits",
     "inherited_trait": "Inherited traits",
     "match_method": "Match function",
@@ -133,8 +134,8 @@ lib_headers = "|_. ".join([descs[l] for l in libnames])
 print "|_. |_.%s|" % lib_headers
 essential_features = ["associated_types", "checkpoint", "consume_parameters",
 "consume_self", "doctest", "external_trait", "foreign",
-"generic_method", "generic_return", "generic_trait", "inherited_trait",
-"match_method", "mock_struct", "mock_trait", "multi_trait",
+"generic_method", "generic_return", "generic_struct", "generic_trait",
+"inherited_trait", "match_method", "mock_struct", "mock_trait", "multi_trait",
 "return_call_with_args", "return_lifetime", "return_owned", "return_parameters",
 "send", "sequence", "static_method", "times_range",]
 convenience_features = [ "derive", "fallback", "match_combo", "match_constant",

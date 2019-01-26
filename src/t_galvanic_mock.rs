@@ -161,6 +161,11 @@ impl TestSuite for MockGalvanicMock{
         unimplemented!()
     }
 
+    fn generic_struct() {
+        // galvanic_mock can't mock structs
+        unimplemented!()
+    }
+
     fn generic_trait() {
         let mock = new_mock!(GenericTrait<i32>);
         given! {

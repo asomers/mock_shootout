@@ -164,6 +164,33 @@ impl TestSuite for MockIt {
     fn foreign() { unimplemented!() }
     fn generic_method() { unimplemented!() }
     fn generic_return() { unimplemented!() }
+
+    fn generic_struct() {
+        struct GenericBean<T>(T);
+        impl<T: Clone + Default> GenericBean<T> {
+            pub fn eat(&self) -> T {
+                T::default()
+            }
+        }
+        struct GenericBeanMock<T> {
+            eat: Mock<(), T>
+        }
+        impl<T: Default + Clone> GenericBeanMock<T> {
+            pub fn new() -> Self {
+                Self {
+                    eat: Mock::new(Default::default())
+                }
+            }
+            pub fn eat(&self) -> T {
+                self.eat.called(())
+            }
+        }
+
+        let mock = GenericBeanMock::<u32>::new();
+        mock.eat.given(()).will_return(42u32);
+        assert_eq!(42, mock.eat());
+    }
+
     fn generic_trait() {
         // Mock-it can do generic Traits, but any type parameters used as return
         // values must support PartialEq and Default

@@ -153,6 +153,28 @@ impl TestSuite for Pseudo{
     fn foreign() { unimplemented!() }
     fn generic_method() { unimplemented!() }
     fn generic_return() { unimplemented!() }
+    fn generic_struct() {
+        struct A<T: Clone>(T);
+        impl<T: Clone> A<T> {
+            fn foo(&self, _t: T) -> u32 {
+                unimplemented!()
+            }
+        }
+        struct MockA<T: Clone> {
+            foo: Mock<T, u32>
+        }
+        impl<T: Clone> MockA<T> {
+            fn foo(&self, t: T) -> u32 {
+                self.foo.call(t)
+            }
+        }
+
+        let mock: MockA<i16> = MockA{ foo: Mock::default() };
+        mock.foo.return_value(42u32);
+        assert_eq!(42, mock.foo(-1));
+        assert!(mock.foo.called_with(-1i16));
+    }
+
     fn generic_trait() {
         // Pseudo can do generic traits, but any type parameters must be Clone
         pub trait A<T: Clone> {

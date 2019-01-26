@@ -187,6 +187,9 @@ impl TestSuite for Mockers {
         assert_eq!(42u32, mock.foo());
     }
 
+    fn generic_struct(){
+        unimplemented!();
+    }
     fn generic_trait(){
         unimplemented!();
     }
