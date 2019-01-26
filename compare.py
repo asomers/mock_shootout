@@ -9,6 +9,7 @@ descs = {
     "galvanic_mock": "Galvanic-mock",
     "mock_derive": "Mock_Derive",
     "mock_it": "Mock-it",
+    "mockall": "Mockall",
     "mockers": "Mockers",
     "mocktopus": "Mocktopus",
     "pseudo": "Pseudo",
@@ -113,6 +114,7 @@ for line in output.splitlines():
 results['double']['rustc'] = "stable ok"
 results['galvanic_mock']['rustc'] = "nightly warn"
 # results['mock_derive']['rustc'] = "nightly < 1.28.0 error"
+results['mockall']['rustc'] = "stable ok"
 results['mockers']['rustc'] = "stable ok"
 results['mocktopus']['rustc'] = "nightly warn"
 results['pseudo']['rustc'] = "stable ok"
@@ -122,6 +124,7 @@ results['mock_it']['rustc'] = "stable ok"
 results['double']['first_release'] = "Dec-12-2017 -"
 results['galvanic_mock']['first_release'] = "Aug-13-2017 -"
 # results['mock_derive']['first_release'] = "Jul-16-2017 -"
+results['mockall']['first_release'] = "Jul-3-2019 -"
 results['mockers']['first_release'] = "Apr-6-2016 -"
 results['mocktopus']['first_release'] = "Sep-5-2017 -"
 results['pseudo']['first_release'] = "Mar-23-2017 -"

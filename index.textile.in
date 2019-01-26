@@ -71,6 +71,12 @@ a good starting point for someone looking to build something bigger.
   advantages are that it requires very little boiler plate, it can mock @struct@
   s and free functions, and it handles generic functions well.
 
+- Mockall := Mockall is the newest contender.  It aims to have the best feature
+  set of all of the above libraries, with the most ergonomic interface.  It
+  runs on stable Rust, and uses no @unsafe@ code at all.  I wrote it myself,
+  after writing this shootout and being unsatisfied with all of the other
+  libraries.
+
 h2. Features
 
 I evaluated about three dozen features evaluated for each library.  The first

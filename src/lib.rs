@@ -62,6 +62,7 @@ mod t_galvanic_mock;
 //// https://github.com/DavidDeSimone/mock_derive/issues/18
 ////mod t_mock_derive;
 mod t_mock_it;
+mod t_mockall;
 mod t_mockers;
 mod t_mocktopus;
 mod t_pseudo;
