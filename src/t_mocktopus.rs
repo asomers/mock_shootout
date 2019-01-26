@@ -266,17 +266,20 @@ impl TestSuite for Mocktopus{
     }
 
     fn return_lifetime() {
-        #[derive(Default)]
-        struct A {
-            x: u32
-        }
-        #[mockable]
-        impl<'a> A {
-            pub fn foo(&'a self) -> &'a u32 {&self.x}
-        }
-        A::foo.mock_safe(|_s| MockResult::Return(&5u32));
-        let a = A::default();
-        assert_eq!(5, *a.foo());
+        // Mocktopus mocks can only return references to 'static variables
+        //let x = 5u32;
+        //#[derive(Default)]
+        //struct A {
+            //x: u32
+        //}
+        //#[mockable]
+        //impl<'a> A {
+            //pub fn foo(&'a self) -> &'a u32 {&self.x}
+        //}
+        //A::foo.mock_safe(|_s| MockResult::Return(&x));
+        //let a = A::default();
+        //assert_eq!(5, *a.foo());
+        unimplemented!()
     }
 
     // https://github.com/CodeSandwich/Mocktopus/issues/34

@@ -300,11 +300,15 @@ impl TestSuite for MockGalvanicMock{
 
     fn return_default() { unimplemented!() }
     fn return_lifetime() {
-        let mock = new_mock!(B);
-        given! {
-            <mock as B>::foo() then_return &5u32 always;
-        }
-        assert_eq!(5, *mock.foo());
+        // The given! macro can't even capture a non-'static variable, much less
+        // return a reference to one.
+        //let mock = new_mock!(B);
+        //let x = 5u32;
+        //given! {
+            //<mock as B>::foo() then_return &x always;
+        //}
+        //assert_eq!(5, *mock.foo());
+        unimplemented!()
     }
 
     fn return_owned() {
