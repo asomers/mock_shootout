@@ -157,7 +157,9 @@ impl TestSuite for Mockers {
     }
 
     // https://github.com/kriomant/mockers/issues/39
-    fn generic_method(){
+    fn generic_method() {
+        register_types!(u32, i16);
+
         #[mocked]
         pub trait A {
             fn foo<T>(&self, t:T) -> u32;
@@ -172,6 +174,8 @@ impl TestSuite for Mockers {
     }
 
     fn generic_return() {
+        register_types!(u32);
+
         #[mocked]
         pub trait A {
             fn foo<T: 'static>(&self) -> T;
