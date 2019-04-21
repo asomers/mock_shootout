@@ -28,7 +28,7 @@ use crate::{TestSuite, UniquelyOwned};
 struct Mocktopus {}
 #[allow(unused_parens)]
 impl TestSuite for Mocktopus{
-    const NAME: &'static str = "double";
+    const NAME: &'static str = "mocktopus";
     fn associated_types() { 
         // mocktopus can't mock traits
         unimplemented!()
