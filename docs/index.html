@@ -185,7 +185,7 @@ some annoyance.</p>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
-		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
@@ -198,6 +198,16 @@ some annoyance.</p>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
+	</tr>
+	<tr>
+		<td>      Generic structs</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 	</tr>
 	<tr>
@@ -273,10 +283,10 @@ some annoyance.</p>
 	<tr>
 		<td>      Return lifetime</td>
 		<td style="background:#EB9999;">no</td>
-		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
-		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 	</tr>
@@ -434,16 +444,6 @@ some annoyance.</p>
 		<td style="background:#EB9999;">no</td>
 	</tr>
 	<tr>
-		<td>          Return call</td>
-		<td style="background:#EB9999;">no</td>
-		<td style="background:#EB9999;">no</td>
-		<td style="background:#EB9999;">no</td>
-		<td style="background:#EB9999;">no</td>
-		<td style="background:#EB9999;">no</td>
-		<td style="background:#EB9999;">no</td>
-		<td style="background:#EB9999;">no</td>
-	</tr>
-	<tr>
 		<td>    Return a constant</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
@@ -551,8 +551,8 @@ some annoyance.</p>
 		<td style="background:#fe7d37;">0.2.2</td>
 		<td style="background:#fe7d37;">0.1.3</td>
 		<td style="background:#fe7d37;">0.2.1</td>
-		<td style="background:#fe7d37;">0.13.0</td>
-		<td style="background:#fe7d37;">0.5.0</td>
+		<td style="background:#fe7d37;">0.13.1</td>
+		<td style="background:#fe7d37;">0.7.0</td>
 		<td style="background:#fe7d37;">0.2.0</td>
 		<td style="background:#fe7d37;">0.3.1</td>
 	</tr>
@@ -624,9 +624,14 @@ parameterized return values, and set expectations for those methods?  For<br />
 example, a method like <code>fn foo&lt;T&gt;(&amp;self, x: u32) -&gt; T</code>.</dd>
 </dl>
 <dl>
+	<dt>Generic structs</dt>
+	<dd>Can the library mock generic structs, like<br />
+<code>std::convert::Mutex&lt;T&gt;</code>?</dd>
+</dl>
+<dl>
 	<dt>Generic traits</dt>
 	<dd>Can the library mock generic traits, like<br />
-<code>std::sync::Mutex&lt;T&gt;</code>?</dd>
+<code>std::sync::Into&lt;T&gt;</code>?</dd>
 </dl>
 <dl>
 	<dt>Inherited traits</dt>
@@ -737,11 +742,6 @@ like <code>eq</code> , <code>gt</code> , etc?</dd>
 <dl>
 	<dt>Match wildcard</dt>
 	<dd>Can an expectation match any argument?</dd>
-</dl>
-<dl>
-	<dt>Return call</dt>
-	<dd>Can an expectation return a value computed from an arbitrary<br />
-function?</dd>
 </dl>
 <dl>
 	<dt>Return constant</dt>
