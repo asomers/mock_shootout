@@ -83,6 +83,19 @@ impl TestSuite for Mockers {
         mock.foo(2);
     }
 
+    fn reference_parameters() {
+        #[mocked]
+        pub trait A {
+            fn foo(&self, x: &u32);
+        }
+
+        let scenario = Scenario::new();
+        let mock = scenario.create_mock_for::<A>();
+        scenario.expect(mock.foo_call(matchers::by_ref(1)).and_return(()));
+
+        mock.foo(&1);
+    }
+
     fn consume_parameters() {
         #[mocked]
         pub trait A {

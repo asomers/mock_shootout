@@ -16,6 +16,7 @@ descs = {
 
     "associated_types": "Associated types",
     "checkpoint": "Checkpoints",
+    "reference_parameters": "Reference parameters",
     "consume_parameters": "Consume parameters",
     "consume_self": "Consume self",
     "doctest": "Doctest",
@@ -131,8 +132,8 @@ results['mock_it']['first_release'] = "Mar-11-2018 -"
 libnames = sorted(results.keys())
 lib_headers = "|_. ".join([descs[l] for l in libnames])
 print "|_. |_.%s|" % lib_headers
-essential_features = ["associated_types", "checkpoint", "consume_parameters",
-"consume_self", "doctest", "external_trait", "foreign",
+essential_features = ["associated_types", "checkpoint", "reference_parameters",
+"consume_parameters", "consume_self", "doctest", "external_trait", "foreign",
 "generic_method", "generic_return", "generic_struct", "generic_trait",
 "inherited_trait", "match_method", "mock_struct", "mock_trait", "multi_trait",
 "return_call_with_args", "return_lifetime", "return_owned", "return_parameters",

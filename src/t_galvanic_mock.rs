@@ -53,6 +53,11 @@ pub trait C {
     fn boo(&self) -> i32;
 }
 
+#[mockable]
+pub trait D {
+    fn foo(&self, x: &u32);
+}
+
 #[derive(Clone, Copy)]
 pub struct ConcreteC();
 impl C for ConcreteC {
@@ -108,6 +113,15 @@ impl TestSuite for MockGalvanicMock{
     }
 
     fn checkpoint() { unimplemented!() }
+
+    fn reference_parameters() {
+        let mock = new_mock!(D);
+        given! {
+            <mock as D>::foo(|&&x| x == 1) then_return () always;
+        }
+        mock.foo(&1);
+    }
+
     fn consume_parameters() {
         // Galvanic_mock match and return functions take parameters by reference
         unimplemented!()

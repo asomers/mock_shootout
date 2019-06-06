@@ -97,6 +97,36 @@ impl TestSuite for MockIt {
     }
 
     fn checkpoint() { unimplemented!() }
+
+    fn reference_parameters() {
+        // Mock-it can't implement this, because Mock-it requires that arguments
+        // types be 'static .
+        unimplemented!();
+        //pub trait A {
+            //fn foo(&self, x: &u32);
+        //}
+
+        //struct AMock {
+            //foo: Mock<(&u32), ()>
+        //}
+        //impl A for AMock {
+            //fn foo(&self, x: &u32) {
+                //self.foo.called(x)
+            //}
+        //}
+        //impl AMock {
+            //fn new() -> AMock {
+                //AMock {
+                    //foo: Mock::new(())
+                //}
+            //}
+        //}
+
+        //let mock = AMock::new();
+        //mock.foo.given(&1).will_return(());
+        //mock.foo(&1);
+    }
+
     fn consume_parameters() {
         // Mock-it can't even match parameters, much less consume them.
         unimplemented!()

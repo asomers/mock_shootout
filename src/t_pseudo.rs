@@ -106,6 +106,27 @@ impl TestSuite for Pseudo{
         assert!(!mock.foo.called_with(2));
     }
 
+    fn reference_parameters() {
+        // Pseudo can't implement this, because Pseudo requires that arguments
+        // types be 'static .
+        unimplemented!();
+        //pub trait A {
+            //fn foo(&self, x: &u32);
+        //}
+
+        //struct MockA {
+            //foo: Mock<(&u32), ()>
+        //}
+        //impl A for MockA {
+            //fn foo(&self, x: &u32) {
+                //self.foo.call(x)
+            //}
+        //}
+        //let mock = MockA{ foo: Mock::default() };
+        //mock.foo(&1);
+        //assert!(mock.foo.called_with(&1));
+    }
+
     fn consume_parameters() {
         // Pseudo requires parameters to be Clone
         unimplemented!()

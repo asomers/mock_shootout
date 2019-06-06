@@ -69,6 +69,12 @@ impl TestSuite for MockDouble{
         unimplemented!()
     }
 
+    fn reference_parameters() {
+        // The mock_trait! macro doesn't provide a way to declare an argument's
+        // lifetime
+        unimplemented!()
+    }
+
     fn consume_parameters() {
         // Double's parameters must be Clone
         unimplemented!()

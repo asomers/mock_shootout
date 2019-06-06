@@ -39,7 +39,18 @@ impl TestSuite for Mocktopus{
         unimplemented!()
     }
 
-    fn consume_parameters() {
+    fn reference_parameters() {
+        #[mockable]
+        fn foo(x: &u32) -> u32 {*x}
+
+        foo.mock_safe(|x| {
+            MockResult::Return(*x + 1)
+        });
+
+        assert_eq!(2, foo(&1));
+    }
+
+fn consume_parameters() {
         #[mockable]
         fn foo(_x: UniquelyOwned) {}
 

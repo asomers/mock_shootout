@@ -124,6 +124,27 @@ impl TestSuite for Simulacrum {
         mock.baz();
     }
 
+    fn reference_parameters() {
+        // Simulacrum can do this, but it needs unsafe code
+        pub trait A {
+            fn foo(&self, x: &u32);
+        }
+
+        create_mock! {
+            impl A for AMock (self) {
+                expect_foo("foo"):
+                fn foo(&self, x: &u32);
+            }
+         }
+
+        let mut mock = AMock::new();
+        mock.expect_foo().called_any().with(passes(
+                |x: &*const u32| unsafe { **x == 1 }
+        ));
+
+        mock.foo(&1);
+    }
+
     fn consume_parameters() {
         // Simulacrum's returning and modifying methods take their parameters by
         // reference

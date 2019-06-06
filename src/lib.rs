@@ -9,6 +9,7 @@ macro_rules! test {
     ( $self:ident) => {
         #[test] fn associated_types() { $self::associated_types() }
         #[test] fn checkpoint() { $self::checkpoint() }
+        #[test] fn reference_parameters() { $self::reference_parameters() }
         #[test] fn consume_parameters() { $self::consume_parameters() }
         #[test] fn consume_self() { $self::consume_self() }
         #[test] fn derive() { $self::derive() }
@@ -58,9 +59,9 @@ macro_rules! test {
 
 mod t_double;
 mod t_galvanic_mock;
-// Disable mock_derive until it gets fixed for newer nightly toolchains
-// https://github.com/DavidDeSimone/mock_derive/issues/18
-//mod t_mock_derive;
+//// Disable mock_derive until it gets fixed for newer nightly toolchains
+//// https://github.com/DavidDeSimone/mock_derive/issues/18
+////mod t_mock_derive;
 mod t_mock_it;
 mod t_mockers;
 mod t_mocktopus;
@@ -82,6 +83,8 @@ pub trait TestSuite {
     /// be satisified before, and all expectations defined after the barrier
     /// must be satisfied after.
     fn checkpoint();
+    /// A mock method can take its parameters by reference.
+    fn reference_parameters();
     /// A mock method can consume its parameters, passing them by value to an
     /// arbitrary function.
     fn consume_parameters();

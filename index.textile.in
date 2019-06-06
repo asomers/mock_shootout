@@ -102,6 +102,8 @@ chronologically.  All expectations created before the checkpoint must be
 satisfied before it, and all expectations created afterwards must be satisfied
 after it.
 
+- Reference parameters := Can a mocked method take its parameters by reference?
+
 - Consume parameters := Can a mock method consume its parameters, passing them
 by value to an arbitrary function?  This is important, for example, to keep the
 parameters from @drop@ ping after the mocked method call.
