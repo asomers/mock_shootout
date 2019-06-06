@@ -1,5 +1,4 @@
 #![feature(proc_macro_hygiene)] // Needed by galvanic_mock and mocktopus
-#![feature(range_contains)] // Used by our code
 #![feature(specialization)] // Used by mockers 0.13.1 for generic methods
 
 #![allow(dead_code)]
