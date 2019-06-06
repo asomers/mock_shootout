@@ -18,7 +18,7 @@ mod t {
 
 use mockers::*;
 use mockers_derive::*;
-use std::{sync::Arc, cell::RefCell};
+use std::{sync::Arc, cell::RefCell, fmt::Debug};
 use crate::{TestSuite, UniquelyOwned};
 
 pub trait ET {}
@@ -162,7 +162,7 @@ impl TestSuite for Mockers {
 
         #[mocked]
         pub trait A {
-            fn foo<T>(&self, t:T) -> u32;
+            fn foo<T: Debug>(&self, t:T) -> u32;
         }
 
         let scenario = Scenario::new();

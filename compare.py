@@ -112,7 +112,7 @@ for line in output.splitlines():
 results['double']['rustc'] = "stable ok"
 results['galvanic_mock']['rustc'] = "nightly warn"
 # results['mock_derive']['rustc'] = "nightly < 1.28.0 error"
-results['mockers']['rustc'] = "nightly warn"
+results['mockers']['rustc'] = "stable ok"
 results['mocktopus']['rustc'] = "nightly warn"
 results['pseudo']['rustc'] = "stable ok"
 results['simulacrum']['rustc'] = "stable ok"

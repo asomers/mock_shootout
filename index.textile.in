@@ -16,9 +16,8 @@ h2. The Contenders
 
 - Mockers := This is the oldest library in our shootout.  Inspired by
 GoogleMock, it has an elegant syntax, powerful sequence matching, and a rich
-variety of helper methods.  It requires nightly Rust, and is very sensitive to
-exact compiler versions.  Each release of Mockers typically only works with a
-single version of rustc.
+variety of helper methods.  It works on stable Rust, though generic methods
+require nightly.
 
 - Mock_Derive := This was the first Rust mocking library that supported
 automatically @derive@ ing the Mock object from the target trait.  That saves a
