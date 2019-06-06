@@ -13,7 +13,8 @@ features work with which library.</p>
 	<dt>Mockers</dt>
 	<dd>This is the oldest library in our shootout.  Inspired by<br />
 GoogleMock, it has an elegant syntax, powerful sequence matching, and a rich<br />
-variety of helper methods.  It works on stable Rust (though a few features require nightly).</dd>
+variety of helper methods.  It works on stable Rust, though generic methods<br />
+require nightly.</dd>
 </dl>
 <dl>
 	<dt>Mock_Derive</dt>
@@ -126,6 +127,16 @@ some annoyance.</p>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
+	</tr>
+	<tr>
+		<td> Reference parameters</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 	</tr>
 	<tr>
@@ -529,7 +540,7 @@ some annoyance.</p>
 		<td style="background:#ADEBAD;">stable</td>
 		<td style="background:#FFEF99;">nightly</td>
 		<td style="background:#ADEBAD;">stable</td>
-		<td style="background:#FFEF99;">nightly</td>
+		<td style="background:#ADEBAD;">stable</td>
 		<td style="background:#FFEF99;">nightly</td>
 		<td style="background:#ADEBAD;">stable</td>
 		<td style="background:#ADEBAD;">stable</td>
@@ -549,7 +560,7 @@ some annoyance.</p>
 		<td style="background:#fe7d37;">0.2.2</td>
 		<td style="background:#fe7d37;">0.1.3</td>
 		<td style="background:#fe7d37;">0.2.1</td>
-		<td style="background:#fe7d37;">0.13.1</td>
+		<td style="background:#fe7d37;">0.13.4</td>
 		<td style="background:#fe7d37;">0.7.0</td>
 		<td style="background:#fe7d37;">0.2.0</td>
 		<td style="background:#fe7d37;">0.3.1</td>
@@ -578,6 +589,10 @@ create checkpoints (aka Eras)?  A checkpoint divides expectations<br />
 chronologically.  All expectations created before the checkpoint must be<br />
 satisfied before it, and all expectations created afterwards must be satisfied<br />
 after it.</dd>
+</dl>
+<dl>
+	<dt>Reference parameters</dt>
+	<dd>Can a mocked method take its parameters by reference?</dd>
 </dl>
 <dl>
 	<dt>Consume parameters</dt>
