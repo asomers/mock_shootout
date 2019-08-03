@@ -571,6 +571,24 @@ impl TestSuite for Mockers {
             .1;
         print!("{} ", ver);
     }
+
+    fn where_clause() {
+        // Error in mockers: Parametrized traits are not supported yet
+        unimplemented!();
+        //struct Holder<T1: PartialEq<u32>, T2: PartialEq<f32>>((T1, T2));
+
+        //#[mocked]
+        //trait Foo<T1> where T1: PartialEq<u32> + 'static {
+            //fn foo<T2>(&self, t1: T1, t2: T2) -> Holder<T1, T2>
+                //where T2: PartialEq<f32> + 'static;
+        //}
+
+        //let scenario = Scenario::new();
+        //let mock = scenario.create_mock_for::<Foo>();
+        //scenario.expect(mock.foo_call().and_call(|t1, t2| Holder((t1, t2))));
+
+        //let _h = mock.foo(42, 3.14159);
+    }
 }
 
 test!{Mockers}

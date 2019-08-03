@@ -588,6 +588,9 @@ impl TestSuite for MockIt {
             .1;
         print!("{} ", ver);
     }
+
+    // Mock-it doesn't implement generic methods
+    fn where_clause() { unimplemented!() }
 }
 
 test!{MockIt}

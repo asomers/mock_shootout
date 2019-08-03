@@ -191,6 +191,9 @@ mocking such a trait is still useful for setting expectations on other methods.
 - Times range := Can the library expect a method to be called a variable number
 of times, bounded by a range?
 
+- Where clauses := Can the library mock generic traits and methods with where
+clauses, and will the expectation still satisfy those where clauses?
+
 - Derive := Can the library automatically generate the Mock struct by
 @derive@ ing on the trait?  This feature can save a lot of typing, but it
 invariably requires nightly Rust.  It also can't be used when mocking external

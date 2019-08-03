@@ -578,6 +578,9 @@ impl TestSuite for Pseudo{
             .1;
         print!("{} ", ver);
     }
+
+    // Pseudo can't mock generic methods
+    fn where_clause() { unimplemented!() }
 }
 
 test!{Pseudo}

@@ -780,6 +780,10 @@ impl TestSuite for Simulacrum {
             .1;
         print!("{} ", ver);
     }
+
+    // While Simulacrum can mock generic traits and methods, the mock object is
+    // concrete, not generic.  So where clauses don't really make sense.
+    fn where_clause() { unimplemented!() }
 }
 
 test!{Simulacrum}

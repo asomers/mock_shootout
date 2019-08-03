@@ -40,6 +40,7 @@ descs = {
     "sequence": "Sequence",
     "static_method": "Static methods",
     "times_range": "Times range",
+    "where_clause": "Where clauses",
 
     "derive": "Derive",
     "fallback": "Fallback",
@@ -140,7 +141,7 @@ essential_features = ["associated_types", "checkpoint", "reference_parameters",
 "generic_method", "generic_return", "generic_struct", "generic_trait",
 "inherited_trait", "match_method", "mock_struct", "mock_trait", "multi_trait",
 "return_call_with_args", "return_lifetime", "return_owned", "return_parameters",
-"send", "sequence", "static_method", "times_range",]
+"send", "sequence", "static_method", "times_range", "where_clause"]
 convenience_features = [ "derive", "fallback", "match_combo", "match_constant",
 "match_operator", "match_pattern", "match_range", "match_wildcard", "modules",
 "return_constant", "return_default", "return_panic",

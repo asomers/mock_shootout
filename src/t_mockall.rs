@@ -28,6 +28,8 @@ use std::{
     sync::{Arc, Mutex}
 };
 
+struct Holder<T1: PartialEq<u32>, T2: PartialEq<f32>>((T1, T2));
+
 struct Mockall {}
 impl TestSuite for Mockall {
     const NAME: &'static str = "mockall";
@@ -575,6 +577,20 @@ impl TestSuite for Mockall {
             .unwrap()
             .1;
         print!("{} ", ver);
+    }
+
+    fn where_clause() {
+        #[automock]
+        // Mockall requires generic methods' generic parameters to be 'static
+        trait Foo<T1> where T1: PartialEq<u32> + 'static {
+            fn foo<T2>(&self, t1: T1, t2: T2) -> Holder<T1, T2>
+                where T2: PartialEq<f32> + 'static;
+        }
+
+        let mut mock = MockFoo::<u32>::new();
+        mock.expect_foo::<f32>()
+            .returning(|t1, t2| Holder((t1, t2)));
+        let _h = mock.foo(42, 3.14159);
     }
 }
 

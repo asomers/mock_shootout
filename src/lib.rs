@@ -50,6 +50,7 @@ macro_rules! test {
         #[test] fn times_never() { $self::times_never() }
         #[test] fn times_range() { $self::times_range() }
         #[test] fn version() { $self::version() }
+        #[test] fn where_clause() { $self::where_clause() }
         #[test] fn link() {
             print!("<a href=\"https://crates.io/crates/{}\"> <img src=\"https://img.shields.io/crates/v/{}.svg\"> </a>", $self::NAME, $self::NAME);
         }
@@ -175,6 +176,9 @@ pub trait TestSuite {
     fn sequence();
     /// Current crate version
     fn version();
+    /// Structs, traits, and methods with where clauses can be mocked, and the
+    /// expectation will satisfy the where clauses.
+    fn where_clause();
 }
 
 pub mod built_info {

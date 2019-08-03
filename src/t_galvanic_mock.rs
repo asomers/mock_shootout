@@ -405,6 +405,11 @@ impl TestSuite for MockGalvanicMock{
             .1;
         print!("{} ", ver);
     }
+
+    // Galvanic mock doesn't implement generic methods.
+    fn where_clause() {
+        unimplemented!()
+    }
 }
 
 test!{MockGalvanicMock}

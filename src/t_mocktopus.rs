@@ -383,6 +383,9 @@ fn consume_parameters() {
             .1;
         print!("{} ", ver);
     }
+
+    // Mocktopus can't mock traits.
+    fn where_clause() { unimplemented!() }
 }
 
 test!{Mocktopus}

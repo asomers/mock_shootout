@@ -535,6 +535,9 @@ impl TestSuite for MockDouble{
             .1;
         print!("{} ", ver);
     }
+
+    // Double can't mock generic traits or methods
+    fn where_clause() { unimplemented!() }
 }
 
 test!{MockDouble}
