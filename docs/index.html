@@ -911,21 +911,22 @@ mocking library with the features needed for that particular project.  Some<br /
 projects may event need to use multiple libraries in combination.  But a few<br />
 things stand out:</p>
 <ul>
-	<li>All of the libraries that run on stable Rust are more verbose than those that<br />
-don&#8217;t.  Mock-it is by far the most verbose, and Mock_Derive is the least.</li>
-	<li>All of the libraries that run on stable Rust are also much easier to debug<br />
-than those that don&#8217;t.  Procedural macros can be very confusing when they fail<br />
-to compile.  Galvanic-mock is probably the worst in this respect.</li>
+	<li>Now that proc macros have been available on stable Rust for awhile, there<br />
+isn&#8217;t any good reason to require nightly anymore.  However, a few libraries<br />
+have optional features that are only available when built with nightly<br />
+compiler.</li>
+	<li>However, not all libraries make use of proc macros.  Those that don&#8217;t, like Mock-it, are more verbose to use than those that do.</li>
+	<li>On the other hand, proc macros can be difficult to debug when they fail to compile.  Galvanic-mock is probably the worst in that respect.  A non-proc-macro based library may be easier to debug.</li>
 	<li>Validating call sequences is an underappreciated aspect of mocking.  Only<br />
-Mockers had full support for validating the sequences of multiple objects&#8217;<br />
-methods.  However, Simulacrum&#8217;s sequence syntax is more elegant.</li>
+Mockers and Mockall have full support for validating the sequences of multiple<br />
+objects&#8217; methods.  However, Simulacrum&#8217;s sequence syntax is more elegant.</li>
 	<li>Mocking is complicated, and none of these libraries&#8217; authors anticipated every<br />
 possible situation.  However, Mock-it and Simulacrum proved surprisingly<br />
 versatile, since they allow the user relatively low-level access into the<br />
 library itself.</li>
-	<li>Simulacrum is the clear winner on features.  However, it also has pretty<br />
-sparse documentation.</li>
-	<li>Mock_Derive and Mockers are probably the easiest libraries to use.</li>
+	<li>Mockall is the clear winner on features, as it should be, because I wrote it<br />
+with prior knowledge of all the other libraries.</li>
+	<li>Mockall and Mockers are probably the easiest libraries to use.</li>
 </ul>
 <h2>Discussion</h2>
 <p>Tear me a new one at the <a href="https://users.rust-lang.org/t/rust-mock-shootout/17700">Rust Forums</a></p>
