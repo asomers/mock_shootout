@@ -82,6 +82,14 @@ a good starting point for someone looking to build something bigger.</dd>
   advantages are that it requires very little boiler plate, it can mock <code>struct</code><br />
   s and free functions, and it handles generic functions well.</dd>
 </dl>
+<dl>
+	<dt>Mockall</dt>
+	<dd>Mockall is the newest contender.  It aims to have the best feature<br />
+  set of all of the above libraries, with the most ergonomic interface.  It<br />
+  runs on stable Rust, and uses no <code>unsafe</code> code at all.  I wrote it myself,<br />
+  after writing this shootout and being unsatisfied with all of the other<br />
+  libraries.</dd>
+</dl>
 <h2>Features</h2>
 <p>I evaluated about three dozen features evaluated for each library.  The first<br />
 group are the essential features.  These determine the library&#8217;s overall<br />
@@ -101,6 +109,7 @@ some annoyance.</p>
 		<th>Double</th>
 		<th>Galvanic-mock</th>
 		<th>Mock-it</th>
+		<th>Mockall</th>
 		<th>Mockers</th>
 		<th>Mocktopus</th>
 		<th>Pseudo</th>
@@ -115,6 +124,7 @@ some annoyance.</p>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
@@ -124,6 +134,7 @@ some annoyance.</p>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
@@ -136,6 +147,7 @@ some annoyance.</p>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 	</tr>
@@ -146,12 +158,14 @@ some annoyance.</p>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 	</tr>
 	<tr>
 		<td>         Consume self</td>
 		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
@@ -168,11 +182,13 @@ some annoyance.</p>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
 	</tr>
 	<tr>
 		<td>      External traits</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
@@ -185,6 +201,7 @@ some annoyance.</p>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
@@ -194,6 +211,7 @@ some annoyance.</p>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
@@ -206,6 +224,7 @@ some annoyance.</p>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 	</tr>
@@ -213,6 +232,7 @@ some annoyance.</p>
 		<td>      Generic structs</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
@@ -224,6 +244,7 @@ some annoyance.</p>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
@@ -231,6 +252,7 @@ some annoyance.</p>
 	</tr>
 	<tr>
 		<td>     Inherited traits</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
@@ -248,11 +270,13 @@ some annoyance.</p>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
 	</tr>
 	<tr>
 		<td>              Structs</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
@@ -265,6 +289,7 @@ some annoyance.</p>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
@@ -272,6 +297,7 @@ some annoyance.</p>
 	<tr>
 		<td>      Multiple traits</td>
 		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
@@ -288,12 +314,25 @@ some annoyance.</p>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
 	</tr>
 	<tr>
-		<td>      Return lifetime</td>
+		<td>Return mutable reference</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+	</tr>
+	<tr>
+		<td>     Return reference</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
@@ -304,6 +343,7 @@ some annoyance.</p>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
@@ -316,6 +356,7 @@ some annoyance.</p>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 	</tr>
@@ -323,6 +364,7 @@ some annoyance.</p>
 		<td>                 Send</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
@@ -334,6 +376,7 @@ some annoyance.</p>
 		<td style="background:#ADEBAD;">single method</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">multi object</td>
 		<td style="background:#ADEBAD;">multi object</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">single method</td>
@@ -347,6 +390,7 @@ some annoyance.</p>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 	</tr>
 	<tr>
@@ -355,6 +399,18 @@ some annoyance.</p>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+	</tr>
+	<tr>
+		<td>        Where clauses</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
@@ -369,6 +425,7 @@ some annoyance.</p>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 	</tr>
@@ -378,7 +435,19 @@ some annoyance.</p>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+	</tr>
+	<tr>
+		<td>           Impl Trait</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 	</tr>
@@ -388,6 +457,7 @@ some annoyance.</p>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
@@ -396,6 +466,7 @@ some annoyance.</p>
 		<td>       Match constant</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
@@ -408,12 +479,14 @@ some annoyance.</p>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 	</tr>
 	<tr>
 		<td>        Match pattern</td>
+		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
@@ -424,6 +497,7 @@ some annoyance.</p>
 	</tr>
 	<tr>
 		<td>          Match range</td>
+		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
@@ -438,6 +512,7 @@ some annoyance.</p>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
@@ -447,6 +522,7 @@ some annoyance.</p>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
@@ -454,6 +530,7 @@ some annoyance.</p>
 	</tr>
 	<tr>
 		<td>    Return a constant</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
@@ -468,6 +545,7 @@ some annoyance.</p>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
@@ -476,6 +554,7 @@ some annoyance.</p>
 		<td>         Return panic</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
@@ -488,6 +567,7 @@ some annoyance.</p>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
@@ -497,6 +577,7 @@ some annoyance.</p>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
@@ -508,6 +589,7 @@ some annoyance.</p>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
@@ -517,6 +599,7 @@ some annoyance.</p>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#ADEBAD;">yes</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#ADEBAD;">yes</td>
@@ -528,10 +611,11 @@ some annoyance.</p>
 	<tr>
 		<td>    Maximum arguments</td>
 		<td style="background:#ADEBAD;">12</td>
-		<td style="background:#ADEBAD;">&gt;= 16</td>
+		<td style="background:#ADEBAD;">≥ 16</td>
 		<td style="background:#ADEBAD;">12</td>
+		<td style="background:#ADEBAD;">≥ 16</td>
 		<td style="background:#ADEBAD;">4</td>
-		<td style="background:#ADEBAD;">&gt;= 16</td>
+		<td style="background:#ADEBAD;">≥ 16</td>
 		<td style="background:#ADEBAD;">12</td>
 		<td style="background:#ADEBAD;">9</td>
 	</tr>
@@ -539,6 +623,7 @@ some annoyance.</p>
 		<td>                Rustc</td>
 		<td style="background:#ADEBAD;">stable</td>
 		<td style="background:#FFEF99;">nightly</td>
+		<td style="background:#ADEBAD;">stable</td>
 		<td style="background:#ADEBAD;">stable</td>
 		<td style="background:#ADEBAD;">stable</td>
 		<td style="background:#FFEF99;">nightly</td>
@@ -550,6 +635,7 @@ some annoyance.</p>
 		<td style="background:white;">Dec-12-2017</td>
 		<td style="background:white;">Aug-13-2017</td>
 		<td style="background:white;">Mar-11-2018</td>
+		<td style="background:white;">Jul-3-2019</td>
 		<td style="background:white;">Apr-6-2016</td>
 		<td style="background:white;">Sep-5-2017</td>
 		<td style="background:white;">Mar-23-2017</td>
@@ -559,6 +645,7 @@ some annoyance.</p>
 		<td>       Tested version</td>
 		<td style="background:#fe7d37;">0.2.2</td>
 		<td style="background:#fe7d37;">0.1.3</td>
+		<td style="background:#fe7d37;">0.2.1</td>
 		<td style="background:#fe7d37;">0.2.1</td>
 		<td style="background:#fe7d37;">0.13.4</td>
 		<td style="background:#fe7d37;">0.7.0</td>
@@ -570,8 +657,9 @@ some annoyance.</p>
 		<td style="background:white;"><a href="https://crates.io/crates/double"> <img src="https://img.shields.io/crates/v/double.svg"></td>
 		<td style="background:white;"><a href="https://crates.io/crates/galvanic-mock"> <img src="https://img.shields.io/crates/v/galvanic-mock.svg"></td>
 		<td style="background:white;"><a href="https://crates.io/crates/mock-it"> <img src="https://img.shields.io/crates/v/mock-it.svg"></td>
+		<td style="background:white;"><a href="https://crates.io/crates/mockall"> <img src="https://img.shields.io/crates/v/mockall.svg"></td>
 		<td style="background:white;"><a href="https://crates.io/crates/mockers"> <img src="https://img.shields.io/crates/v/mockers.svg"></td>
-		<td style="background:white;"><a href="https://crates.io/crates/double"> <img src="https://img.shields.io/crates/v/double.svg"></td>
+		<td style="background:white;"><a href="https://crates.io/crates/mocktopus"> <img src="https://img.shields.io/crates/v/mocktopus.svg"></td>
 		<td style="background:white;"><a href="https://crates.io/crates/pseudo"> <img src="https://img.shields.io/crates/v/pseudo.svg"></td>
 		<td style="background:white;"><a href="https://crates.io/crates/simulacrum"> <img src="https://img.shields.io/crates/v/simulacrum.svg"></td>
 	</tr>
@@ -647,6 +735,11 @@ example, a method like <code>fn foo&lt;T&gt;(&amp;self, x: u32) -&gt; T</code>.<
 <code>std::sync::Into&lt;T&gt;</code>?</dd>
 </dl>
 <dl>
+	<dt>Impl Trait</dt>
+	<dd>Can the library derive mocks for methods that use<br />
+<code>-&gt; impl Trait</code> syntax?</dd>
+</dl>
+<dl>
 	<dt>Inherited traits</dt>
 	<dd>Can the library mock inherited traits like <code>pub trait B:
 A</code>?</dd>
@@ -681,9 +774,14 @@ so it can be passed to a function like <code>fn foo&lt;T: A + B&gt;(t: T)</code>
 arguments by an arbitrary function?</dd>
 </dl>
 <dl>
-	<dt>Return lifetime</dt>
-	<dd>Can a mocked method return a reference with a<br />
- non-<code>'static</code> lifetime?</dd>
+	<dt>Return reference</dt>
+	<dd>Can a mocked method return a reference with the lifetime<br />
+  of the mock object?</dd>
+</dl>
+<dl>
+	<dt>Return mutable reference</dt>
+	<dd>Can a mocked method return a mutable reference<br />
+  with the lifetime of the mock object?</dd>
 </dl>
 <dl>
 	<dt>Return owned</dt>
@@ -722,6 +820,11 @@ mocking such a trait is still useful for setting expectations on other methods.<
 	<dt>Times range</dt>
 	<dd>Can the library expect a method to be called a variable number<br />
 of times, bounded by a range?</dd>
+</dl>
+<dl>
+	<dt>Where clauses</dt>
+	<dd>Can the library mock generic traits and methods with where<br />
+clauses, and will the expectation still satisfy those where clauses?</dd>
 </dl>
 <dl>
 	<dt>Derive</dt>
