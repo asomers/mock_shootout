@@ -19,6 +19,7 @@ macro_rules! test {
         #[test] fn generic_return() { $self::generic_return() }
         #[test] fn generic_struct() { $self::generic_struct() }
         #[test] fn generic_trait() { $self::generic_trait() }
+        #[test] fn impl_trait() { $self::impl_trait() }
         #[test] fn inherited_trait() { $self::inherited_trait() }
         #[test] fn many_args() { $self::many_args() }
         #[test] fn match_combo() { $self::match_combo() }
@@ -106,6 +107,8 @@ pub trait TestSuite {
     fn generic_struct();
     /// A generic `Trait` can be mocked.
     fn generic_trait();
+    /// A mock can be derived for a method that returns "-> impl Trait".
+    fn impl_trait();
     /// An inherited `Trait` can be mocked.
     fn inherited_trait();
     /// A method call can match an argument by an arbitrary method

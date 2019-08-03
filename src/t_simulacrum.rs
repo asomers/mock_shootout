@@ -291,6 +291,9 @@ impl TestSuite for Simulacrum {
         assert_eq!(5, mock.foo(-1));
     }
 
+    // Can't derive mocks for structs
+    fn impl_trait() {unimplemented!() }
+
     fn inherited_trait() {
         // Simulacrum can mock inherited traits using mid-level macros
         pub trait A {

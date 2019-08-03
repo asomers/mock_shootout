@@ -216,6 +216,9 @@ impl TestSuite for Pseudo{
         assert!(mock.foo.called_with(-1i16));
     }
 
+    // Can't derive mocks for structs
+    fn impl_trait() {unimplemented!() }
+
     fn inherited_trait() {
         pub trait A {
             fn foo(&self) -> u32;

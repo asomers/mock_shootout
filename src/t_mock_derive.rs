@@ -112,6 +112,9 @@ impl TestSuite for MockDerive{
         let _mock = MockA::<u32>::new();
     }
 
+    // Can't mock structs at all
+    fn impl_trait() {unimplemented!() }
+
     fn inherited_trait(){
         #[mock]
         trait A {

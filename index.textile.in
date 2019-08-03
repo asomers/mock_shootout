@@ -142,6 +142,9 @@ example, a method like @fn foo<T>(&self, x: u32) -> T@.
 - Generic traits := Can the library mock generic traits, like
 @std::sync::Into<T>@?
 
+- Impl Trait := Can the library derive mocks for methods that use
+@-> impl Trait@ syntax?
+
 - Inherited traits := Can the library mock inherited traits like @pub trait B:
 A@?
 

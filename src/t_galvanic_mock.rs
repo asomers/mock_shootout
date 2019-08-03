@@ -186,6 +186,9 @@ impl TestSuite for MockGalvanicMock{
         assert_eq!(5, mock.foo());
     }
 
+    // Can't mock structs at all
+    fn impl_trait() {unimplemented!() }
+
     fn inherited_trait() {
         let mock = new_mock!(Derived, A);
         given! {

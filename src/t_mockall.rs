@@ -25,6 +25,7 @@ use mockall::{
     predicate::*
 };
 use std::{
+    fmt::Debug,
     sync::{Arc, Mutex}
 };
 
@@ -186,6 +187,21 @@ impl TestSuite for Mockall {
         let mut mock: MockA<i16> = MockA::new();
         mock.expect_foo().with(eq(-1));
         mock.foo(-1);
+    }
+
+    fn impl_trait() {
+        struct Foo {}
+
+        #[automock]
+        impl Foo {
+            fn foo(&self) -> impl Debug {unimplemented!();}
+        }
+
+        let mut mock = MockFoo::new();
+        mock.expect_foo()
+            .returning(|| Box::new(String::from("Hello, World!")));
+        let r = format!("{:?}", mock.foo());
+        assert_eq!("\"Hello, World!\"", r);
     }
 
     fn inherited_trait() {

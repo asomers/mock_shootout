@@ -152,6 +152,9 @@ impl TestSuite for MockDouble{
         unimplemented!()
     }
 
+    // Can't mock structs at all
+    fn impl_trait() {unimplemented!() }
+
     fn inherited_trait() {
         pub trait A {
             fn foo(&self);

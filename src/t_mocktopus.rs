@@ -160,6 +160,23 @@ fn consume_parameters() {
         // Mocktopus can't mock traits
     }
 
+    fn impl_trait() {
+        unimplemented!()
+        // Build fails: "expected opaque type, found struct `std::boxed::Box`"
+        //#[derive(Default)]
+        //struct Foo();
+        //#[mockable]
+        //impl Foo {
+            //fn foo(&self) -> impl Debug {unimplemented!();}
+        //}
+        //let mock = Foo::default();
+        //Foo::foo.mock_safe(|_|
+            //MockResult::Return(Box::new(String::from("Hello, World!")))
+        //);
+        //let r = format!("{:?}", mock.foo());
+        //assert_eq!("\"Hello, World!\"", r);
+    }
+
     fn inherited_trait() {
         // mocktopus can't mock traits
         unimplemented!()

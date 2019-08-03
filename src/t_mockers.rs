@@ -207,6 +207,9 @@ impl TestSuite for Mockers {
         unimplemented!();
     }
 
+    // Can't mock structs
+    fn impl_trait() {unimplemented!() }
+
     fn inherited_trait(){
         #[mocked(module="::t_mockers::t")]
         pub trait A {

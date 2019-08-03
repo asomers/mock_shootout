@@ -248,6 +248,9 @@ impl TestSuite for MockIt {
         assert_eq!(42, mock.foo(-1));
     }
 
+    // Can't derive mocks for structs
+    fn impl_trait() { unimplemented!() }
+
     fn inherited_trait() {
         pub trait A {
             fn foo(&self) -> u32;

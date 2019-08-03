@@ -27,6 +27,7 @@ descs = {
     "generic_return": "Generic return",
     "generic_struct": "Generic structs",
     "generic_trait": "Generic traits",
+    "impl_trait": "Impl Trait",
     "inherited_trait": "Inherited traits",
     "match_method": "Match function",
     "mock_struct": "Structs",
@@ -144,10 +145,10 @@ essential_features = ["associated_types", "checkpoint", "reference_parameters",
 "return_call_with_args", "return_reference", "return_mutable_reference",
 "return_owned", "return_parameters", "send", "sequence", "static_method",
 "times_range", "where_clause"]
-convenience_features = [ "derive", "fallback", "match_combo", "match_constant",
-"match_operator", "match_pattern", "match_range", "match_wildcard", "modules",
-"return_constant", "return_default", "return_panic",
-"times_once", "times_any", "times_n", "times_never"]
+convenience_features = [ "derive", "fallback", "impl_trait", "match_combo",
+"match_constant", "match_operator", "match_pattern", "match_range",
+"match_wildcard", "modules", "return_constant", "return_default",
+"return_panic", "times_once", "times_any", "times_n", "times_never"]
 other_features = [ "many_args", "rustc", "first_release", "version", "link"]
 print "|\\8=. Essential Features|"
 for feature in essential_features:
