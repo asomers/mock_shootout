@@ -390,6 +390,8 @@ impl TestSuite for MockDouble{
         unimplemented!()
     }
 
+    fn return_mutable_reference() { unimplemented!() }
+
     fn return_owned() { 
         // Double requires that return types be Clone
         unimplemented!()

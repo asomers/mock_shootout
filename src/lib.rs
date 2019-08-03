@@ -36,6 +36,9 @@ macro_rules! test {
         #[test] fn return_constant() { $self::return_constant() }
         #[test] fn return_default() { $self::return_default() }
         #[test] fn return_reference() { $self::return_reference() }
+        #[test] fn return_mutable_reference() {
+            $self::return_mutable_reference()
+        }
         #[test] fn return_owned() { $self::return_owned() }
         #[should_panic(expected="Panic")] #[test] fn return_panic() {
             $self::return_panic()
@@ -117,8 +120,11 @@ pub trait TestSuite {
     /// arguments.
     fn return_call_with_args();
     /// A mock method can return a reference with the lifetime of the mock
-    /// object?
+    /// object.
     fn return_reference();
+    /// A mock method can return a mutable reference with the lifetime of the
+    /// mock object.
+    fn return_mutable_reference();
     /// A mock method can return an owned object that is neither `Copy` nor
     /// `Clone`
     fn return_owned();

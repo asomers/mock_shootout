@@ -504,6 +504,7 @@ impl TestSuite for MockIt {
         // types have a 'static default value, and to be Clone
         unimplemented!()
     }
+    fn return_mutable_reference() { unimplemented!() }
 
     fn return_owned() {
         // Mock-it requires return types to be Clone

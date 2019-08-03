@@ -454,6 +454,7 @@ impl TestSuite for Pseudo{
         unimplemented!()
     }
 
+    fn return_mutable_reference() { unimplemented!() }
     fn return_owned() {
         // Mock-it requires return types to be Clone
         unimplemented!()

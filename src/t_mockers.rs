@@ -413,6 +413,7 @@ impl TestSuite for Mockers {
         unimplemented!()
     }
 
+    fn return_mutable_reference() { unimplemented!() }
     fn return_owned(){
         #[mocked]
         pub trait A {

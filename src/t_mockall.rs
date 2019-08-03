@@ -297,6 +297,26 @@ impl TestSuite for Mockall {
         assert_eq!(5, *mock.foo());
     }
 
+    fn return_mutable_reference() {
+        #[automock]
+        pub trait A {
+            fn foo(&mut self) -> &mut u32;
+        }
+
+        let mut mock = MockA::new();
+        mock.expect_foo()
+            .return_var(5);
+        {
+            let x = mock.foo();
+            assert_eq!(5, *x);
+            *x = 6;
+        }
+        {
+            let y = mock.foo();
+            assert_eq!(6, *y);
+        }
+    }
+
     fn return_owned() {
         #[automock]
         pub trait A {

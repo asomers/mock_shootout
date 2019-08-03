@@ -287,6 +287,7 @@ fn consume_parameters() {
         unimplemented!()
     }
 
+    fn return_mutable_reference() { unimplemented!() }
     // https://github.com/CodeSandwich/Mocktopus/issues/34
     fn return_owned() { 
         // mock_safe and mock_raw both take FnMut arguments

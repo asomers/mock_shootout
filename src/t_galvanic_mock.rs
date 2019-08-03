@@ -319,6 +319,7 @@ impl TestSuite for MockGalvanicMock{
         unimplemented!()
     }
 
+    fn return_mutable_reference() { unimplemented!() }
     fn return_owned() {
         // Galvanic mock supports two kinds of returns:
         // then_return returns constants (which can't be moved)

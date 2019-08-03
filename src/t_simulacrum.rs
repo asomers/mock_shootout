@@ -581,6 +581,7 @@ impl TestSuite for Simulacrum {
         unimplemented!()
     }
 
+    fn return_mutable_reference() { unimplemented!() }
     fn return_owned() {
         // Simulacrum returns the output of a `FnMut`, not an `FnOnce`, so it
         // can't return by move.

@@ -165,6 +165,9 @@ arguments by an arbitrary function?
 - Return reference := Can a mocked method return a reference with the lifetime
   of the mock object?
 
+- Return mutable reference := Can a mocked method return a mutable reference
+  with the lifetime of the mock object?
+
 - Return owned := Can a mocked method return ownership of a value that does not
 implement @Clone@?
 
