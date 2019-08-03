@@ -546,7 +546,7 @@ impl TestSuite for Simulacrum {
         unimplemented!()
     }
 
-    fn return_lifetime() {
+    fn return_reference() {
         // I can't get this code to work.
         //pub trait A<'a> {
             //fn foo(&'a self) -> &'a u32;

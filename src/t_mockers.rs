@@ -402,7 +402,7 @@ impl TestSuite for Mockers {
         assert_eq!(mock.foo(), 0);
     }
 
-    fn return_lifetime(){
+    fn return_reference(){
         //#[mocked]
         //pub trait A {
             //fn foo(&'a self) -> &'a A;

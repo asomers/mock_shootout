@@ -35,7 +35,7 @@ macro_rules! test {
         #[test] fn return_call_with_args() { $self::return_call_with_args() }
         #[test] fn return_constant() { $self::return_constant() }
         #[test] fn return_default() { $self::return_default() }
-        #[test] fn return_lifetime() { $self::return_lifetime() }
+        #[test] fn return_reference() { $self::return_reference() }
         #[test] fn return_owned() { $self::return_owned() }
         #[should_panic(expected="Panic")] #[test] fn return_panic() {
             $self::return_panic()
@@ -116,8 +116,9 @@ pub trait TestSuite {
     /// A mock method can return the result of a function that depends on its
     /// arguments.
     fn return_call_with_args();
-    /// A mock method can return a reference with a non-`'static` lifetime
-    fn return_lifetime();
+    /// A mock method can return a reference with the lifetime of the mock
+    /// object?
+    fn return_reference();
     /// A mock method can return an owned object that is neither `Copy` nor
     /// `Clone`
     fn return_owned();

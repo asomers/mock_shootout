@@ -373,7 +373,7 @@ impl TestSuite for MockDouble{
         assert_eq!(0, mock.foo());
     }
 
-    fn return_lifetime() {
+    fn return_reference() {
         // mock_method! can't handle "&'a self" parameters
         //struct S();
         //pub trait A<'a> {

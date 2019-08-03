@@ -218,7 +218,7 @@ impl TestSuite for MockDerive{
     }
 
     fn return_default(){unimplemented!()}
-    fn return_lifetime(){
+    fn return_reference(){
         #[mock]
         pub trait A<'a, T> where T: 'a {
             fn foo(&self, t: T) -> &'a T;

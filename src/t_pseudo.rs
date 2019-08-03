@@ -448,7 +448,7 @@ impl TestSuite for Pseudo{
         assert_eq!(0, mock.foo());
     }
 
-    fn return_lifetime() {
+    fn return_reference() {
         // Pseudo can't implement this, because Pseudo requires that return
         // types be Clone
         unimplemented!()

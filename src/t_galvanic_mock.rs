@@ -307,7 +307,7 @@ impl TestSuite for MockGalvanicMock{
     }
 
     fn return_default() { unimplemented!() }
-    fn return_lifetime() {
+    fn return_reference() {
         // The given! macro can't even capture a non-'static variable, much less
         // return a reference to one.
         //let mock = new_mock!(B);

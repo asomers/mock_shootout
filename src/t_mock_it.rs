@@ -499,7 +499,7 @@ impl TestSuite for MockIt {
         assert_eq!(0, mock.foo());
     }
 
-    fn return_lifetime() {
+    fn return_reference() {
         // Mock-it can't implement this, because Mock-it requires that return
         // types have a 'static default value, and to be Clone
         unimplemented!()

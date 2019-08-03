@@ -284,7 +284,7 @@ impl TestSuite for Mockall {
         assert_eq!(mock.foo(2), 3);
     }
 
-    fn return_lifetime() {
+    fn return_reference() {
         #[automock]
         pub trait A {
             fn foo(&self) -> &u32;

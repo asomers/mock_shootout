@@ -270,7 +270,7 @@ fn consume_parameters() {
         unimplemented!()
     }
 
-    fn return_lifetime() {
+    fn return_reference() {
         // Mocktopus mocks can only return references to 'static variables
         //let x = 5u32;
         //#[derive(Default)]

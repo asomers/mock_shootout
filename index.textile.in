@@ -162,8 +162,8 @@ so it can be passed to a function like @fn foo<T: A + B>(t: T)@?
 - Return call with args := Can a mocked method return a value computed from the
 arguments by an arbitrary function?
 
-- Return lifetime := Can a mocked method return a reference with a
- non-@'static@ lifetime?
+- Return reference := Can a mocked method return a reference with the lifetime
+  of the mock object?
 
 - Return owned := Can a mocked method return ownership of a value that does not
 implement @Clone@?
