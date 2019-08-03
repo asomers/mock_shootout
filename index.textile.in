@@ -252,21 +252,22 @@ mocking library with the features needed for that particular project.  Some
 projects may event need to use multiple libraries in combination.  But a few
 things stand out:
 
-* All of the libraries that run on stable Rust are more verbose than those that
-don't.  Mock-it is by far the most verbose, and Mock_Derive is the least.
-* All of the libraries that run on stable Rust are also much easier to debug
-than those that don't.  Procedural macros can be very confusing when they fail
-to compile.  Galvanic-mock is probably the worst in this respect.
+* Now that proc macros have been available on stable Rust for awhile, there
+isn't any good reason to require nightly anymore.  However, a few libraries
+have optional features that are only available when built with nightly
+compiler.
+* However, not all libraries make use of proc macros.  Those that don't, like Mock-it, are more verbose to use than those that do.
+* On the other hand, proc macros can be difficult to debug when they fail to compile.  Galvanic-mock is probably the worst in that respect.  A non-proc-macro based library may be easier to debug.
 * Validating call sequences is an underappreciated aspect of mocking.  Only
-Mockers had full support for validating the sequences of multiple objects'
-methods.  However, Simulacrum's sequence syntax is more elegant.
+Mockers and Mockall have full support for validating the sequences of multiple
+objects' methods.  However, Simulacrum's sequence syntax is more elegant.
 * Mocking is complicated, and none of these libraries' authors anticipated every
 possible situation.  However, Mock-it and Simulacrum proved surprisingly
 versatile, since they allow the user relatively low-level access into the
 library itself.
-* Simulacrum is the clear winner on features.  However, it also has pretty
-sparse documentation.
-* Mock_Derive and Mockers are probably the easiest libraries to use.
+* Mockall is the clear winner on features, as it should be, because I wrote it
+with prior knowledge of all the other libraries.
+* Mockall and Mockers are probably the easiest libraries to use.
 
 h2. Discussion
 
