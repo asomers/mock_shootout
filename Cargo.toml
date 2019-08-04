@@ -15,7 +15,7 @@ mock_derive = { version = "=0.7.0" }
 mockall = { version = "=0.2.1", features = ["nightly"] }
 mockers = { version = "=0.13.4" }
 mockers_derive = { version = "=0.13.4" }
-mock-it = { version = "=0.2.1" }
+mock-it = { version = "=0.3.0" }
 mocktopus = { version = "=0.7.0" }
 pseudo = { version = "=0.2.0" }
 simulacrum = { version = "=0.3.1" }
