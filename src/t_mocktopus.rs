@@ -50,7 +50,7 @@ impl TestSuite for Mocktopus{
         assert_eq!(2, foo(&1));
     }
 
-fn consume_parameters() {
+    fn consume_parameters() {
         #[mockable]
         fn foo(_x: UniquelyOwned) {}
 
@@ -92,6 +92,8 @@ fn consume_parameters() {
         unimplemented!();
     }
 
+    // Mocktopus's clear, clear_mock, and MockContext functions are related to
+    // fallback.
     fn fallback() {
         #[derive(Default)]
         struct A {};
