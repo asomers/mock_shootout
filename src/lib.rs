@@ -141,6 +141,9 @@ pub trait TestSuite {
     fn static_method();
     /// An expectation can assert that it's called a variable number of times
     fn times_range();
+    /// Structs, traits, and methods with where clauses can be mocked, and the
+    /// expectation will satisfy the where clauses.
+    fn where_clause();
 
     // Convenience features.  These are nice-to-have, but their absence doesn't
     // fundamentally limit the library's capabilities.  The user can either
@@ -186,9 +189,6 @@ pub trait TestSuite {
     fn sequence();
     /// Current crate version
     fn version();
-    /// Structs, traits, and methods with where clauses can be mocked, and the
-    /// expectation will satisfy the where clauses.
-    fn where_clause();
 }
 
 pub mod built_info {
