@@ -346,7 +346,6 @@ impl TestSuite for Mockall {
         assert_eq!(mock.foo(), UniquelyOwned(42));
     }
 
-    // Doesn't work yet :(
     fn return_parameters() {
         mod m {
             use super::*;
