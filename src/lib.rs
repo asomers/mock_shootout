@@ -69,6 +69,7 @@ mod t_galvanic_mock;
 mod t_mock_it;
 mod t_mockall;
 mod t_mockers;
+mod t_mockiato;
 mod t_mocktopus;
 mod t_pseudo;
 mod t_simulacrum;
