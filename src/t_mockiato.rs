@@ -13,11 +13,16 @@
 /// ```
 fn doctest() {}
 
+pub trait ET {
+    fn foo(&self);
+}
+
 #[cfg(test)]
 mod t {
 
 use crate::{TestSuite, UniquelyOwned};
 use mockiato::*;
+use super::ET;
 
 struct Mockiato {}
 impl TestSuite for Mockiato {
@@ -62,7 +67,14 @@ impl TestSuite for Mockiato {
     }
 
     fn external_trait() {
-        unimplemented!()
+        #[mockable(remote = "super::ET")]
+        trait ET{
+            fn foo(&self);
+        }
+
+        let mut mock = ETMock::new();
+        mock.expect_foo().returns(());
+        mock.foo();
     }
 
     fn foreign() {
@@ -142,13 +154,36 @@ impl TestSuite for Mockiato {
     }
 
     fn return_reference() {
-        // Mockiato can only return 'static references
-        unimplemented!()
+        #[mockable]
+        pub trait A {
+            fn foo(&self) -> &u32;
+        }
+
+        let x = 5u32;
+        let mut mock = AMock::new();
+        mock.expect_foo()
+            .returns(&x);
+        assert_eq!(5, *mock.foo());
     }
 
     fn return_mutable_reference() {
-        // Mockiato can only return 'static references
+        // Mockiato can sort-of do this, but it's a bit crippled by the fact
+        // that mutable references aren't Clone, so you need to use
+        // returns_once.  That's a pretty big limitation, because the code under
+        // test can't call the method more than once.
         unimplemented!()
+        //#[mockable]
+        //pub trait A {
+            //fn foo(&mut self) -> &mut u32;
+        //}
+
+        //let mut x = 5u32;
+        //let mut mock = AMock::new();
+        //mock.expect_foo()
+            //.returns_once(&mut x);
+        //let x = mock.foo();
+        //assert_eq!(5, *x);
+        //*x = 6;
     }
 
     fn return_owned() {
@@ -266,7 +301,14 @@ impl TestSuite for Mockiato {
     }
 
     fn return_panic() {
-        unimplemented!()
+        #[mockable]
+        pub trait A {
+            fn foo(&self);
+        }
+
+        let mut mock = AMock::new();
+        mock.expect_foo().panics_with_message("Panic");
+        mock.foo();
     }
 
     // This is the default behavior
