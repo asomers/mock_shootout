@@ -39,6 +39,19 @@ impl TestSuite for Mocktopus{
         unimplemented!()
     }
 
+    // Mocktopus can't do this because mock_safe requires naming the argument.
+    // Closures usually can't be named.
+    fn closures() {
+        unimplemented!()
+        //#[mockable]
+        //fn foo<F: Fn(u32) -> u32 + 'static>(f: F) -> u32 {
+            //unimplemented!()
+        //}
+
+        //foo.mock_safe(|f| MockResult::Return(f(13)));
+        //assert_eq!(3, foo(|x| x % 5));
+    }
+
     fn reference_parameters() {
         #[mockable]
         fn foo(x: &u32) -> u32 {*x}

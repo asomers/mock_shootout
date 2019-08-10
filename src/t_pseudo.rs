@@ -106,6 +106,9 @@ impl TestSuite for Pseudo{
         assert!(!mock.foo.called_with(2));
     }
 
+    // Pseudo can't do generic methods
+    fn closures() { unimplemented!() }
+
     fn reference_parameters() {
         // Pseudo can't implement this, because Pseudo requires that arguments
         // types be 'static .

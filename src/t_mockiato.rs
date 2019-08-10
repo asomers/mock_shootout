@@ -37,6 +37,8 @@ impl TestSuite for Mockiato {
         unimplemented!()
     }
 
+    // Mockiato can't even do match_method or return_call_with_args
+    fn closures() { unimplemented!() }
     fn reference_parameters() {
         #[mockable]
         pub trait A {

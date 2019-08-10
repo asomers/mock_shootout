@@ -63,6 +63,20 @@ impl TestSuite for Mockall {
         mock.foo(2);
     }
 
+    fn closures() {
+        #[automock]
+        pub trait Foo {
+            fn foo<F: Fn(u32) -> u32 + 'static>(&self, f: F) -> u32;
+        }
+
+        let mut mock = MockFoo::new();
+        mock.expect_foo()
+            .withf(|f| f(10) == 0)
+            .returning(|f| f(13));
+
+        assert_eq!(3, mock.foo(|x| x % 5));
+    }
+
     fn reference_parameters() {
         #[automock]
         pub trait A {

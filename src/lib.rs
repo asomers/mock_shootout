@@ -8,7 +8,7 @@ macro_rules! test {
     ( $self:ident) => {
         #[test] fn associated_types() { $self::associated_types() }
         #[test] fn checkpoint() { $self::checkpoint() }
-        #[test] fn reference_parameters() { $self::reference_parameters() }
+        #[test] fn closures() { $self::closures() }
         #[test] fn consume_parameters() { $self::consume_parameters() }
         #[test] fn consume_self() { $self::consume_self() }
         #[test] fn derive() { $self::derive() }
@@ -29,10 +29,11 @@ macro_rules! test {
         #[test] fn match_pattern() { $self::match_pattern() }
         #[test] fn match_range() { $self::match_range() }
         #[test] fn match_wildcard() { $self::match_wildcard() }
-        #[test] fn modules() { $self::modules() }
         #[test] fn mock_struct() { $self::mock_struct() }
         #[test] fn mock_trait() { $self::mock_trait() }
+        #[test] fn modules() { $self::modules() }
         #[test] fn multi_trait() { $self::multi_trait() }
+        #[test] fn reference_parameters() { $self::reference_parameters() }
         #[test] fn return_call_with_args() { $self::return_call_with_args() }
         #[test] fn return_constant() { $self::return_constant() }
         #[test] fn return_default() { $self::return_default() }
@@ -48,10 +49,10 @@ macro_rules! test {
         #[test] fn send() { $self::send() }
         #[test] fn sequence() { $self::sequence() }
         #[test] fn static_method() { $self::static_method() }
-        #[test] fn times_once() { $self::times_once() }
         #[test] fn times_any() { $self::times_any() }
         #[test] fn times_n() { $self::times_n() }
         #[test] fn times_never() { $self::times_never() }
+        #[test] fn times_once() { $self::times_once() }
         #[test] fn times_range() { $self::times_range() }
         #[test] fn version() { $self::version() }
         #[test] fn where_clause() { $self::where_clause() }
@@ -89,6 +90,9 @@ pub trait TestSuite {
     /// be satisified before, and all expectations defined after the barrier
     /// must be satisfied after.
     fn checkpoint();
+    /// A method with a closure argument can be mocked, and the mock's matcher
+    /// and return functions can call the closure.
+    fn closures();
     /// A mock method can take its parameters by reference.
     fn reference_parameters();
     /// A mock method can consume its parameters, passing them by value to an

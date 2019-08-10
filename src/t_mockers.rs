@@ -83,6 +83,27 @@ impl TestSuite for Mockers {
         mock.foo(2);
     }
 
+    // Fails to compile with
+    // "cannot find type `MockersTypeRegistry` in this scope"
+    // and because F doesn't implement Debug.  That's a big problem, because
+    // most closures don't.
+    fn closures() {
+        unimplemented!()
+        //#[mocked]
+        //pub trait Foo {
+            //fn foo<F: Fn(u32) -> u32 + 'static>(&self, f: F) -> u32;
+        //}
+
+        //let scenario = Scenario::new();
+        //let mock = scenario.create_mock_for::<dyn Foo>();
+        //scenario.expect(
+            //mock.foo_call(matchers::check(|f| f(10) == 0))
+            //.and_call(|f| f(13))
+        //);
+
+        //assert_eq!(3, mock.foo(|x| x % 5));
+    }
+
     fn reference_parameters() {
         #[mocked]
         pub trait A {

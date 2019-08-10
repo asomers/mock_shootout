@@ -69,6 +69,9 @@ impl TestSuite for MockDouble{
         unimplemented!()
     }
 
+    // Double can't handle generic methods
+    fn closures() { unimplemented!() }
+
     fn reference_parameters() {
         // The mock_trait! macro doesn't provide a way to declare an argument's
         // lifetime

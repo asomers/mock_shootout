@@ -18,6 +18,7 @@ descs = {
 
     "associated_types": "Associated types",
     "checkpoint": "Checkpoints",
+    "closures": "Closures",
     "reference_parameters": "Reference parameters",
     "consume_parameters": "Consume parameters",
     "consume_self": "Consume self",
@@ -141,17 +142,18 @@ results['mock_it']['first_release'] = "Mar-11-2018 -"
 libnames = sorted(results.keys())
 lib_headers = "|_. ".join([descs[l] for l in libnames])
 print "|_. |_.%s|" % lib_headers
-essential_features = ["associated_types", "checkpoint", "reference_parameters",
-"consume_parameters", "consume_self", "doctest", "external_trait", "foreign",
-"generic_method", "generic_return", "generic_struct", "generic_trait",
-"inherited_trait", "match_method", "mock_struct", "mock_trait", "multi_trait",
-"return_call_with_args", "return_reference", "return_mutable_reference",
-"return_owned", "return_parameters", "send", "sequence", "static_method",
-"times_range", "where_clause"]
+essential_features = ["associated_types", "checkpoint", "closures",
+        "reference_parameters", "consume_parameters", "consume_self", "doctest",
+        "external_trait", "foreign", "generic_method", "generic_return",
+        "generic_struct", "generic_trait", "inherited_trait", "match_method",
+        "mock_struct", "mock_trait", "multi_trait", "return_call_with_args",
+        "return_reference", "return_mutable_reference", "return_owned",
+        "return_parameters", "send", "sequence", "static_method", "times_range",
+        "where_clause"]
 convenience_features = [ "derive", "fallback", "impl_trait", "match_combo",
-"match_constant", "match_operator", "match_pattern", "match_range",
-"match_wildcard", "modules", "return_constant", "return_default",
-"return_panic", "times_once", "times_any", "times_n", "times_never"]
+        "match_constant", "match_operator", "match_pattern", "match_range",
+        "match_wildcard", "modules", "return_constant", "return_default",
+        "return_panic", "times_once", "times_any", "times_n", "times_never"]
 other_features = [ "many_args", "rustc", "first_release", "version", "link"]
 print "|\\8=. Essential Features|"
 for feature in essential_features:

@@ -114,6 +114,9 @@ impl TestSuite for MockGalvanicMock{
 
     fn checkpoint() { unimplemented!() }
 
+    // Galvanic can't mock generic methods
+    fn closures() { unimplemented!() }
+
     fn reference_parameters() {
         let mock = new_mock!(D);
         given! {

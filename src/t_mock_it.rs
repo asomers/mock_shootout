@@ -98,6 +98,9 @@ impl TestSuite for MockIt {
 
     fn checkpoint() { unimplemented!() }
 
+    // Mock-it can't even to match_method
+    fn closures() { unimplemented!() }
+
     fn reference_parameters() {
         // Mock-it can't implement this, because Mock-it requires that arguments
         // types be 'static .

@@ -124,6 +124,11 @@ impl TestSuite for Simulacrum {
         mock.baz();
     }
 
+    // To mock generic methods Simulacrum requires naming each concrete type
+    // that will be used with the method.  But that's usually not possible for
+    // closures.
+    fn closures() { unimplemented!() }
+
     fn reference_parameters() {
         // Simulacrum can do this, but it needs unsafe code
         pub trait A {
