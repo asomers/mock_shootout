@@ -7,7 +7,7 @@
 /// }
 /// 
 /// let scenario = Scenario::new();
-/// let mock = scenario.create_mock_for::<A>();
+/// let mock = scenario.create_mock_for::<dyn A>();
 /// scenario.expect(mock.foo_call(-1).and_return(42));
 /// assert_eq!(42, mock.foo(-1));
 /// ```
@@ -63,7 +63,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A<Key=u32, Value=bool>>();
+        let mock = scenario.create_mock_for::<dyn A<Key=u32, Value=bool>>();
         scenario.expect(mock.foo_call(1).and_return(false));
         assert_eq!(mock.foo(1), false);
     }
@@ -75,7 +75,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.foo_call(1).and_return(()));
         mock.foo(1);
         scenario.checkpoint();
@@ -90,7 +90,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.foo_call(matchers::by_ref(1)).and_return(()));
 
         mock.foo(&1);
@@ -106,7 +106,7 @@ impl TestSuite for Mockers {
             Arc::new(RefCell::new(None));
         let dest2 = dest.clone();
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.foo_call(matchers::ANY).and_call(move |x| {
             dest2.replace(Some(x));
         }));
@@ -122,7 +122,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.into_nothing_call().and_return(()));
         mock.into_nothing();
     }
@@ -134,7 +134,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let _mock = scenario.create_mock_for::<A>();
+        let _mock = scenario.create_mock_for::<dyn A>();
     }
 
     fn external_trait(){
@@ -222,7 +222,7 @@ impl TestSuite for Mockers {
         }
        
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<B>();
+        let mock = scenario.create_mock_for::<dyn B>();
         scenario.expect(mock.foo_call().and_return(()));
         scenario.expect(mock.bar_call().and_return(()));
         mock.foo();
@@ -236,7 +236,7 @@ impl TestSuite for Mockers {
          }
 
          let scenario = Scenario::new();
-         let mock = scenario.create_mock_for::<A>();
+         let mock = scenario.create_mock_for::<dyn A>();
          scenario.expect(mock.foo_call(0, 1, 2, 3).and_return(()));
          mock.foo(0, 1, 2, 3);
          print!("4 ");
@@ -249,7 +249,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.foo_call(
             matchers::and(matchers::gt(1), matchers::lt(10))).and_return(()));
         scenario.expect(mock.foo_call(
@@ -265,7 +265,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.foo_call(5).and_return(()));
         mock.foo(5);
     }
@@ -277,7 +277,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.foo_call(
             matchers::check(|t: &i16| *t == 5)).and_return(()));
         mock.foo(5);
@@ -295,7 +295,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.foo_eq_call(matchers::eq(3)).and_return(()));
         scenario.expect(mock.foo_ge_call(matchers::ge(3)).and_return(()));
         scenario.expect(mock.foo_gt_call(matchers::gt(3)).and_return(()));
@@ -317,7 +317,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.foo_call(arg!(Some(_))).and_return(()));
         mock.foo(Some(1));
     }
@@ -329,7 +329,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.foo_call(
             matchers::in_range(5..10)).and_return(()));
         mock.foo(5);
@@ -342,7 +342,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.foo_call(matchers::ANY).and_return(()));
         mock.foo(2);
     }
@@ -357,7 +357,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let _mock = scenario.create_mock_for::<A>();
+        let _mock = scenario.create_mock_for::<dyn A>();
     }
 
     fn multi_trait(){
@@ -376,7 +376,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.foo_call(matchers::ANY).and_call(|x| x+1));
         assert_eq!(mock.foo(2), 3);
     }
@@ -388,7 +388,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.foo_call().and_return(2));
         assert_eq!(mock.foo(), 2);
     }
@@ -400,7 +400,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.foo_call().and_return_default().times(1));
         assert_eq!(mock.foo(), 0);
     }
@@ -412,7 +412,7 @@ impl TestSuite for Mockers {
         //}
 
         //let scenario = Scenario::new();
-        //let _mock = scenario.create_mock_for::<A>();
+        //let _mock = scenario.create_mock_for::<dyn A>();
         unimplemented!()
     }
 
@@ -424,7 +424,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         let result = UniquelyOwned(42);
         scenario.expect(mock.foo_call().and_return(result));
         assert_eq!(mock.foo(), UniquelyOwned(42));
@@ -437,7 +437,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.foo_call().and_panic("Panic".to_owned()));
         mock.foo();
     }
@@ -449,7 +449,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.foo_call(matchers::ANY)
                         .and_call(|arg| { *arg = 2 }));
 
@@ -466,8 +466,8 @@ impl TestSuite for Mockers {
         //}
 
         //let scenario = Scenario::new();
-        //let mock = scenario.create_mock_for::<A>();
-        //let _ = Box::new(mock) as Box<A + Send>;
+        //let mock = scenario.create_mock_for::<dyn A>();
+        //let _ = Box::new(mock) as Box<dyn A + Send>;
         unimplemented!()
     }
 
@@ -496,8 +496,8 @@ impl TestSuite for Mockers {
 
         let scenario = Scenario::new();
         let mut seq = Sequence::new();
-        let mock1 = scenario.create_mock_for::<A>();
-        let mock2 = scenario.create_mock_for::<A>();
+        let mock1 = scenario.create_mock_for::<dyn A>();
+        let mock2 = scenario.create_mock_for::<dyn A>();
         seq.expect(mock1.foo_call().and_return(()));
         seq.expect(mock2.bar_call().and_return(()));
         scenario.expect(seq);
@@ -513,7 +513,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.foo_call().and_return_clone(()).times(..));
         mock.foo();
         mock.foo();
@@ -526,7 +526,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.foo_call().and_return_clone(()).times(2));
         mock.foo();
         mock.foo();
@@ -539,7 +539,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.foo_call().never());
     }
 
@@ -551,7 +551,7 @@ impl TestSuite for Mockers {
         }
 
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.foo_call().and_return(()));
         mock.foo();
     }
@@ -562,7 +562,7 @@ impl TestSuite for Mockers {
             fn foo(&self);
         }
         let scenario = Scenario::new();
-        let mock = scenario.create_mock_for::<A>();
+        let mock = scenario.create_mock_for::<dyn A>();
         scenario.expect(mock.foo_call().and_return_clone(()).times(2..4));
         mock.foo();
         mock.foo();
@@ -588,7 +588,7 @@ impl TestSuite for Mockers {
         //}
 
         //let scenario = Scenario::new();
-        //let mock = scenario.create_mock_for::<Foo>();
+        //let mock = scenario.create_mock_for::<dyn Foo>();
         //scenario.expect(mock.foo_call().and_call(|t1, t2| Holder((t1, t2))));
 
         //let _h = mock.foo(42, 3.14159);

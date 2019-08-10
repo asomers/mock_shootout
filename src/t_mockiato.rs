@@ -208,7 +208,7 @@ impl TestSuite for Mockiato {
         pub trait A {}
 
         let mock = AMock::new();
-        let _ = Box::new(mock) as Box<A + Send>;
+        let _ = Box::new(mock) as Box<dyn A + Send>;
     }
 
     fn static_method() {

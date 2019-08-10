@@ -502,7 +502,7 @@ impl TestSuite for Pseudo{
         }
 
         let mock = MockA{foo: Mock::default()};
-        let _ = Box::new(mock) as Box<A + Send>;
+        let _ = Box::new(mock) as Box<dyn A + Send>;
     }
 
     // Pseudo can do this, but you must manually create a global Mock object for
