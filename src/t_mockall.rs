@@ -394,7 +394,7 @@ impl TestSuite for Mockall {
         }
         let mut mock = MockA::new();
         mock.expect_foo()
-            .times_range(2..4);
+            .times(2..4);
         mock.foo();
         mock.foo();
     }
@@ -544,7 +544,7 @@ impl TestSuite for Mockall {
         }
 
         let mut mock = MockA::new();
-        mock.expect_foo().times_any();
+        mock.expect_foo().times(..);
         mock.foo();
         mock.foo();
     }
