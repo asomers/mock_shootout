@@ -19,66 +19,72 @@ GoogleMock, it has an elegant syntax, powerful sequence matching, and a rich
 variety of helper methods.  It works on stable Rust, though generic methods
 require nightly.
 
-- Mock_Derive := This was the first Rust mocking library that supported
-automatically @derive@ ing the Mock object from the target trait.  That saves a
-lot of typing!  Mock_Derive is still very easy to use, though it lacks any
-ability to validate method arguments.  It also can't work with generic traits,
-traits with generic methods, traits defined in external crates, or multiple
-traits (like @T: A + B@).  However, it does have a few rare features, like the
-ability to mock foreign free functions, or traits with static methods.
-Unfortunately, it's maintenance has fallen behind and it *no longer compiles on
-recent toolchains*.
+- "Mock_Derive":https://github.com/DavidDeSimone/mock_derive := This was the
+first Rust mocking library that supported automatically @derive@ ing the Mock
+object from the target trait.  That saves a lot of typing!  Mock_Derive is
+still very easy to use, though it lacks any ability to validate method
+arguments.  It also can't work with generic traits, traits with generic
+methods, traits defined in external crates, or multiple traits (like @T: A +
+B@).  However, it does have a few rare features, like the ability to mock
+foreign free functions, or traits with static methods. Unfortunately, it's
+maintenance has fallen behind and it *no longer compiles on recent toolchains*.
 
-- Galvanic-mock := This is part of a suite of testing libraries.  Along with
-galvanic-test and galvanic-assert, it provides a comprehensive set of testing
-functionality for Rust programs.  Galvanic-mock itself takes a behavior-driven
-approach to testing.  It tries to separate the specification from what a mock
-does, from how that mock is expected to be used.  It's a good all-around
-library: good feature set, good documentation, good ergonomics.
+- "Galvanic-mock":https://github.com/mindsbackyard/galvanic-mock := This is
+part of a suite of testing libraries.  Along with galvanic-test and
+galvanic-assert, it provides a comprehensive set of testing functionality for
+Rust programs.  Galvanic-mock itself takes a behavior-driven approach to
+testing.  It tries to separate the specification from what a mock does, from
+how that mock is expected to be used.  It's a good all-around library: good
+feature set, good documentation, good ergonomics.
 
-- Pseudo := All of the previous libraries had one thing in common: they all
-require the nightly compiler.  That allows them to do some pretty cool stuff,
-like tweak the language's syntax, but it's also inherently unstable.  No code
-that relies on nightly can be guaranteed to work with future compilers.  Pseudo
-is different.  It eschews nightly-dependent features like @derive@ so that it
-can work on stable Rust.  Unfortunately, that also makes it pretty verbose.
+- "Pseudo":https://github.com/iredelmeier/pseudo := All of the previous
+libraries had one thing in common: they all require the nightly compiler. 
+That allows them to do some pretty cool stuff, like tweak the language's
+syntax, but it's also inherently unstable.  No code that relies on nightly can
+be guaranteed to work with future compilers.  Pseudo is different.  It eschews
+nightly-dependent features like @derive@ so that it can work on stable Rust.
+Unfortunately, that also makes it pretty verbose.
 
-- Double :=  Like Pseudo, Double runs on stable Rust.  However, it uses a few
-macros to reduce the verbosity.  The feature set is pretty similar.  In fact,
-the entire API is eerily similar.  I think one of these crates must've copied
-from the other (perhaps they both did).
+- "Double":https://github.com/DonaldWhyte/double :=  Like Pseudo, Double runs
+on stable Rust.  However, it uses a few macros to reduce the verbosity.  The
+feature set is pretty similar.  In fact, the entire API is eerily similar.  I
+think one of these crates must've copied from the other (perhaps they both
+did).
 
-- Simulacrum := This is a bit of a different beast.  Whereas other mock
-libraries try to provide a clean API, Simulacrum actually provides 3 different
-APIs.  That can be confusing at first, but the result is great power.  Unusual
-requirements, impossible to meet with the highest-level and most conveient API,
-can be satisfied (at greater effort) with the lower-level APIs.  Simulacrum also
-runs on stable Rust, and manages to do it with less verbosity than Double.
-Optional, nightly-dependent, support for @derive@ is a work-in-progress.
+- "Simulacrum":https://github.com/pcsm/simulacrum := This is a bit of a
+different beast.  Whereas other mock libraries try to provide a clean API,
+Simulacrum actually provides 3 different APIs.  That can be confusing at first,
+but the result is great power.  Unusual requirements, impossible to meet with
+the highest-level and most conveient API, can be satisfied (at greater effort)
+with the lower-level APIs.  Simulacrum also runs on stable Rust, and manages
+to do it with less verbosity than Double. Optional, nightly-dependent, support
+for @derive@ is a work-in-progress.
 
-- Mock-it := Mock-it is one of Rust's simplest mocking libraries.  Its chief
-advantage is that its simplicity allows it to run on stable Rust, though that's
-fast becoming a less unique feature.  However, the lack of a high-level API
-also gives Mock-it some of the power of Simulacrum; it can mock a @struct@, for
-example.  Overall, Mock-it has few practical advantages, but it's a good
-starting point for someone looking to build something bigger.
+- "Mock-it":https://github.com/nathanielsimard/mock-it := Mock-it is one of
+Rust's simplest mocking libraries.  Its chief advantage is that its simplicity
+allows it to run on stable Rust, though that's fast becoming a less unique
+feature.  However, the lack of a high-level API also gives Mock-it some of the
+power of Simulacrum; it can mock a @struct@, for example.  Overall, Mock-it
+has few practical advantages, but it's a good starting point for someone
+looking to build something bigger.
 
-- Moctopus := Mocktopus is a bit of a different beast.  Whereas every other
-  library focuses on mocking @trait@ s, Mocktopus focuses on free functions.  In
-  fact, the only way that it can mock a @trait@ is by manually creating an
-  implementation of that @trait@, and then mocking every single function.
-  Mocktopus also has only the most rudimentary support for expectations.  Its
-  advantages are that it requires very little boiler plate, it can mock @struct@
-  s and free functions, and it handles generic functions well.
+- "Mocktopus":https://github.com/CodeSandwich/Mocktopus := Mocktopus is a bit
+  of a different beast.  Whereas every other library focuses on mocking
+  @trait@ s, Mocktopus focuses on free functions.  In fact, the only way that
+  it can mock a @trait@ is by manually creating an implementation of that
+  @trait@, and then mocking every single function. Mocktopus also has only the
+  most rudimentary support for expectations.  Its advantages are that it
+  requires very little boiler plate, it can mock @struct@ s and free functions,
+  and it handles generic functions well.
 
-- Mockiato := A fairly new library.  The syntax is simple and terse, but it has
-  few distinct features.
+- "Mockiato":https://github.com/myelin-ai/mockiato := A fairly new library.
+  The syntax is simple and terse, but it has few distinct features.
 
-- Mockall := Mockall is the newest contender.  It aims to have the best feature
-  set of all of the above libraries, with the most ergonomic interface.  It
-  runs on stable Rust, and uses no @unsafe@ code at all.  I wrote it myself,
-  after writing this shootout and being unsatisfied with all of the other
-  libraries.
+- "Mockall":https://github.com/asomers/mockall := Mockall is the newest
+  contender.  It aims to have the best feature set of all of the above
+  libraries, with the most ergonomic interface.  It runs on stable Rust, and
+  uses no @unsafe@ code at all.  I wrote it myself, after writing this
+  shootout and being unsatisfied with all of the other libraries.
 
 h2. Features
 
