@@ -17,7 +17,7 @@ variety of helper methods.  It works on stable Rust, though generic methods<br /
 require nightly.</dd>
 </dl>
 <dl>
-	<dt>Mock_Derive</dt>
+	<dt><a href="https://github.com/DavidDeSimone/mock_derive">Mock_Derive</a></dt>
 	<dd>This was the first Rust mocking library that supported<br />
 automatically <code>derive</code> ing the Mock object from the target trait.  That saves a<br />
 lot of typing!  Mock_Derive is still very easy to use, though it lacks any<br />
@@ -29,7 +29,7 @@ Unfortunately, it&#8217;s maintenance has fallen behind and it <strong>no longer
 recent toolchains</strong>.</dd>
 </dl>
 <dl>
-	<dt>Galvanic-mock</dt>
+	<dt><a href="https://github.com/mindsbackyard/galvanic-mock">Galvanic-mock</a></dt>
 	<dd>This is part of a suite of testing libraries.  Along with<br />
 galvanic-test and galvanic-assert, it provides a comprehensive set of testing<br />
 functionality for Rust programs.  Galvanic-mock itself takes a behavior-driven<br />
@@ -38,7 +38,7 @@ does, from how that mock is expected to be used.  It&#8217;s a good all-around<b
 library: good feature set, good documentation, good ergonomics.</dd>
 </dl>
 <dl>
-	<dt>Pseudo</dt>
+	<dt><a href="https://github.com/iredelmeier/pseudo">Pseudo</a></dt>
 	<dd>All of the previous libraries had one thing in common: they all<br />
 require the nightly compiler.  That allows them to do some pretty cool stuff,<br />
 like tweak the language&#8217;s syntax, but it&#8217;s also inherently unstable.  No code<br />
@@ -47,14 +47,14 @@ is different.  It eschews nightly-dependent features like <code>derive</code> so
 can work on stable Rust.  Unfortunately, that also makes it pretty verbose.</dd>
 </dl>
 <dl>
-	<dt>Double</dt>
+	<dt><a href="https://github.com/DonaldWhyte/double">Double</a></dt>
 	<dd>Like Pseudo, Double runs on stable Rust.  However, it uses a few<br />
 macros to reduce the verbosity.  The feature set is pretty similar.  In fact,<br />
 the entire <span class="caps">API</span> is eerily similar.  I think one of these crates must&#8217;ve copied<br />
 from the other (perhaps they both did).</dd>
 </dl>
 <dl>
-	<dt>Simulacrum</dt>
+	<dt><a href="https://github.com/pcsm/simulacrum">Simulacrum</a></dt>
 	<dd>This is a bit of a different beast.  Whereas other mock<br />
 libraries try to provide a clean <span class="caps">API</span>, Simulacrum actually provides 3 different<br />
 APIs.  That can be confusing at first, but the result is great power.  Unusual<br />
@@ -64,7 +64,7 @@ runs on stable Rust, and manages to do it with less verbosity than Double.<br />
 Optional, nightly-dependent, support for <code>derive</code> is a work-in-progress.</dd>
 </dl>
 <dl>
-	<dt>Mock-it</dt>
+	<dt><a href="https://github.com/nathanielsimard/mock-it">Mock-it</a></dt>
 	<dd>Mock-it is Rust&#8217;s newest mocking library, and probably its<br />
 simplest.  Its chief advantage is that its simplicity allows it to run on stable<br />
 Rust, though that&#8217;s fast becoming a less unique feature.  However, the lack of a<br />
@@ -73,7 +73,7 @@ high-level <span class="caps">API</span> also gives Mock-it some of the power of
 a good starting point for someone looking to build something bigger.</dd>
 </dl>
 <dl>
-	<dt>Moctopus</dt>
+	<dt><a href="https://github.com/CodeSandwich/Mocktopus">Mocktopus</a></dt>
 	<dd>Mocktopus is a bit of a different beast.  Whereas every other<br />
   library focuses on mocking <code>trait</code> s, Mocktopus focuses on free functions.  In<br />
   fact, the only way that it can mock a <code>trait</code> is by manually creating an<br />
@@ -83,12 +83,12 @@ a good starting point for someone looking to build something bigger.</dd>
   s and free functions, and it handles generic functions well.</dd>
 </dl>
 <dl>
-	<dt>Mockiato</dt>
+	<dt><a href="https://github.com/myelin-ai/mockiato">Mockiato</a></dt>
 	<dd>A fairly new library.  The syntax is simple and terse, but it has<br />
   few distinct features.</dd>
 </dl>
 <dl>
-	<dt>Mockall</dt>
+	<dt><a href="https://github.com/asomers/mockall">Mockall</a></dt>
 	<dd>Mockall is the newest contender.  It aims to have the best feature<br />
   set of all of the above libraries, with the most ergonomic interface.  It<br />
   runs on stable Rust, and uses no <code>unsafe</code> code at all.  I wrote it myself,<br />
