@@ -245,6 +245,18 @@ some annoyance.</p>
 		<td style="background:#ADEBAD;">yes</td>
 	</tr>
 	<tr>
+		<td>Generic methods with lifetime parameters</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#ADEBAD;">yes</td>
+		<td style="background:#EB9999;">no</td>
+		<td style="background:#EB9999;">no</td>
+	</tr>
+	<tr>
 		<td>       Generic return</td>
 		<td style="background:#EB9999;">no</td>
 		<td style="background:#EB9999;">no</td>
@@ -711,9 +723,9 @@ some annoyance.</p>
 		<td style="background:#fe7d37;">0.2.2</td>
 		<td style="background:#fe7d37;">0.1.3</td>
 		<td style="background:#fe7d37;">0.3.0</td>
-		<td style="background:#fe7d37;">0.3.0</td>
+		<td style="background:#fe7d37;">0.5.2</td>
 		<td style="background:#fe7d37;">0.13.4</td>
-		<td style="background:#fe7d37;">0.9.0</td>
+		<td style="background:#fe7d37;">0.9.5</td>
 		<td style="background:#fe7d37;">0.7.3</td>
 		<td style="background:#fe7d37;">0.2.0</td>
 		<td style="background:#fe7d37;">0.3.1</td>
@@ -790,6 +802,13 @@ crate?</dd>
 	<dd>Can the library mock traits with generic methods that<br />
 have parameterized arguments, and set expectations for those methods?  For<br />
 example, a method like <code>fn foo&lt;T&gt;(&amp;self, t: T) -&gt; u32</code>.</dd>
+</dl>
+<dl>
+	<dt>Generic method with lifetime parameters</dt>
+	<dd>Can the library mock<br />
+functions or methods that have generic lifetime parameters, and set<br />
+expectations for those methods?  For example, a method like<br />
+<code>fn foo&lt;'a&gt;(&amp;self, t: T&lt;'a&gt;)</code>.</dd>
 </dl>
 <dl>
 	<dt>Generic return</dt>
