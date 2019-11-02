@@ -146,8 +146,10 @@ impl TestSuite for Mockall {
             pub fn bar();
         }
 
-        mock_foo::expect_foo();
-        mock_bar::expect_bar();
+        let foo_ctx = mock_foo::foo_context();
+        let bar_ctx = mock_bar::bar_context();
+        foo_ctx.expect();
+        bar_ctx.expect();
 
         unsafe { mock_foo::foo(); }
         unsafe { mock_bar::bar(); }
@@ -396,7 +398,8 @@ impl TestSuite for Mockall {
 
         let mut mock = MockA::new();
         mock.expect_foo().returning(|| 42);
-        MockA::expect_bar().returning(|| 99);
+        let bar_ctx = MockA::bar_context();
+        bar_ctx.expect().returning(|| 99);
         assert_eq!(42, mock.foo());
         assert_eq!(99, MockA::bar());
     }
@@ -508,8 +511,10 @@ impl TestSuite for Mockall {
             pub fn foo() -> u32 {0}
             pub fn bar() -> u32 {0}
         }
-        mock_a::expect_foo().returning(|| 42);
-        mock_a::expect_bar().returning(|| 69);
+        let foo_ctx = mock_a::foo_context();
+        let bar_ctx = mock_a::bar_context();
+        foo_ctx.expect().returning(|| 42);
+        bar_ctx.expect().returning(|| 69);
         assert_eq!(42, mock_a::foo());
         assert_eq!(69, mock_a::bar());
     }
