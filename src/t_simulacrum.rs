@@ -239,6 +239,11 @@ impl TestSuite for Simulacrum {
         mock.foo::<u32>(1);
     }
 
+    // Simulacrum can't do this because every mock object needs an Expectations
+    // object parameterized with the argument and return types, and they must
+    // all be 'static.
+    fn generic_method_with_lifetime() { unimplemented!() }
+
     fn generic_return() {
         pub trait A {
             fn bar<T: 'static>(&self) -> T;

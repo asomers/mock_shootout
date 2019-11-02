@@ -149,6 +149,19 @@ impl TestSuite for Mocktopus{
         assert_eq!(-1i16, foo(-1i16));
     }
 
+    fn generic_method_with_lifetime() {
+        struct NonStaticStruct<'a>(&'a i32);
+
+        #[mockable]
+        fn foo<'a>(x: NonStaticStruct<'a>) {}
+
+        foo.mock_safe(|_x| MockResult::Return(()));
+
+        let x_inner = -1;
+        let x = NonStaticStruct(&x_inner);
+        foo(x);
+    }
+
     fn generic_return() {
         #[mockable]
         fn foo<T: Default>() -> T {T::default()}

@@ -139,6 +139,11 @@ crate?
 have parameterized arguments, and set expectations for those methods?  For
 example, a method like @fn foo<T>(&self, t: T) -> u32@.
 
+- Generic method with lifetime parameters := Can the library mock
+functions or methods that have generic lifetime parameters, and set
+expectations for those methods?  For example, a method like
+@fn foo<'a>(&self, t: T<'a>)@.
+
 - Generic return := Can the library mock traits with generic methods that have
 parameterized return values, and set expectations for those methods?  For
 example, a method like @fn foo<T>(&self, x: u32) -> T@.

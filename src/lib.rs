@@ -16,6 +16,9 @@ macro_rules! test {
         #[test] fn fallback() { $self::fallback() }
         #[test] fn foreign() { $self::foreign() }
         #[test] fn generic_method() { $self::generic_method() }
+        #[test] fn generic_method_with_lifetime() {
+            $self::generic_method_with_lifetime()
+        }
         #[test] fn generic_return() { $self::generic_return() }
         #[test] fn generic_struct() { $self::generic_struct() }
         #[test] fn generic_trait() { $self::generic_trait() }
@@ -106,6 +109,9 @@ pub trait TestSuite {
     fn foreign();
     /// A `Trait` with a method that has generic parameters can be mocked.
     fn generic_method();
+    /// A `Trait` with a method that has a generic lifetime parameter can be
+    /// mocked.
+    fn generic_method_with_lifetime();
     /// A `Trait` with a method that has a generic return value can be mocked.
     fn generic_return();
     /// A generic `struct` can be mocked.

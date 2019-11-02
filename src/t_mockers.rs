@@ -207,6 +207,23 @@ impl TestSuite for Mockers {
         assert_eq!(100u32, mock.foo(42u32));
     }
 
+    fn generic_method_with_lifetime() {
+        // Fails to compile
+        //struct NonStaticStruct<'a>(&'a i32);
+        //#[mocked]
+        //pub trait A {
+            //fn foo<'a>(&self, x: NonStaticStruct<'a>);
+        //}
+
+        //let scenario = Scenario::new();
+        //let mock = scenario.create_mock::<AMock>();
+        //scenario.expect(mock.foo_call(
+            //matchers::check(|x| *x.0 == -1)).and_return(()));
+        //let x = NonStaticStruct(&-1);
+        //mock.foo(x);
+        unimplemented!()
+    }
+
     fn generic_return() {
         register_types!(u32);
 

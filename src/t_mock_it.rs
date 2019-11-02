@@ -195,6 +195,34 @@ impl TestSuite for MockIt {
 
     fn foreign() { unimplemented!() }
     fn generic_method() { unimplemented!() }
+
+    fn generic_method_with_lifetime() {
+        // Doesn't work because there's no way to define the AMock::foo member
+        // that's valid for all lifetimes.  Though case-by-case workarounds may
+        // be possible.
+        //struct NonStaticStruct<'a>(&'a i32);
+        //pub trait A {
+            //fn foo<'a>(&self, x: NonStaticStruct<'a>);
+        //}
+
+        //struct AMock {
+            //foo: Mock<NonStaticStruct, ()>
+        //}
+        //impl A for AMock {
+            //fn foo<'a>(&self, x: NonStaticStruct<'a>) {
+                //self.foo.called(x)
+            //}
+        //}
+        //impl AMock {
+            //fn new() -> AMock {
+                //AMock {
+                    //foo: Mock::new(Default::default())
+                //}
+            //}
+        //}
+        unimplemented!()
+    }
+
     fn generic_return() { unimplemented!() }
 
     fn generic_struct() {

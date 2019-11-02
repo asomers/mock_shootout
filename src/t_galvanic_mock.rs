@@ -170,6 +170,25 @@ impl TestSuite for MockGalvanicMock{
         unimplemented!()
     }
 
+    // Doesn't work.  No way to specify the lifetime parameter in the
+    // matching closure.
+    fn generic_method_with_lifetime() {
+        //pub struct NonStaticStruct<'a>(&'a i32);
+        //#[mockable]
+        //pub trait GenericMethodLifetimeTrait {
+            //fn foo<'a>(&self, x: NonStaticStruct<'a>);
+        //}
+
+        //let mock = new_mock!(GenericMethodLifetimeTrait);
+        //given! {
+            //<mock as GenericMethodLifetimeTrait>::foo(|x| *x.0 == -1)
+                //then_return () always;
+        //}
+        //let x = NonStaticStruct(&-1);
+        //assert_eq!(-1, mock.foo(x));
+        unimplemented!()
+    }
+
     fn generic_return() {
         // galvanic_mock can mock a method with a generic return value, but
         // there's no way to specify the return value except for default().

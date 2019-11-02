@@ -175,6 +175,7 @@ impl TestSuite for Pseudo{
     fn fallback() { unimplemented!() }
     fn foreign() { unimplemented!() }
     fn generic_method() { unimplemented!() }
+    fn generic_method_with_lifetime() { unimplemented!() }
     fn generic_return() { unimplemented!() }
     fn generic_struct() {
         struct A<T: Clone>(T);

@@ -30,6 +30,7 @@ use std::{
 };
 
 struct Holder<T1: PartialEq<u32>, T2: PartialEq<f32>>((T1, T2));
+struct NonStaticStruct<'a>(&'a i32);
 
 struct Mockall {}
 impl TestSuite for Mockall {
@@ -168,6 +169,20 @@ impl TestSuite for Mockall {
 
         mock.foo::<i16>(-1);
         mock.foo::<u32>(1);
+    }
+
+    fn generic_method_with_lifetime() {
+        #[automock]
+        trait A {
+            fn foo<'a>(&self, x: NonStaticStruct<'a>);
+        }
+
+        let mut mock = MockA::new();
+        mock.expect_foo().once().withf(|x| *x.0 == -1);
+
+        let x_inner = -1;
+        let x = NonStaticStruct(&x_inner);
+        mock.foo(x);
     }
 
     fn generic_return() {

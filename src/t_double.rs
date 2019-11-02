@@ -132,6 +132,10 @@ impl TestSuite for MockDouble{
         unimplemented!()
     }
 
+    fn generic_method_with_lifetime() {
+        unimplemented!()
+    }
+
     fn generic_return() {unimplemented!()}
 
     fn generic_struct() {

@@ -17,12 +17,14 @@ pub trait ET {
     fn foo(&self);
 }
 
+struct NonStaticStruct<'a>(&'a i32);
+
 #[cfg(test)]
 mod t {
 
 use crate::{TestSuite, UniquelyOwned};
 use mockiato::*;
-use super::ET;
+use super::{ET, NonStaticStruct};
 
 struct Mockiato {}
 impl TestSuite for Mockiato {
@@ -86,6 +88,21 @@ impl TestSuite for Mockiato {
     fn generic_method() {
         // Only lifetimes are supported as generic parameters on methods
         unimplemented!()
+    }
+
+    // Mockiato can sort-of implement this, but there's no way to match the
+    // function's argument.
+    fn generic_method_with_lifetime() {
+        #[mockable]
+        trait A {
+            fn foo<'a>(&self, x: NonStaticStruct<'a>);
+        }
+
+        let mut mock = AMock::new();
+        mock.expect_foo(|t| t.any()).returns(());
+        let x_inner = -1;
+        let x = NonStaticStruct(&x_inner);
+        mock.foo(x);
     }
 
     fn generic_return() {
