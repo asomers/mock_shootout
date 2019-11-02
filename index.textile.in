@@ -56,12 +56,12 @@ can be satisfied (at greater effort) with the lower-level APIs.  Simulacrum also
 runs on stable Rust, and manages to do it with less verbosity than Double.
 Optional, nightly-dependent, support for @derive@ is a work-in-progress.
 
-- Mock-it := Mock-it is Rust's newest mocking library, and probably its
-simplest.  Its chief advantage is that its simplicity allows it to run on stable
-Rust, though that's fast becoming a less unique feature.  However, the lack of a
-high-level API also gives Mock-it some of the power of Simulacrum; it can mock a
-@struct@, for example.  Overall, Mock-it has few practical advantages, but it's
-a good starting point for someone looking to build something bigger.
+- Mock-it := Mock-it is one of Rust's simplest mocking libraries.  Its chief
+advantage is that its simplicity allows it to run on stable Rust, though that's
+fast becoming a less unique feature.  However, the lack of a high-level API
+also gives Mock-it some of the power of Simulacrum; it can mock a @struct@, for
+example.  Overall, Mock-it has few practical advantages, but it's a good
+starting point for someone looking to build something bigger.
 
 - Moctopus := Mocktopus is a bit of a different beast.  Whereas every other
   library focuses on mocking @trait@ s, Mocktopus focuses on free functions.  In
