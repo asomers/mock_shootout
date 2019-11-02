@@ -331,7 +331,7 @@ impl TestSuite for MockIt {
         }
         
         struct AMock {
-            foo: Mock<(i16), ()>
+            foo: Mock<i16, ()>
         }
         impl A for AMock {
             fn foo(&self, key: i16) {
@@ -361,7 +361,7 @@ impl TestSuite for MockIt {
         }
         
         struct AMock {
-            foo: Mock<(Matcher<i16>), ()>
+            foo: Mock<Matcher<i16>, ()>
         }
         impl A for AMock {
             fn foo(&self, key: i16) {
@@ -387,7 +387,7 @@ impl TestSuite for MockIt {
         }
 
         struct AMock {
-            foo: Mock<(i16), ()>
+            foo: Mock<i16, ()>
         }
         impl A for AMock {
             fn foo(&self, key: i16) {
@@ -460,7 +460,7 @@ impl TestSuite for MockIt {
         }
         
         struct AMock {
-            foo: Mock<(), (u32)>
+            foo: Mock<(), u32>
         }
         impl A for AMock {
             fn foo(&self) -> u32{
@@ -486,7 +486,7 @@ impl TestSuite for MockIt {
         }
         
         struct AMock {
-            foo: Mock<(), (u32)>
+            foo: Mock<(), u32>
         }
         impl A for AMock {
             fn foo(&self) -> u32{
@@ -555,7 +555,7 @@ impl TestSuite for MockIt {
         }
 
         struct AMock {
-            foo: Mock<(u32), (u32)>
+            foo: Mock<u32, u32>
         }
         impl A for AMock {
             fn bar() -> u32 {

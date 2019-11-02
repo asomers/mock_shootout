@@ -84,7 +84,7 @@ impl TestSuite for Pseudo{
         }
 
         struct MockA {
-            foo: Mock<(i32), ()>
+            foo: Mock<i32, ()>
         }
         impl A for MockA {
             fn foo(&self, x: i32) {
@@ -283,7 +283,7 @@ impl TestSuite for Pseudo{
         }
         
         struct MockA {
-            foo: Mock<(i16), ()>
+            foo: Mock<i16, ()>
         }
         impl A for MockA {
             fn foo(&self, key: i16) {
@@ -303,7 +303,7 @@ impl TestSuite for Pseudo{
         }
 
         struct MockA {
-            foo: Mock<(u32), ()>
+            foo: Mock<u32, ()>
         }
         impl A for MockA {
             fn foo(&self, x: u32) {
@@ -328,7 +328,7 @@ impl TestSuite for Pseudo{
         }
         
         struct MockA {
-            foo: Mock<(i16), ()>
+            foo: Mock<i16, ()>
         }
         impl A for MockA {
             fn foo(&self, key: i16) {
@@ -403,7 +403,7 @@ impl TestSuite for Pseudo{
         }
 
         struct MockA {
-            foo: Mock<(u32), u32>
+            foo: Mock<u32, u32>
         }
         impl A for MockA {
             fn foo(&self, x: u32) -> u32 {
@@ -442,7 +442,7 @@ impl TestSuite for Pseudo{
         }
         
         struct MockA {
-            foo: Mock<(), (u32)>
+            foo: Mock<(), u32>
         }
         impl A for MockA {
             fn foo(&self) -> u32{
@@ -474,7 +474,7 @@ impl TestSuite for Pseudo{
         }
 
         struct MockA {
-            foo: Mock<(i32), ()>
+            foo: Mock<i32, ()>
         }
         impl A for MockA {
             fn foo(&self, x: i32) {
@@ -518,7 +518,7 @@ impl TestSuite for Pseudo{
 
         #[derive(Default)]
         struct MockA {
-            foo: Mock<(u32), (u32)>
+            foo: Mock<u32, u32>
         }
         impl A for MockA {
             fn bar() -> u32 {
